@@ -40,7 +40,7 @@ Perk Property Skill_RifleCertification Auto
 Perk Property Skill_ArmorPenetration Auto
 Perk Property Skill_Crippling Auto
 
-String Property Version="1.0.8" Auto
+String Property Version="1.1.0" Auto
 
 Float Property DefaultNPCHealthBonus=20.00 Auto
 Float Property DefaultPlayerHealthBonus=20.00 Auto
@@ -376,65 +376,65 @@ EndFunction
 Float Function GetDamageToPlayerScalingFactor() 
   Int playerLevel = PlayerRef.GetLevel()
 
-  String debugMessage = "Damage To Player scaling is being calculated for a player level of " + playerLevel + "."
+  Debug.Trace("Damage To Player scaling is being calculated for a player level of " + playerLevel + ".", 0)
   Float scaleFactor = 0
   Int bracket = 0
   If (1 <= playerLevel && playerLevel <= 25)
     ;; Bracket 1
     bracket = 1
     scaleFactor = SF_DamageToPlayer_Bracket1
-    debugMessage += "SF adjusted for B1 SF " + SF_DamageToPlayer_Bracket1 + "."
+    Debug.Trace("SF adjusted for B1 SF " + SF_DamageToPlayer_Bracket1 + ".", 0)
   ElseIf (26 <= playerLevel && playerLevel <= 50)
     ;; Bracket 2
     bracket = 2
     scaleFactor = SF_DamageToPlayer_Bracket2
-    debugMessage += "SF adjusted for B2 SF " + SF_DamageToPlayer_Bracket2 + "."
+    Debug.Trace("SF adjusted for B2 SF " + SF_DamageToPlayer_Bracket2 + ".", 0)
   ElseIf (51 <= playerLevel && playerLevel <= 75)
     ;; Bracket 3
     bracket = 3
     scaleFactor = SF_DamageToPlayer_Bracket3
-    debugMessage += "SF adjusted for B3 SF " + SF_DamageToPlayer_Bracket3 + "."
+    Debug.Trace("SF adjusted for B3 SF " + SF_DamageToPlayer_Bracket3 + ".", 0)
   ElseIf (76 <= playerLevel && playerLevel <= 100)
     ;; Bracket 4
     bracket = 4
     scaleFactor = SF_DamageToPlayer_Bracket4
-    debugMessage += "SF adjusted for B4 SF " + SF_DamageToPlayer_Bracket4 + "."
+    Debug.Trace("SF adjusted for B4 SF " + SF_DamageToPlayer_Bracket4 + ".", 0)
   ElseIf (101 <= playerLevel && playerLevel <= 125)
     ;; Bracket 5
     bracket = 5
     scaleFactor = SF_DamageToPlayer_Bracket5
-    debugMessage += "SF adjusted for B5 SF " + SF_DamageToPlayer_Bracket5 + "."
+    Debug.Trace("SF adjusted for B5 SF " + SF_DamageToPlayer_Bracket5 + ".", 0)
   ElseIf (126 <= playerLevel && playerLevel <= 150)
     ;; Bracket 6
     bracket = 6
     scaleFactor = SF_DamageToPlayer_Bracket6
-    debugMessage += "SF adjusted for B6 SF " + SF_DamageToPlayer_Bracket6 + "."
+    Debug.Trace("SF adjusted for B6 SF " + SF_DamageToPlayer_Bracket6 + ".", 0)
   ElseIf (151 <= playerLevel && playerLevel <= 200)
     ;; Bracket 7
     bracket = 7
     scaleFactor = SF_DamageToPlayer_Bracket7
-    debugMessage += "SF adjusted for B7 SF " + SF_DamageToPlayer_Bracket7 + "."
+    Debug.Trace("SF adjusted for B7 SF " + SF_DamageToPlayer_Bracket7 + ".", 0)
   ElseIf (201 <= playerLevel && playerLevel <= 250)
     ;; Bracket 8
     bracket = 8
     scaleFactor = SF_DamageToPlayer_Bracket8
-    debugMessage += "SF adjusted for B8 SF " + SF_DamageToPlayer_Bracket8 + "."
+    Debug.Trace("SF adjusted for B8 SF " + SF_DamageToPlayer_Bracket8 + ".", 0)
   ElseIf (251 <= playerLevel && playerLevel <= 300)
     ;; Bracket 9
     bracket = 9
     scaleFactor = SF_DamageToPlayer_Bracket9
-    debugMessage += "SF adjusted for B9 SF " + SF_DamageToPlayer_Bracket9 + "."
+    Debug.Trace("SF adjusted for B9 SF " + SF_DamageToPlayer_Bracket9 + ".", 0)
   Else
     ;; Bracket 10
     bracket = 10
     scaleFactor = SF_DamageToPlayer_Bracket10
-    debugMessage += "SF adjusted for B10 SF " + SF_DamageToPlayer_Bracket10 + "."
+    Debug.Trace("SF adjusted for B10 SF " + SF_DamageToPlayer_Bracket10 + ".", 0)
   EndIf
 
   If (playerRef.HasPerk(Skill_Wellness) || playerRef.HasPerk(Skill_EnergyWeaponDissipation) || playerRef.HasPerk(Skill_PainTolerance) || playerRef.HasPerk(Skill_Rejuvenation))
     Float adjustment = PerkADJ_DamageReduction * (bracket/6)
     scaleFactor += adjustment
-    debugMessage += "SF adjusted for damage reduction perks increased by " + adjustment + "."
+    Debug.Trace("SF adjusted for damage reduction perks increased by " + adjustment + ".", 0)
   EndIf
 
   If scaleFactor < 0 
@@ -443,8 +443,7 @@ Float Function GetDamageToPlayerScalingFactor()
       Return scaleFactor
   EndIf
 
-  debugMessage += "Final calculated SF is " + scaleFactor + "."
-  Debug.Messagebox(debugMessage)
+  Debug.Trace("Final calculated SF is " + scaleFactor + ".", 0)
 EndFunction
 
 ;; ****************************************************************************
@@ -454,73 +453,73 @@ EndFunction
 Float Function GetDamageByPlayerScalingFactor()
   Int playerLevel = PlayerRef.GetLevel()
 
-  String debugMessage = "Damage By Player scaling is being calculated for a player level of " + playerLevel + "."
+  Debug.Trace("Damage By Player scaling is being calculated for a player level of " + playerLevel + ".", 0)
   Float scaleFactor = 0
   Int bracket = 0
   If (1 <= playerLevel && playerLevel <= 25)
     ;; Bracket 1
     bracket = 1
     scaleFactor = SF_DamageByPlayer_Bracket1
-    debugMessage += "SF adjusted for B1 SF " + SF_DamageByPlayer_Bracket1 + "."
+    Debug.Trace("SF adjusted for B1 SF " + SF_DamageByPlayer_Bracket1 + ".", 0)
   ElseIf (26 <= playerLevel && playerLevel <= 50)
     ;; Bracket 2
     bracket = 2
     scaleFactor = SF_DamageByPlayer_Bracket2
-    debugMessage += "SF adjusted for B2 SF " + SF_DamageByPlayer_Bracket2 + "."
+    Debug.Trace("SF adjusted for B2 SF " + SF_DamageByPlayer_Bracket2 + ".", 0)
   ElseIf (51 <= playerLevel && playerLevel <= 75)
     ;; Bracket 3
     bracket = 3
     scaleFactor = SF_DamageByPlayer_Bracket3
-    debugMessage += "SF adjusted for B3 SF " + SF_DamageByPlayer_Bracket3 + "."
+    Debug.Trace("SF adjusted for B3 SF " + SF_DamageByPlayer_Bracket3 + ".", 0)
   ElseIf (76 <= playerLevel && playerLevel <= 100)
     ;; Bracket 4
     bracket = 4
     scaleFactor = SF_DamageByPlayer_Bracket4
-    debugMessage += "SF adjusted for B4 SF " + SF_DamageByPlayer_Bracket4 + "."
+    Debug.Trace("SF adjusted for B4 SF " + SF_DamageByPlayer_Bracket4 + ".", 0)
   ElseIf (101 <= playerLevel && playerLevel <= 125)
     ;; Bracket 5
     bracket = 5
     scaleFactor = SF_DamageByPlayer_Bracket5
-    debugMessage += "SF adjusted for B5 SF " + SF_DamageByPlayer_Bracket5 + "."
+    Debug.Trace("SF adjusted for B5 SF " + SF_DamageByPlayer_Bracket5 + ".", 0)
   ElseIf (126 <= playerLevel && playerLevel <= 150)
     ;; Bracket 6
     bracket = 6
     scaleFactor = SF_DamageByPlayer_Bracket6
-    debugMessage += "SF adjusted for B6 SF " + SF_DamageByPlayer_Bracket6 + "."
+    Debug.Trace("SF adjusted for B6 SF " + SF_DamageByPlayer_Bracket6 + ".", 0)
   ElseIf (151 <= playerLevel && playerLevel <= 200)
     ;; Bracket 7
     bracket = 7
     scaleFactor = SF_DamageByPlayer_Bracket7
-    debugMessage += "SF adjusted for B7 SF " + SF_DamageByPlayer_Bracket7 + "."
+    Debug.Trace("SF adjusted for B7 SF " + SF_DamageByPlayer_Bracket7 + ".", 0)
   ElseIf (201 <= playerLevel && playerLevel <= 250)
     ;; Bracket 8
     bracket = 8
     scaleFactor = SF_DamageByPlayer_Bracket8
-    debugMessage += "SF adjusted for B8 SF " + SF_DamageByPlayer_Bracket8 + "."
+    Debug.Trace("SF adjusted for B8 SF " + SF_DamageByPlayer_Bracket8 + ".", 0)
   ElseIf (251 <= playerLevel && playerLevel <= 300)
     ;; Bracket 9
     bracket = 9
     scaleFactor = SF_DamageByPlayer_Bracket9
-    debugMessage += "SF adjusted for B9 SF " + SF_DamageByPlayer_Bracket9 + "."
+    Debug.Trace("SF adjusted for B9 SF " + SF_DamageByPlayer_Bracket9 + ".", 0)
   Else
     ;; Bracket 10
     bracket = 10
     scaleFactor = SF_DamageByPlayer_Bracket10
-    debugMessage += "SF adjusted for B10 SF " + SF_DamageByPlayer_Bracket10 + "."
+    Debug.Trace("SF adjusted for B10 SF " + SF_DamageByPlayer_Bracket10 + ".", 0)
   EndIf
 
   If ((playerRef.HasPerk(Skill_PistolCertification) || playerRef.HasPerk(Skill_ShotgunCertification) || playerRef.HasPerk(Skill_HeavyWeaponsCertification) || playerRef.HasPerk(Skill_RifleCertification)) && (playerRef.HasPerk(Skill_Ballistics) || playerRef.HasPerk(Skill_Lasers) || playerRef.HasPerk(Skill_ParticleBeams) || playerRef.HasPerk(Skill_Marksmanship))) 
     Float adjustment = PerkADJ_DamageAdd * (bracket/6)
     scaleFactor -= adjustment
-    debugMessage += "SF adjusted for damage add perks decreased by " + adjustment + "."
+    Debug.Trace("SF adjusted for damage add perks decreased by " + adjustment + ".", 0)
   EndIf
   If (playerRef.HasPerk(Skill_ArmorPenetration))
     scaleFactor -= PerkADJ_SpecialArmorPen
-    debugMessage += "SF adjusted for Armor Penetration perk decreased by " + PerkADJ_SpecialArmorPen + "."
+    Debug.Trace("SF adjusted for Armor Penetration perk decreased by " + PerkADJ_SpecialArmorPen + ".", 0)
   EndIf
   If (playerRef.HasPerk(Skill_Crippling))
     scaleFactor -= PerkADJ_SpecialCrippling
-    debugMessage += "SF adjusted for Crippling perk perk decreased by " + PerkADJ_SpecialCrippling + "."
+    Debug.Trace("SF adjusted for Crippling perk perk decreased by " + PerkADJ_SpecialCrippling + ".", 0)
   EndIf
 
   If scaleFactor < 0 
@@ -529,8 +528,7 @@ Float Function GetDamageByPlayerScalingFactor()
     Return scaleFactor
   EndIf
 
-  debugMessage += "Final calculated SF is " + scaleFactor + "."
-  Debug.Messagebox(debugMessage)
+  Debug.Trace("Final calculated SF is " + scaleFactor + ".", 0)
 EndFunction
 
 ;; ****************************************************************************
@@ -539,48 +537,48 @@ EndFunction
 Float Function SponginessNPCScalingFactor()
   Int playerLevel = PlayerRef.GetLevel()
 
-  String debugMessage = "NPC Health Boost scaling is being calculated for a player level of " + playerLevel + "."
+  Debug.Trace("NPC Health Boost scaling is being calculated for a player level of " + playerLevel + ".", 0)
   Float scaleFactor = 0
   If (1 <= playerLevel && playerLevel <= 25)
     ;; Bracket 1
     scaleFactor = SF_NPCHealthBoost_Bracket1
-    debugMessage += "SF adjusted for B1 SF " + SF_NPCHealthBoost_Bracket1 + "."
+    Debug.Trace("SF adjusted for B1 SF " + SF_NPCHealthBoost_Bracket1 + ".", 0)
   ElseIf (26 <= playerLevel && playerLevel <= 50)
     ;; Bracket 2
     scaleFactor = SF_NPCHealthBoost_Bracket2
-    debugMessage += "SF adjusted for B2 SF " + SF_NPCHealthBoost_Bracket2 + "."
+    Debug.Trace("SF adjusted for B2 SF " + SF_NPCHealthBoost_Bracket2 + ".", 0)
   ElseIf (51 <= playerLevel && playerLevel <= 75)
     ;; Bracket 3
     scaleFactor = SF_NPCHealthBoost_Bracket3
-    debugMessage += "SF adjusted for B3 SF " + SF_NPCHealthBoost_Bracket3 + "."
+    Debug.Trace("SF adjusted for B3 SF " + SF_NPCHealthBoost_Bracket3 + ".", 0)
   ElseIf (76 <= playerLevel && playerLevel <= 100)
     ;; Bracket 4
     scaleFactor = SF_NPCHealthBoost_Bracket4
-    debugMessage += "SF adjusted for B4 SF " + SF_NPCHealthBoost_Bracket4 + "."
+    Debug.Trace("SF adjusted for B4 SF " + SF_NPCHealthBoost_Bracket4 + ".", 0)
   ElseIf (101 <= playerLevel && playerLevel <= 125)
     ;; Bracket 5
     scaleFactor = SF_NPCHealthBoost_Bracket5
-    debugMessage += "SF adjusted for B5 SF " + SF_NPCHealthBoost_Bracket5 + "."
+    Debug.Trace("SF adjusted for B5 SF " + SF_NPCHealthBoost_Bracket5 + ".", 0)
   ElseIf (126 <= playerLevel && playerLevel <= 150)
     ;; Bracket 6
     scaleFactor = SF_NPCHealthBoost_Bracket6
-    debugMessage += "SF adjusted for B6 SF " + SF_NPCHealthBoost_Bracket6 + "."
+    Debug.Trace("SF adjusted for B6 SF " + SF_NPCHealthBoost_Bracket6 + ".", 0)
   ElseIf (151 <= playerLevel && playerLevel <= 200)
     ;; Bracket 7
     scaleFactor = SF_NPCHealthBoost_Bracket7
-    debugMessage += "SF adjusted for B7 SF " + SF_NPCHealthBoost_Bracket7 + "."
+    Debug.Trace("SF adjusted for B7 SF " + SF_NPCHealthBoost_Bracket7 + ".", 0)
   ElseIf (201 <= playerLevel && playerLevel <= 250)
     ;; Bracket 8
     scaleFactor = SF_NPCHealthBoost_Bracket8
-    debugMessage += "SF adjusted for B8 SF " + SF_NPCHealthBoost_Bracket8 + "."
+    Debug.Trace("SF adjusted for B8 SF " + SF_NPCHealthBoost_Bracket8 + ".", 0)
   ElseIf (251 <= playerLevel && playerLevel <= 300)
     ;; Bracket 9
     scaleFactor = SF_NPCHealthBoost_Bracket9
-    debugMessage += "SF adjusted for B9 SF " + SF_NPCHealthBoost_Bracket9 + "."
+    Debug.Trace("SF adjusted for B9 SF " + SF_NPCHealthBoost_Bracket9 + ".", 0)
   Else
     ;; Bracket 10
     scaleFactor = SF_NPCHealthBoost_Bracket10
-    debugMessage += "SF adjusted for B10 SF " + SF_NPCHealthBoost_Bracket10 + "."
+    Debug.Trace("SF adjusted for B10 SF " + SF_NPCHealthBoost_Bracket10 + ".", 0)
   EndIf
 
   If scaleFactor < 0 
@@ -589,8 +587,7 @@ Float Function SponginessNPCScalingFactor()
     Return scaleFactor
   EndIf
 
-  debugMessage += "Final calculated SF is " + scaleFactor + "."
-  Debug.Messagebox(debugMessage)
+  Debug.Trace("Final calculated SF is " + scaleFactor + ".", 0)
 EndFunction
 
 ;; ****************************************************************************
@@ -599,48 +596,48 @@ EndFunction
 Float Function SponginessPlayerScalingFactor()
   Int playerLevel = PlayerRef.GetLevel()
 
-  String debugMessage = "Player Health Booster scaling is being calculated for a player level of " + playerLevel + "."
+  Debug.Trace("Player Health Booster scaling is being calculated for a player level of " + playerLevel + ".", 0)
   Float scaleFactor = 0
   If (1 <= playerLevel && playerLevel <= 25)
     ;; Bracket 1
     scaleFactor = SF_PCHealthBoost_Bracket1
-    debugMessage += "SF adjusted for B1 SF " + SF_PCHealthBoost_Bracket1 + "."
+    Debug.Trace("SF adjusted for B1 SF " + SF_PCHealthBoost_Bracket1 + ".", 0)
   ElseIf (26 <= playerLevel && playerLevel <= 50)
     ;; Bracket 2
     scaleFactor = SF_PCHealthBoost_Bracket2
-    debugMessage += "SF adjusted for B2 SF " + SF_PCHealthBoost_Bracket2 + "."
+    Debug.Trace("SF adjusted for B2 SF " + SF_PCHealthBoost_Bracket2 + ".", 0)
   ElseIf (51 <= playerLevel && playerLevel <= 75)
     ;; Bracket 3
     scaleFactor = SF_PCHealthBoost_Bracket3
-    debugMessage += "SF adjusted for B3 SF " + SF_PCHealthBoost_Bracket3 + "."
+    Debug.Trace("SF adjusted for B3 SF " + SF_PCHealthBoost_Bracket3 + ".", 0)
   ElseIf (76 <= playerLevel && playerLevel <= 100)
     ;; Bracket 4
     scaleFactor = SF_PCHealthBoost_Bracket4
-    debugMessage += "SF adjusted for B4 SF " + SF_PCHealthBoost_Bracket4 + "."
+    Debug.Trace("SF adjusted for B4 SF " + SF_PCHealthBoost_Bracket4 + ".", 0)
   ElseIf (101 <= playerLevel && playerLevel <= 125)
     ;; Bracket 5
     scaleFactor = SF_PCHealthBoost_Bracket5
-    debugMessage += "SF adjusted for B5 SF " + SF_PCHealthBoost_Bracket5 + "."
+    Debug.Trace("SF adjusted for B5 SF " + SF_PCHealthBoost_Bracket5 + ".", 0)
   ElseIf (126 <= playerLevel && playerLevel <= 150)
     ;; Bracket 6
     scaleFactor = SF_PCHealthBoost_Bracket6
-    debugMessage += "SF adjusted for B6 SF " + SF_PCHealthBoost_Bracket6 + "."
+    Debug.Trace("SF adjusted for B6 SF " + SF_PCHealthBoost_Bracket6 + ".", 0)
   ElseIf (151 <= playerLevel && playerLevel <= 200)
     ;; Bracket 7
     scaleFactor = SF_PCHealthBoost_Bracket7
-    debugMessage += "SF adjusted for B7 SF " + SF_PCHealthBoost_Bracket7 + "."
+    Debug.Trace("SF adjusted for B7 SF " + SF_PCHealthBoost_Bracket7 + ".", 0)
   ElseIf (201 <= playerLevel && playerLevel <= 250)
     ;; Bracket 8
     scaleFactor = SF_PCHealthBoost_Bracket8
-    debugMessage += "SF adjusted for B8 SF " + SF_PCHealthBoost_Bracket8 + "."
+    Debug.Trace("SF adjusted for B8 SF " + SF_PCHealthBoost_Bracket8 + ".", 0)
   ElseIf (251 <= playerLevel && playerLevel <= 300)
     ;; Bracket 9
     scaleFactor = SF_PCHealthBoost_Bracket9
-    debugMessage += "SF adjusted for B9 SF " + SF_PCHealthBoost_Bracket9 + "."
+    Debug.Trace("SF adjusted for B9 SF " + SF_PCHealthBoost_Bracket9 + ".", 0)
   Else
     ;; Bracket 10
     scaleFactor = SF_PCHealthBoost_Bracket10
-    debugMessage += "SF adjusted for B10 SF " + SF_PCHealthBoost_Bracket10 + "."
+    Debug.Trace("SF adjusted for B10 SF " + SF_PCHealthBoost_Bracket10 + ".", 0)
   EndIf
 
   If scaleFactor < 0 
@@ -649,8 +646,7 @@ Float Function SponginessPlayerScalingFactor()
     Return scaleFactor
   EndIf
 
-  debugMessage += "Final calculated SF is " + scaleFactor + "."
-  Debug.Messagebox(debugMessage)
+  Debug.Trace("Final calculated SF is " + scaleFactor + ".", 0)
 EndFunction
 
 ;; ****************************************************************************
