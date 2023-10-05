@@ -1,27 +1,3 @@
-;;
-;; Baseline/Default Scaling Values
-;; NOTE: These are the baseline for the scaling so if you want to change the baseline vs that scale factor uncomment the line and adjust it 
-;;
-;; This adjusts the bonus health per level a NPC receives (Default 20)
-;;setgs fNPCHealthLevelBonus 20 
-;;
-;; This adjusts the bonus health per level a player receives (Default 20)
-;;setgs fHealthEnduranceOffset 20 
-;;
-;; This is the damage BY the player based on difficulty mode
-;;setgs fDiffMultHPByPCVE 2.00
-;;setgs fDiffMultHPByPCE 1.50
-;;setgs fDiffMultHPByPCN 1.00
-;;setgs fDiffMultHPByPCH 0.75
-;;setgs fDiffMultHPByPCVH 0.50
-;;
-;; This is the damage TO the player based on difficulty mode
-;;setgs fDiffMultHPToPCVE 0.50
-;;setgs fDiffMultHPToPCE  0.75
-;;setgs fDiffMultHPToPCN  1.00
-;;setgs fDiffMultHPToPCH  1.50
-;;setgs fDiffMultHPToPCVH 2.00
-
 ;; These adjust level ranges for the encounter zones (Planets, Labs, Mines, Etc)
 setgs uDefaultLevelZone01min 1
 setgs uDefaultLevelZone01max 15
