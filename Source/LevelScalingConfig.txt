@@ -1,0 +1,47 @@
+;;
+;; Baseline/Default Scaling Values
+;; NOTE: These are the baseline for the scaling so if you want to change the baseline vs that scale factor uncomment the line and adjust it 
+;;
+;; This adjusts the bonus health per level a NPC receives (Default 20)
+;;setgs fNPCHealthLevelBonus 20 
+;;
+;; This adjusts the bonus health per level a player receives (Default 20)
+;;setgs fHealthEnduranceOffset 20 
+;;
+;; This is the damage BY the player based on difficulty mode
+;;setgs fDiffMultHPByPCVE 2.00
+;;setgs fDiffMultHPByPCE 1.50
+;;setgs fDiffMultHPByPCN 1.00
+;;setgs fDiffMultHPByPCH 0.75
+;;setgs fDiffMultHPByPCVH 0.50
+;;
+;; This is the damage TO the player based on difficulty mode
+;;setgs fDiffMultHPToPCVE 0.50
+;;setgs fDiffMultHPToPCE  0.75
+;;setgs fDiffMultHPToPCN  1.00
+;;setgs fDiffMultHPToPCH  1.50
+;;setgs fDiffMultHPToPCVH 2.00
+
+;; These adjust level ranges for the encounter zones (Planets, Labs, Mines, Etc)
+setgs uDefaultLevelZone01min 1
+setgs uDefaultLevelZone01max 15
+setgs uDefaultLevelZone02min 16
+setgs uDefaultLevelZone02max 30
+setgs uDefaultLevelZone03min 31
+setgs uDefaultLevelZone03max 75
+setgs uDefaultLevelZone04min 76
+setgs uDefaultLevelZone04max 125
+setgs uDefaultLevelZone05min 126
+setgs uDefaultLevelZone05max 175
+setgs uDefaultLevelZone06min 176
+setgs uDefaultLevelZone06max 999
+setgs uDefaultLevelZone07min 200
+setgs uDefaultLevelZone07max 999
+setgs uDefaultLevelZone08min 225
+setgs uDefaultLevelZone08max 999
+setgs uDefaultLevelZone09min 250
+setgs uDefaultLevelZone09max 999
+
+;; This adjusts the level ranges between you and the mobs maybe seems to help but mixed opinion if id did anything in earlier games
+;; And in testing I did get some sawns that we 20 levels higher them me
+setgs iLevCharLevelDifferenceMax 10
