@@ -40,7 +40,7 @@ Perk Property Skill_RifleCertification Auto
 Perk Property Skill_ArmorPenetration Auto
 Perk Property Skill_Crippling Auto
 
-String Property Version="1.1.0" Auto
+String Property Version="1.1.1" Auto
 
 Float Property DefaultNPCHealthBonus=20.00 Auto
 Float Property DefaultPlayerHealthBonus=20.00 Auto
@@ -118,7 +118,8 @@ Float Property PerkADJ_SpecialCrippling=0.005 Auto
 
 Event OnPlayerLoadGame()
   Utility.Wait(1.0)
-  
+  Debug.Trace("OnPlayerLoadGame Event OnPlayerLoadGame triggered populating Properties and Regenerating Scaling Values", 0)
+
   ;; Not supposed to have to do this the Game should have set these automatically
   if (PlayerRef == None) 
     PlayerRef = Game.GetPlayer()
@@ -170,10 +171,12 @@ Event OnPlayerLoadGame()
 EndEvent
 
 Event OnDifficultyChanged(Int aOldDifficulty, Int aNewDifficulty)
+  Debug.Trace("OnDifficultyChanged Event OnPlayerLoadGame triggered Regenerating Scaling Values", 0)
   ScaleForMyLevel()
 EndEvent
 
 Event OnEnterShipInterior(ObjectReference akShip)
+  Debug.Trace("OnEnterShipInterior Event OnPlayerLoadGame triggered Regenerating Scaling Values", 0)
   ScaleForMyLevel()
 EndEvent
 
