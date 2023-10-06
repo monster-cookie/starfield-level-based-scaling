@@ -118,7 +118,8 @@ Float Property PerkADJ_SpecialCrippling=0.005 Auto
 
 Event OnPlayerLoadGame()
   Utility.Wait(1.0)
-  Debug.Trace("OnPlayerLoadGame Event OnPlayerLoadGame triggered populating Properties and Regenerating Scaling Values", 0)
+  Debug.Trace("EVENT: OnPlayerLoadGame triggered populating Properties and Regenerating Scaling Values", 0)
+  Debug.Notification("Level Based Scaling " + version + " is currently running.")
 
   ;; Not supposed to have to do this the Game should have set these automatically
   if (PlayerRef == None) 
@@ -171,12 +172,19 @@ Event OnPlayerLoadGame()
 EndEvent
 
 Event OnDifficultyChanged(Int aOldDifficulty, Int aNewDifficulty)
-  Debug.Trace("OnDifficultyChanged Event OnPlayerLoadGame triggered Regenerating Scaling Values", 0)
+  Debug.Trace("EVENT: OnDifficultyChanged triggered Regenerating Scaling Values", 0)
   ScaleForMyLevel()
 EndEvent
 
-Event OnEnterShipInterior(ObjectReference akShip)
-  Debug.Trace("OnEnterShipInterior Event OnPlayerLoadGame triggered Regenerating Scaling Values", 0)
+; Using ReferenceAlias (vs Actor) this is now actually triggered so don't think I need OnEnterShipInterior/OnExitShipInterior
+Event OnLocationChange(Location akOldLoc, Location akNewLoc)
+  Debug.Trace("EXPERIMENTAL EVENT: OnLocationChange triggered Regenerating Scaling Values", 0)
+  ScaleForMyLevel()
+EndEvent
+
+;; Called on ever thinkg you kill player or beast -- probably a good tracking point as you gain XP from the kill
+Event OnKill(ObjectReference akVictim)
+  Debug.Trace("EVENT: OnKill triggered Regenerating Scaling Values", 1)
   ScaleForMyLevel()
 EndEvent
 
