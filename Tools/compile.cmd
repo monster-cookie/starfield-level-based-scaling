@@ -14,7 +14,11 @@ REM Clear Dist DIR
 del /s /q "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\*.*"
 rmdir /s /q "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist"
 mkdir "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist"
+mkdir "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data\Scripts"
+mkdir "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data\Batchfiles"
+mkdir "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data\SFSE\plugins\ConsoleCommandRunner"
 
 REM Deploy to Dist DIR
 Caprica.exe --game starfield --import "D:\SteamLibrary\steamapps\common\Starfield\Data\Scripts\Source\Base" --flags "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Tools\Starfield_Papyrus_Flags.flg" --output "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data\Scripts" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\VPI_LevelBasedScaling.psc"
-copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\LevelScalingConfig.txt" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist"
+copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\LevelScalingConfig.txt" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data\Batchfiles"
+copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\LevelScalingConfig.toml" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data\SFSE\plugins\ConsoleCommandRunner"
