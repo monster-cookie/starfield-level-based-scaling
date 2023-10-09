@@ -1,0 +1,89 @@
+;;
+;; Brackets
+;;
+;; B01 => Level 001-025
+;; B02 => Level 026-050
+;; B03 => Level 051-075
+;; B04 => Level 076-100
+;; B05 => Level 101-125
+;; B06 => Level 126-150
+;; B07 => Level 151-200
+;; B08 => Level 201-250
+;; B09 => Level 251-300
+;; B10 => Level 301-999
+;;
+
+;; 
+;; Fix Default Values
+;;
+player.cf "VPI_LevelBasedScaling.SetDefaultNPCHealthBoost" 20
+player.cf "VPI_LevelBasedScaling.SetDefaultPlayerHealthBoost" 20
+
+player.cf "VPI_LevelBasedScaling.SetDefaultDamageToPlayerValue" 0 0.50
+player.cf "VPI_LevelBasedScaling.SetDefaultDamageToPlayerValue" 1 0.75
+player.cf "VPI_LevelBasedScaling.SetDefaultDamageToPlayerValue" 2 1.00
+player.cf "VPI_LevelBasedScaling.SetDefaultDamageToPlayerValue" 3 1.50
+player.cf "VPI_LevelBasedScaling.SetDefaultDamageToPlayerValue" 4 2.00
+
+player.cf "VPI_LevelBasedScaling.SetDefaultDamageByPlayerValue" 0 2.00
+player.cf "VPI_LevelBasedScaling.SetDefaultDamageByPlayerValue" 1 1.50
+player.cf "VPI_LevelBasedScaling.SetDefaultDamageByPlayerValue" 2 1.00
+player.cf "VPI_LevelBasedScaling.SetDefaultDamageByPlayerValue" 3 0.75
+player.cf "VPI_LevelBasedScaling.SetDefaultDamageByPlayerValue" 4 0.50
+
+;; 
+;; Fix Scaling Factors
+;;
+player.cf "VPI_LevelBasedScaling.SetNPCBonusHealthSFForBracket" 1 1.00
+player.cf "VPI_LevelBasedScaling.SetNPCBonusHealthSFForBracket" 2 1.00
+player.cf "VPI_LevelBasedScaling.SetNPCBonusHealthSFForBracket" 3 1.00
+player.cf "VPI_LevelBasedScaling.SetNPCBonusHealthSFForBracket" 4 1.00
+player.cf "VPI_LevelBasedScaling.SetNPCBonusHealthSFForBracket" 5 1.00
+player.cf "VPI_LevelBasedScaling.SetNPCBonusHealthSFForBracket" 6 1.00
+player.cf "VPI_LevelBasedScaling.SetNPCBonusHealthSFForBracket" 7 1.00
+player.cf "VPI_LevelBasedScaling.SetNPCBonusHealthSFForBracket" 8 1.00
+player.cf "VPI_LevelBasedScaling.SetNPCBonusHealthSFForBracket" 9 1.00
+player.cf "VPI_LevelBasedScaling.SetNPCBonusHealthSFForBracket" 10 1.00
+
+player.cf "VPI_LevelBasedScaling.SetPCBonusHealthSFForBracket" 1 1.00
+player.cf "VPI_LevelBasedScaling.SetPCBonusHealthSFForBracket" 2 1.00
+player.cf "VPI_LevelBasedScaling.SetPCBonusHealthSFForBracket" 3 1.00
+player.cf "VPI_LevelBasedScaling.SetPCBonusHealthSFForBracket" 4 1.00
+player.cf "VPI_LevelBasedScaling.SetPCBonusHealthSFForBracket" 5 1.00
+player.cf "VPI_LevelBasedScaling.SetPCBonusHealthSFForBracket" 6 1.00
+player.cf "VPI_LevelBasedScaling.SetPCBonusHealthSFForBracket" 7 1.00
+player.cf "VPI_LevelBasedScaling.SetPCBonusHealthSFForBracket" 8 1.00
+player.cf "VPI_LevelBasedScaling.SetPCBonusHealthSFForBracket" 9 1.00
+player.cf "VPI_LevelBasedScaling.SetPCBonusHealthSFForBracket" 10 1.00
+
+player.cf "VPI_LevelBasedScaling.SetDamageToPlayerSFForBracket" 1 1.00
+player.cf "VPI_LevelBasedScaling.SetDamageToPlayerSFForBracket" 2 1.00
+player.cf "VPI_LevelBasedScaling.SetDamageToPlayerSFForBracket" 3 1.00
+player.cf "VPI_LevelBasedScaling.SetDamageToPlayerSFForBracket" 4 1.00
+player.cf "VPI_LevelBasedScaling.SetDamageToPlayerSFForBracket" 5 1.00
+player.cf "VPI_LevelBasedScaling.SetDamageToPlayerSFForBracket" 6 1.00
+player.cf "VPI_LevelBasedScaling.SetDamageToPlayerSFForBracket" 7 1.00
+player.cf "VPI_LevelBasedScaling.SetDamageToPlayerSFForBracket" 8 1.00
+player.cf "VPI_LevelBasedScaling.SetDamageToPlayerSFForBracket" 9 1.00
+player.cf "VPI_LevelBasedScaling.SetDamageToPlayerSFForBracket" 10 1.00
+
+player.cf "VPI_LevelBasedScaling.SetDamageByPlayerSFForBracket" 1 1.00
+player.cf "VPI_LevelBasedScaling.SetDamageByPlayerSFForBracket" 2 1.00
+player.cf "VPI_LevelBasedScaling.SetDamageByPlayerSFForBracket" 3 1.00
+player.cf "VPI_LevelBasedScaling.SetDamageByPlayerSFForBracket" 4 1.00
+player.cf "VPI_LevelBasedScaling.SetDamageByPlayerSFForBracket" 5 1.00
+player.cf "VPI_LevelBasedScaling.SetDamageByPlayerSFForBracket" 6 1.00
+player.cf "VPI_LevelBasedScaling.SetDamageByPlayerSFForBracket" 7 1.00
+player.cf "VPI_LevelBasedScaling.SetDamageByPlayerSFForBracket" 8 1.00
+player.cf "VPI_LevelBasedScaling.SetDamageByPlayerSFForBracket" 9 1.00
+player.cf "VPI_LevelBasedScaling.SetDamageByPlayerSFForBracket" 10 1.00
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;                                     ;;;
+;;;       YOU MUST SAVE STARFIELD       ;;;
+;;;       YOU MUST SAVE STARFIELD       ;;;
+;;;       YOU MUST SAVE STARFIELD       ;;;
+;;;                                     ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
