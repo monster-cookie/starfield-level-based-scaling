@@ -40,7 +40,7 @@ Perk Property Skill_RifleCertification Auto
 Perk Property Skill_ArmorPenetration Auto
 Perk Property Skill_Crippling Auto
 
-String Property Version="1.1.2" Auto
+String Property Version="1.1.3" Auto
 
 Float Property DefaultNPCHealthBonus=0.00 Auto
 Float Property DefaultPlayerHealthBonus=0.00 Auto
@@ -174,14 +174,14 @@ EndFunction
 Function CreateBracketArrays() 
   If (SF_PCHealthBoost == None)
     SF_PCHealthBoost = new Float[11]
-    SF_PCHealthBoost[1] = 1.00
-    SF_PCHealthBoost[2] = 1.00
-    SF_PCHealthBoost[3] = 1.00
-    SF_PCHealthBoost[4] = 0.85
-    SF_PCHealthBoost[5] = 0.75
-    SF_PCHealthBoost[6] = 0.75
-    SF_PCHealthBoost[7] = 0.50
-    SF_PCHealthBoost[8] = 0.25
+    SF_PCHealthBoost[1] = 0.00
+    SF_PCHealthBoost[2] = 0.00
+    SF_PCHealthBoost[3] = 0.00
+    SF_PCHealthBoost[4] = 0.00
+    SF_PCHealthBoost[5] = 0.00
+    SF_PCHealthBoost[6] = 0.00
+    SF_PCHealthBoost[7] = 0.00
+    SF_PCHealthBoost[8] = 0.00
     SF_PCHealthBoost[9] = 0.00
     SF_PCHealthBoost[10] = 0.00
   EndIf
@@ -189,27 +189,27 @@ Function CreateBracketArrays()
     SF_NPCHealthBoost = new Float[11]
     SF_NPCHealthBoost[1] = 0.00
     SF_NPCHealthBoost[2] = 0.00
-    SF_NPCHealthBoost[3] = 0.50
-    SF_NPCHealthBoost[4] = 1.00
-    SF_NPCHealthBoost[5] = 1.25
-    SF_NPCHealthBoost[6] = 1.50
-    SF_NPCHealthBoost[7] = 1.75
-    SF_NPCHealthBoost[8] = 2.00
-    SF_NPCHealthBoost[9] = 3.00
-    SF_NPCHealthBoost[10] = 4.00
+    SF_NPCHealthBoost[3] = 0.00
+    SF_NPCHealthBoost[4] = 0.00
+    SF_NPCHealthBoost[5] = 0.00
+    SF_NPCHealthBoost[6] = 0.00
+    SF_NPCHealthBoost[7] = 0.00
+    SF_NPCHealthBoost[8] = 0.00
+    SF_NPCHealthBoost[9] = 0.00
+    SF_NPCHealthBoost[10] = 0.00
   EndIf
   If (SF_DamageToPlayer == None)
     SF_DamageToPlayer = new Float[11]
     SF_DamageToPlayer[1] = 0.80
     SF_DamageToPlayer[2] = 0.90
-    SF_DamageToPlayer[3] = 1.00
-    SF_DamageToPlayer[4] = 1.20
-    SF_DamageToPlayer[5] = 1.30
-    SF_DamageToPlayer[6] = 1.40
-    SF_DamageToPlayer[7] = 1.60
-    SF_DamageToPlayer[8] = 1.75
-    SF_DamageToPlayer[9] = 2.00
-    SF_DamageToPlayer[10] = 2.30
+    SF_DamageToPlayer[3] = 1.10
+    SF_DamageToPlayer[4] = 1.40
+    SF_DamageToPlayer[5] = 1.60
+    SF_DamageToPlayer[6] = 1.80
+    SF_DamageToPlayer[7] = 2.00
+    SF_DamageToPlayer[8] = 2.25
+    SF_DamageToPlayer[9] = 2.50
+    SF_DamageToPlayer[10] = 3.00
   EndIf
   If (SF_DamageByPlayer == None)
     SF_DamageByPlayer = new Float[11]
