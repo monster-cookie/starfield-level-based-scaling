@@ -40,7 +40,7 @@ Perk Property Skill_RifleCertification Auto
 Perk Property Skill_ArmorPenetration Auto
 Perk Property Skill_Crippling Auto
 
-String Property Version="1.1.2" Auto
+String Property Version="1.1.3" Auto
 
 Float Property DefaultNPCHealthBonus=0.00 Auto
 Float Property DefaultPlayerHealthBonus=0.00 Auto
