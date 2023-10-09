@@ -40,32 +40,32 @@ Perk Property Skill_RifleCertification Auto
 Perk Property Skill_ArmorPenetration Auto
 Perk Property Skill_Crippling Auto
 
-String Property Version="1.1.2" Auto
+String Property Version="1.1.3" Auto
 
-Float Property DefaultNPCHealthBonus=0.00 Auto
-Float Property DefaultPlayerHealthBonus=0.00 Auto
+Float Property DefaultNPCHealthBonus Auto
+Float Property DefaultPlayerHealthBonus Auto
 
-Float Property DefaultDamageToPlayerVE=0.50 Auto
-Float Property DefaultDamageToPlayerE=0.75 Auto
-Float Property DefaultDamageToPlayerN=1.00 Auto
-Float Property DefaultDamageToPlayerH=1.50 Auto
-Float Property DefaultDamageToPlayerVH=2.00 Auto
+Float Property DefaultDamageToPlayerVE Auto
+Float Property DefaultDamageToPlayerE Auto
+Float Property DefaultDamageToPlayerN Auto
+Float Property DefaultDamageToPlayerH Auto
+Float Property DefaultDamageToPlayerVH Auto
 
-Float Property DefaultDamageByPlayerVE=2.00 Auto
-Float Property DefaultDamageByPlayerE=1.50 Auto
-Float Property DefaultDamageByPlayerN=1.00 Auto
-Float Property DefaultDamageByPlayerH=0.75 Auto
-Float Property DefaultDamageByPlayerVH=0.50 Auto
+Float Property DefaultDamageByPlayerVE Auto
+Float Property DefaultDamageByPlayerE Auto
+Float Property DefaultDamageByPlayerN Auto
+Float Property DefaultDamageByPlayerH Auto
+Float Property DefaultDamageByPlayerVH Auto
 
 Float[] Property SF_PCHealthBoost Auto
 Float[] Property SF_NPCHealthBoost Auto
 Float[] Property SF_DamageToPlayer Auto
 Float[] Property SF_DamageByPlayer Auto
 
-Float Property PerkADJ_DamageReduction=0.25 Auto
-Float Property PerkADJ_DamageAdd=0.25 Auto
-Float Property PerkADJ_SpecialArmorPen=0.002 Auto
-Float Property PerkADJ_SpecialCrippling=0.01 Auto
+Float Property PerkADJ_DamageReduction Auto
+Float Property PerkADJ_DamageAdd Auto
+Float Property PerkADJ_SpecialArmorPen Auto
+Float Property PerkADJ_SpecialCrippling Auto
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -79,6 +79,7 @@ Event OnInit()
   Debug.Notification("Level Based Scaling " + version + " is currently running.")
 
   UpdateSkillAndActorBindings()
+  CreateDefaults()
   CreateBracketArrays()
 
   ScaleForMyLevel()
@@ -95,6 +96,7 @@ Event OnPlayerLoadGame()
   Debug.Notification("Level Based Scaling " + version + " is currently running.")
 
   UpdateSkillAndActorBindings()
+  CreateDefaults()
   CreateBracketArrays()
 
   ScaleForMyLevel()
@@ -224,6 +226,28 @@ Function CreateBracketArrays()
     SF_DamageByPlayer[9] = 0.30
     SF_DamageByPlayer[10] = 0.15
   EndIf
+
+  PerkADJ_DamageReduction=0.25
+  PerkADJ_DamageAdd=0.25
+  PerkADJ_SpecialArmorPen=0.002
+  PerkADJ_SpecialCrippling=0.01
+EndFunction
+
+Function CreateDefaults()
+  DefaultNPCHealthBonus=0.00
+  DefaultPlayerHealthBonus=0.00
+  
+  DefaultDamageToPlayerVE=0.50
+  DefaultDamageToPlayerE=0.75
+  DefaultDamageToPlayerN=1.00
+  DefaultDamageToPlayerH=1.50
+  DefaultDamageToPlayerVH=2.00
+  
+  DefaultDamageByPlayerVE=2.00
+  DefaultDamageByPlayerE=1.50
+  DefaultDamageByPlayerN=1.00
+  DefaultDamageByPlayerH=0.75
+  DefaultDamageByPlayerVH=0.50
 EndFunction
 
 ;; ****************************************************************************
