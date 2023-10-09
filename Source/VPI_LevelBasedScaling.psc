@@ -107,7 +107,7 @@ EndEvent
 
 ; Using ReferenceAlias (vs Actor) this is now actually triggered so don't think I need OnEnterShipInterior/OnExitShipInterior
 Event OnLocationChange(Location akOldLoc, Location akNewLoc)
-  Debug.Trace("EXPERIMENTAL EVENT: OnLocationChange triggered Regenerating Scaling Values", 0)
+  Debug.Trace("EVENT: OnLocationChange triggered Regenerating Scaling Values", 0)
   ScaleForMyLevel()
 EndEvent
 
