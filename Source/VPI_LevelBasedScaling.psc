@@ -42,8 +42,8 @@ Perk Property Skill_Crippling Auto
 
 String Property Version="1.1.2" Auto
 
-Float Property DefaultNPCHealthBonus=20.00 Auto
-Float Property DefaultPlayerHealthBonus=20.00 Auto
+Float Property DefaultNPCHealthBonus=0.00 Auto
+Float Property DefaultPlayerHealthBonus=0.00 Auto
 
 Float Property DefaultDamageToPlayerVE=0.50 Auto
 Float Property DefaultDamageToPlayerE=0.75 Auto
@@ -203,13 +203,13 @@ Function CreateBracketArrays()
     SF_DamageToPlayer[1] = 0.80
     SF_DamageToPlayer[2] = 0.90
     SF_DamageToPlayer[3] = 1.00
-    SF_DamageToPlayer[4] = 1.25
-    SF_DamageToPlayer[5] = 1.33
-    SF_DamageToPlayer[6] = 1.50
-    SF_DamageToPlayer[7] = 1.75
-    SF_DamageToPlayer[8] = 2.00
-    SF_DamageToPlayer[9] = 2.50
-    SF_DamageToPlayer[10] = 3.00
+    SF_DamageToPlayer[4] = 1.20
+    SF_DamageToPlayer[5] = 1.30
+    SF_DamageToPlayer[6] = 1.40
+    SF_DamageToPlayer[7] = 1.60
+    SF_DamageToPlayer[8] = 1.75
+    SF_DamageToPlayer[9] = 2.00
+    SF_DamageToPlayer[10] = 2.30
   EndIf
   If (SF_DamageByPlayer == None)
     SF_DamageByPlayer = new Float[11]
@@ -221,7 +221,7 @@ Function CreateBracketArrays()
     SF_DamageByPlayer[6] = 0.60
     SF_DamageByPlayer[7] = 0.50
     SF_DamageByPlayer[8] = 0.40
-    SF_DamageByPlayer[9] = 0.25
+    SF_DamageByPlayer[9] = 0.30
     SF_DamageByPlayer[10] = 0.15
   EndIf
 EndFunction
@@ -245,6 +245,7 @@ Function SetDefaultDamageToPlayerValue(int difficulty, Float value)
   ElseIf (difficulty == 4)
     DefaultDamageToPlayerVH = value
   EndIf
+  ScaleForMyLevel()
 EndFunction
 
 ;; ****************************************************************************
@@ -266,6 +267,7 @@ Function SetDefaultDamageByPlayerValue(int difficulty, Float value)
   ElseIf (difficulty == 4)
     DefaultDamageByPlayerVH = value
   EndIf
+  ScaleForMyLevel()
 EndFunction
 
 ;; ****************************************************************************
@@ -276,6 +278,7 @@ EndFunction
 ;;
 Function SetDefaultNPCHealthBoost(Float value)
   DefaultNPCHealthBonus = value
+  ScaleForMyLevel()
 EndFunction
 
 ;; ****************************************************************************
@@ -286,6 +289,7 @@ EndFunction
 ;;
 Function SetDefaultPlayerHealthBoost(Float value)
   DefaultPlayerHealthBonus = value
+  ScaleForMyLevel()
 EndFunction
 
 ;; ****************************************************************************
@@ -551,7 +555,7 @@ Function GetScalingMatrix()
   Float scaledSponginessNPC = Game.GetGameSettingFloat("fNPCHealthLevelBonus")
   Float scaledSponginessPlayer = Game.GetGameSettingFloat("fHealthEnduranceOffset")
 
-  String message = ""
+  String message = "Scaling for a player level of " + iPlayerLevel + " using scaling data from the level " + iPlayerBracket + " bracket.\n"
 
   message += "NPC Health Boost is " + scaledSponginessNPC + " (Default:" + DefaultNPCHealthBonus + " X SF:" + sfSponginessNPC + ").\n"
   message += "Player Health Boost is " + scaledSponginessPlayer + " (Default:" + DefaultPlayerHealthBonus + " X SF:" + sfSponginessPlayer + ").\n"
