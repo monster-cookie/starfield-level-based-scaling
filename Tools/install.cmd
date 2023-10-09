@@ -7,5 +7,4 @@ copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dis
 copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data\Batchfiles\LevelScalingConfig.txt" "D:\SteamLibrary\steamapps\common\Starfield\Data\Batchfiles"
 copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data\Batchfiles\vpi-lbs-reset-vanilla.txt" "D:\SteamLibrary\steamapps\common\Starfield\Data\Batchfiles"
 copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data\Batchfiles\vpi-lbs-reset-defaults.txt" "D:\SteamLibrary\steamapps\common\Starfield\Data\Batchfiles"
-copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data\Batchfiles\vpi-lbs-custom-config.txt" "D:\SteamLibrary\steamapps\common\Starfield\Data\Batchfiles"
 copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data\SFSE\plugins\ConsoleCommandRunner\LevelScalingConfig.toml" "D:\SteamLibrary\steamapps\common\Starfield\Data\SFSE\plugins\ConsoleCommandRunner"
