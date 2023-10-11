@@ -40,7 +40,7 @@ Perk Property Skill_RifleCertification Auto
 Perk Property Skill_ArmorPenetration Auto
 Perk Property Skill_Crippling Auto
 
-String Property Version="1.1.3" Auto
+String Property Version="1.1.4" Auto
 
 Float Property DefaultNPCHealthBonus=0.00 Auto
 Float Property DefaultPlayerHealthBonus=0.00 Auto
@@ -120,7 +120,7 @@ EndEvent
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Member Functions
+;;; Private Member Functions
 ;;;
 
 Function UpdateSkillAndActorBindings()
@@ -227,113 +227,51 @@ Function CreateBracketArrays()
 EndFunction
 
 ;; ****************************************************************************
-;; Change a default damage to player values
+;; Convert the difficulty int value to the string value
 ;;
-;; Use: player.cf "VPI_LevelBasedScaling.SetDefaultDamageToPlayerValue" <difficulty> <newValue>
-;;   difficulty -> 0=Very Easy, 1=Easy, 2=Normal, 3=Hard, 4=Very Hard
-;;   newValue -> The new float value to set
-;;
-Function SetDefaultDamageToPlayerValue(int difficulty, Float value)
-  If (difficulty == 0)
-    DefaultDamageToPlayerVE = value
-  ElseIf (difficulty == 1)
-    DefaultDamageToPlayerE = value
-  ElseIf (difficulty == 2)
-    DefaultDamageToPlayerN = value
-  ElseIf (difficulty == 3)
-    DefaultDamageToPlayerH = value
-  ElseIf (difficulty == 4)
-    DefaultDamageToPlayerVH = value
+String Function GetDifficulty(int iDifficulty)
+  if (iDifficulty == 0)
+    return "Very Easy"
+  ElseIf (iDifficulty == 1)
+    return "Easy"
+  ElseIf (iDifficulty == 2)
+    return "Normal"
+  ElseIf (iDifficulty == 3)
+    return "Hard"
+  ElseIf (iDifficulty == 4)
+    return "Very Hard"
+  Else
+    return "Unknown(" + iDifficulty +")"
   EndIf
-  ScaleForMyLevel()
 EndFunction
 
 ;; ****************************************************************************
-;; Change a default damage by player values
+;; Get the bracket that applies to the player's current level
 ;;
-;; Use: player.cf "VPI_LevelBasedScaling.SetDefaultDamageByPlayerValue" <difficulty> <newValue>
-;;   difficulty -> 0=Very Easy, 1=Easy, 2=Normal, 3=Hard, 4=Very Hard
-;;   newValue -> The new float value to set
-;;
-Function SetDefaultDamageByPlayerValue(int difficulty, Float value)
-  If (difficulty == 0)
-    DefaultDamageByPlayerVE = value
-  ElseIf (difficulty == 1)
-    DefaultDamageByPlayerE = value
-  ElseIf (difficulty == 2)
-    DefaultDamageByPlayerN = value
-  ElseIf (difficulty == 3)
-    DefaultDamageByPlayerH = value
-  ElseIf (difficulty == 4)
-    DefaultDamageByPlayerVH = value
+Int Function GetBracketForPlayerLevel()
+  Int playerLevel = PlayerRef.GetLevel()
+
+  If (1 <= playerLevel && playerLevel <= 25)
+    return 1
+  ElseIf (26 <= playerLevel && playerLevel <= 50)
+    return 2
+  ElseIf (51 <= playerLevel && playerLevel <= 75)
+    return 3
+  ElseIf (76 <= playerLevel && playerLevel <= 100)
+    return 4
+  ElseIf (101 <= playerLevel && playerLevel <= 125)
+    return 5
+  ElseIf (126 <= playerLevel && playerLevel <= 150)
+    return 6
+  ElseIf (151 <= playerLevel && playerLevel <= 200)
+    return 7
+  ElseIf (201 <= playerLevel && playerLevel <= 250)
+    return 8
+  ElseIf (251 <= playerLevel && playerLevel <= 300)
+    return 9
+  Else
+    return 10
   EndIf
-  ScaleForMyLevel()
-EndFunction
-
-;; ****************************************************************************
-;; Change the default NPC health boost
-;;
-;; Use: player.cf "VPI_LevelBasedScaling.SetDefaultNPCHealthBoost" <newValue>
-;;   newValue -> The new float value to set
-;;
-Function SetDefaultNPCHealthBoost(Float value)
-  DefaultNPCHealthBonus = value
-  ScaleForMyLevel()
-EndFunction
-
-;; ****************************************************************************
-;; Change the default Player health boost
-;;
-;; Use: player.cf "VPI_LevelBasedScaling.SetDefaultPlayerHealthBoost" <newValue>
-;;   newValue -> The new float value to set
-;;
-Function SetDefaultPlayerHealthBoost(Float value)
-  DefaultPlayerHealthBonus = value
-  ScaleForMyLevel()
-EndFunction
-
-;; ****************************************************************************
-;; Change a scaling factor in the specified level bracket for damage to player 
-;;
-;; Use: player.cf "VPI_LevelBasedScaling.SetDamageToPlayerSFForBracket" <bracket> <newSF>
-;;   bracket -> The bracket to change can be 1 to 10 only
-;;   newSF -> The new scale factor to set for the bracket
-;;
-Function SetDamageToPlayerSFForBracket(int bracket, Float newSF)
-  SF_DamageToPlayer[bracket] = newSF
-EndFunction
-
-;; ****************************************************************************
-;; Change a scaling factor in the specified level bracket for damage by player 
-;;
-;; Use: player.cf "VPI_LevelBasedScaling.SetDamageByPlayerSFForBracket" <bracket> <newSF>
-;;   bracket -> The bracket to change can be 1 to 10 only
-;;   newSF -> The new scale factor to set for the bracket
-;;
-Function SetDamageByPlayerSFForBracket(int bracket, Float newSF)
-  SF_DamageByPlayer[bracket]=newSF
-EndFunction
-
-;; ****************************************************************************
-;; Change a scaling factor in the specified level bracket for NPC Bonus Health 
-;;
-;; Use: player.cf "VPI_LevelBasedScaling.SetNPCBonusHealthSFForBracket" <bracket> <newSF>
-;;   bracket -> The bracket to change can be 1 to 10 only
-;;   newSF -> The new scale factor to set for the bracket
-;;
-Function SetNPCBonusHealthSFForBracket(int bracket, Float newSF)
-  SF_NPCHealthBoost[bracket]=newSF
-EndFunction
-
-;; ****************************************************************************
-;; Change a scaling factor in the specified level bracket for Player Bonus Health 
-;;
-;; Use: player.cf "VPI_LevelBasedScaling.SetPCBonusHealthSFForBracket" <bracket> <newSF>
-;;   bracket -> The bracket to change can be 1 to 10 only
-;;   newSF -> The new scale factor to set for the bracket
-;;
-Function SetPCBonusHealthSFForBracket(int bracket, Float newSF)
-  SF_NPCHealthBoost[bracket] = newSF
 EndFunction
 
 ;; ****************************************************************************
@@ -448,6 +386,118 @@ Function ScaleFloatGameSetting (String gameSetting, Float defaultValue, Float sc
   Debug.ExecuteConsole("setgs " + gameSetting + " " + scaledValue)
 EndFunction
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Public Member Functions
+;;;
+
+;; ****************************************************************************
+;; Change a default damage to player values
+;;
+;; Use: player.cf "VPI_LevelBasedScaling.SetDefaultDamageToPlayerValue" <difficulty> <newValue>
+;;   difficulty -> 0=Very Easy, 1=Easy, 2=Normal, 3=Hard, 4=Very Hard
+;;   newValue -> The new float value to set
+;;
+Function SetDefaultDamageToPlayerValue(int difficulty, Float value)
+  If (difficulty == 0)
+    DefaultDamageToPlayerVE = value
+  ElseIf (difficulty == 1)
+    DefaultDamageToPlayerE = value
+  ElseIf (difficulty == 2)
+    DefaultDamageToPlayerN = value
+  ElseIf (difficulty == 3)
+    DefaultDamageToPlayerH = value
+  ElseIf (difficulty == 4)
+    DefaultDamageToPlayerVH = value
+  EndIf
+EndFunction
+
+;; ****************************************************************************
+;; Change a default damage by player values
+;;
+;; Use: player.cf "VPI_LevelBasedScaling.SetDefaultDamageByPlayerValue" <difficulty> <newValue>
+;;   difficulty -> 0=Very Easy, 1=Easy, 2=Normal, 3=Hard, 4=Very Hard
+;;   newValue -> The new float value to set
+;;
+Function SetDefaultDamageByPlayerValue(int difficulty, Float value)
+  If (difficulty == 0)
+    DefaultDamageByPlayerVE = value
+  ElseIf (difficulty == 1)
+    DefaultDamageByPlayerE = value
+  ElseIf (difficulty == 2)
+    DefaultDamageByPlayerN = value
+  ElseIf (difficulty == 3)
+    DefaultDamageByPlayerH = value
+  ElseIf (difficulty == 4)
+    DefaultDamageByPlayerVH = value
+  EndIf
+EndFunction
+
+;; ****************************************************************************
+;; Change the default NPC health boost
+;;
+;; Use: player.cf "VPI_LevelBasedScaling.SetDefaultNPCHealthBoost" <newValue>
+;;   newValue -> The new float value to set
+;;
+Function SetDefaultNPCHealthBoost(Float value)
+  DefaultNPCHealthBonus = value
+EndFunction
+
+;; ****************************************************************************
+;; Change the default Player health boost
+;;
+;; Use: player.cf "VPI_LevelBasedScaling.SetDefaultPlayerHealthBoost" <newValue>
+;;   newValue -> The new float value to set
+;;
+Function SetDefaultPlayerHealthBoost(Float value)
+  DefaultPlayerHealthBonus = value
+EndFunction
+
+;; ****************************************************************************
+;; Change a scaling factor in the specified level bracket for damage to player 
+;;
+;; Use: player.cf "VPI_LevelBasedScaling.SetDamageToPlayerSFForBracket" <bracket> <newSF>
+;;   bracket -> The bracket to change can be 1 to 10 only
+;;   newSF -> The new scale factor to set for the bracket
+;;
+Function SetDamageToPlayerSFForBracket(int bracket, Float newSF)
+  SF_DamageToPlayer[bracket] = newSF
+EndFunction
+
+;; ****************************************************************************
+;; Change a scaling factor in the specified level bracket for damage by player 
+;;
+;; Use: player.cf "VPI_LevelBasedScaling.SetDamageByPlayerSFForBracket" <bracket> <newSF>
+;;   bracket -> The bracket to change can be 1 to 10 only
+;;   newSF -> The new scale factor to set for the bracket
+;;
+Function SetDamageByPlayerSFForBracket(int bracket, Float newSF)
+  SF_DamageByPlayer[bracket]=newSF
+EndFunction
+
+;; ****************************************************************************
+;; Change a scaling factor in the specified level bracket for NPC Bonus Health 
+;;
+;; Use: player.cf "VPI_LevelBasedScaling.SetNPCBonusHealthSFForBracket" <bracket> <newSF>
+;;   bracket -> The bracket to change can be 1 to 10 only
+;;   newSF -> The new scale factor to set for the bracket
+;;
+Function SetNPCBonusHealthSFForBracket(int bracket, Float newSF)
+  SF_NPCHealthBoost[bracket]=newSF
+EndFunction
+
+;; ****************************************************************************
+;; Change a scaling factor in the specified level bracket for Player Bonus Health 
+;;
+;; Use: player.cf "VPI_LevelBasedScaling.SetPCBonusHealthSFForBracket" <bracket> <newSF>
+;;   bracket -> The bracket to change can be 1 to 10 only
+;;   newSF -> The new scale factor to set for the bracket
+;;
+Function SetPCBonusHealthSFForBracket(int bracket, Float newSF)
+  SF_PCHealthBoost[bracket] = newSF
+EndFunction
+
 ;; ****************************************************************************
 ;; Update Starfield Damage Scaling Game Setting for my current level and 
 ;; scaling factor for that level
@@ -474,54 +524,6 @@ Function ScaleForMyLevel()
   ScaleFloatGameSetting("fDiffMultHPToPCN", DefaultDamageToPlayerN, sfDamageToPlayer)
   ScaleFloatGameSetting("fDiffMultHPToPCH", DefaultDamageToPlayerH, sfDamageToPlayer)
   ScaleFloatGameSetting("fDiffMultHPToPCVH", DefaultDamageToPlayerVH, sfDamageToPlayer)    
-EndFunction
-
-;; ****************************************************************************
-;; Convert the difficulty int value to the string value
-;;
-String Function GetDifficulty(int iDifficulty)
-  if (iDifficulty == 0)
-    return "Very Easy"
-  ElseIf (iDifficulty == 1)
-    return "Easy"
-  ElseIf (iDifficulty == 2)
-    return "Normal"
-  ElseIf (iDifficulty == 3)
-    return "Hard"
-  ElseIf (iDifficulty == 4)
-    return "Very Hard"
-  Else
-    return "Unknown(" + iDifficulty +")"
-  EndIf
-EndFunction
-
-;; ****************************************************************************
-;; Get the bracket that applies to the player's current level
-;;
-Int Function GetBracketForPlayerLevel()
-  Int playerLevel = PlayerRef.GetLevel()
-
-  If (1 <= playerLevel && playerLevel <= 25)
-    return 1
-  ElseIf (26 <= playerLevel && playerLevel <= 50)
-    return 2
-  ElseIf (51 <= playerLevel && playerLevel <= 75)
-    return 3
-  ElseIf (76 <= playerLevel && playerLevel <= 100)
-    return 4
-  ElseIf (101 <= playerLevel && playerLevel <= 125)
-    return 5
-  ElseIf (126 <= playerLevel && playerLevel <= 150)
-    return 6
-  ElseIf (151 <= playerLevel && playerLevel <= 200)
-    return 7
-  ElseIf (201 <= playerLevel && playerLevel <= 250)
-    return 8
-  ElseIf (251 <= playerLevel && playerLevel <= 300)
-    return 9
-  Else
-    return 10
-  EndIf
 EndFunction
 
 ;; ****************************************************************************
@@ -581,6 +583,28 @@ Function GetScalingMatrix()
     message += "Damage To Player is " + scaledDamageToPlayerVH + " (Default:" + DefaultDamageToPlayerVH + " X SF:" + sfDamageToPlayer + ").\n"
     message += "Damage By Player is " + scaledDamageByPlayerVH + " (Default:" + DefaultDamageByPlayerVH + " X SF:" + sfDamageByPlayer + ").\n"
   EndIf
+
+  Debug.Trace(message, 2)
+  Debug.Messagebox(message)
+EndFunction
+
+;; ****************************************************************************
+;; Get the current level scaling config from the player object
+;;
+;; Use: player.cf "VPI_LevelBasedScaling.DumpLevelScalingConfig"
+;;
+Function DumpLevelScalingConfig() 
+  string message = "*** Defaults ***\n\n"
+  message += "NPC Health " + DefaultNPCHealthBonus + ".\nPlayer Health " + DefaultPlayerHealthBonus + ".\n"
+  message += "Damage To Player: |VE " + DefaultDamageToPlayerVE + "|E " + DefaultDamageToPlayerE + "|N " + DefaultDamageToPlayerN + "|H " + DefaultDamageToPlayerH + "|VH " + DefaultDamageToPlayerVH + "|\n"
+  message += "Damage By Player: |VE " + DefaultDamageByPlayerVE + "|E " + DefaultDamageByPlayerE + "|N " + DefaultDamageByPlayerN + "|H " + DefaultDamageByPlayerH + "|VH " + DefaultDamageByPlayerVH + "|\n"
+
+  message += "\n\n*** Scaling Factores ***\n\n"
+  message += "____________|____01____|____02____|____03____|____04____|____05____|____06____|____07____|____08____|____09____|____10____|\n"
+  message += "NPC Health  | " + SF_NPCHealthBoost[1] + " | " + SF_NPCHealthBoost[2] + " | " + SF_NPCHealthBoost[3] + " | " + SF_NPCHealthBoost[4] + " | " + SF_NPCHealthBoost[5] + " | " + SF_NPCHealthBoost[6] + " | " + SF_NPCHealthBoost[7] + " | " + SF_NPCHealthBoost[8] + " | " + SF_NPCHealthBoost[9] + " | " + SF_NPCHealthBoost[10] + " |\n"
+  message += "PC Health   | " + SF_PCHealthBoost[1] + " | " + SF_PCHealthBoost[2] + " | " + SF_PCHealthBoost[3] + " | " + SF_PCHealthBoost[4] + " | " + SF_PCHealthBoost[5] + " | " + SF_PCHealthBoost[6] + " | " + SF_PCHealthBoost[7] + " | " + SF_PCHealthBoost[8] + " | " + SF_PCHealthBoost[9] + " | " + SF_PCHealthBoost[10] + " |\n"
+  message += "Damage To PC| " + SF_DamageToPlayer[1] + " | " + SF_DamageToPlayer[2] + " | " + SF_DamageToPlayer[3] + " | " + SF_DamageToPlayer[4] + " | " + SF_DamageToPlayer[5] + " | " + SF_DamageToPlayer[6] + " | " + SF_DamageToPlayer[7] + " | " + SF_DamageToPlayer[8] + " | " + SF_DamageToPlayer[9] + " | " + SF_DamageToPlayer[10] + " |\n"
+  message += "Damage By PC| " + SF_DamageByPlayer[1] + " | " + SF_DamageByPlayer[2] + " | " + SF_DamageByPlayer[3] + " | " + SF_DamageByPlayer[4] + " | " + SF_DamageByPlayer[5] + " | " + SF_DamageByPlayer[6] + " | " + SF_DamageByPlayer[7] + " | " + SF_DamageByPlayer[8] + " | " + SF_DamageByPlayer[9] + " | " + SF_DamageByPlayer[10] + " |\n"
 
   Debug.Trace(message, 2)
   Debug.Messagebox(message)

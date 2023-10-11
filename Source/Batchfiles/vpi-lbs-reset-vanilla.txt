@@ -78,6 +78,7 @@ player.cf "VPI_LevelBasedScaling.SetDamageByPlayerSFForBracket" 8 1.00
 player.cf "VPI_LevelBasedScaling.SetDamageByPlayerSFForBracket" 9 1.00
 player.cf "VPI_LevelBasedScaling.SetDamageByPlayerSFForBracket" 10 1.00
 
+player.cf "VPI_LevelBasedScaling.ScaleForMyLevel"
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;                                     ;;;
