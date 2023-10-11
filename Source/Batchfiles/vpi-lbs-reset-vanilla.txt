@@ -18,6 +18,7 @@
 ;;
 player.cf "VPI_LevelBasedScaling.SetDefaultNPCHealthBoost" 20
 player.cf "VPI_LevelBasedScaling.SetDefaultPlayerHealthBoost" 20
+player.cf "VPI_LevelBasedScaling.SetDefaultPlayerExperienceBoost" 0
 
 player.cf "VPI_LevelBasedScaling.SetDefaultDamageToPlayerValue" 0 0.50
 player.cf "VPI_LevelBasedScaling.SetDefaultDamageToPlayerValue" 1 0.75
@@ -78,6 +79,18 @@ player.cf "VPI_LevelBasedScaling.SetDamageByPlayerSFForBracket" 8 1.00
 player.cf "VPI_LevelBasedScaling.SetDamageByPlayerSFForBracket" 9 1.00
 player.cf "VPI_LevelBasedScaling.SetDamageByPlayerSFForBracket" 10 1.00
 
+player.cf "VPI_LevelBasedScaling.SetPlayerExperienceBonusSFForBracket" 1 1.00
+player.cf "VPI_LevelBasedScaling.SetPlayerExperienceBonusSFForBracket" 2 1.00
+player.cf "VPI_LevelBasedScaling.SetPlayerExperienceBonusSFForBracket" 3 1.00
+player.cf "VPI_LevelBasedScaling.SetPlayerExperienceBonusSFForBracket" 4 1.00
+player.cf "VPI_LevelBasedScaling.SetPlayerExperienceBonusSFForBracket" 5 1.00
+player.cf "VPI_LevelBasedScaling.SetPlayerExperienceBonusSFForBracket" 6 1.00
+player.cf "VPI_LevelBasedScaling.SetPlayerExperienceBonusSFForBracket" 7 1.00
+player.cf "VPI_LevelBasedScaling.SetPlayerExperienceBonusSFForBracket" 8 1.00
+player.cf "VPI_LevelBasedScaling.SetPlayerExperienceBonusSFForBracket" 9 1.00
+player.cf "VPI_LevelBasedScaling.SetPlayerExperienceBonusSFForBracket" 10 1.00
+
+player.cf "VPI_LevelBasedScaling.ScaleForMyLevel"
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;                                     ;;;
