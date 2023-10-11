@@ -611,8 +611,10 @@ Function DumpLevelScalingConfig()
 EndFunction
 
 ;; ****************************************************************************
-;; Funciton to get the current version of the script
+;; Get the current version of the script
 ;;
-Function GetVersion() Global
-	Debug.Messagebox("VPI_LevelBasedScaling Version: " + self.Version)
+;; Use: player.cf "VPI_LevelBasedScaling.GetVersion"
+;;
+Function GetVersion()
+	Debug.Messagebox("VPI_LevelBasedScaling Version: " + Version)
 EndFunction
