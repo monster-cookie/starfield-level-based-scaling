@@ -48,6 +48,9 @@ ActorValue Property Health Auto
 Float Property DefaultNPCHealthBonus=0.00 Auto
 Float Property DefaultPlayerHealthBonus=0.00 Auto
 
+Float Property DefaultLowLevelNPCHealthAdjustment=0.05 Auto
+Int Property DefaultLowLevelNPCVsPlayerLevelDifference=5 Auto
+
 Float Property DefaultDamageToPlayerVE=0.50 Auto
 Float Property DefaultDamageToPlayerE=0.75 Auto
 Float Property DefaultDamageToPlayerN=1.00 Auto
@@ -64,6 +67,9 @@ Float[] Property SF_PCHealthBoost Auto
 Float[] Property SF_NPCHealthBoost Auto
 Float[] Property SF_DamageToPlayer Auto
 Float[] Property SF_DamageByPlayer Auto
+
+Float[] Property BK_LowLevelNPCHealthAdjustment Auto
+Int[] Property BK_LowLevelNPCVsPlayerLevelDifference Auto
 
 Float Property PerkADJ_DamageReduction=0.25 Auto
 Float Property PerkADJ_DamageAdd=0.25 Auto
@@ -241,6 +247,32 @@ Function CreateBracketArrays()
     SF_DamageByPlayer[9] = 0.30
     SF_DamageByPlayer[10] = 0.15
   EndIf
+  If (BK_LowLevelNPCHealthAdjustment == None)
+    BK_LowLevelNPCHealthAdjustment = new Float[11]
+    BK_LowLevelNPCHealthAdjustment[1] = 0.10
+    BK_LowLevelNPCHealthAdjustment[2] = 0.10
+    BK_LowLevelNPCHealthAdjustment[3] = 0.10
+    BK_LowLevelNPCHealthAdjustment[4] = 0.05
+    BK_LowLevelNPCHealthAdjustment[5] = 0.05
+    BK_LowLevelNPCHealthAdjustment[6] = 0.05
+    BK_LowLevelNPCHealthAdjustment[7] = 0.05
+    BK_LowLevelNPCHealthAdjustment[8] = 0.01
+    BK_LowLevelNPCHealthAdjustment[9] = 0.01
+    BK_LowLevelNPCHealthAdjustment[10] = 0.01
+  EndIf
+  If (BK_LowLevelNPCVsPlayerLevelDifference == None)
+    BK_LowLevelNPCVsPlayerLevelDifference = new Int[11]
+    BK_LowLevelNPCVsPlayerLevelDifference[1] = 5
+    BK_LowLevelNPCVsPlayerLevelDifference[2] = 5
+    BK_LowLevelNPCVsPlayerLevelDifference[3] = 5
+    BK_LowLevelNPCVsPlayerLevelDifference[4] = 5
+    BK_LowLevelNPCVsPlayerLevelDifference[5] = 5
+    BK_LowLevelNPCVsPlayerLevelDifference[6] = 5
+    BK_LowLevelNPCVsPlayerLevelDifference[7] = 5
+    BK_LowLevelNPCVsPlayerLevelDifference[8] = 5
+    BK_LowLevelNPCVsPlayerLevelDifference[9] = 5
+    BK_LowLevelNPCVsPlayerLevelDifference[10] = 5
+  EndIf
 EndFunction
 
 ;; ****************************************************************************
@@ -396,11 +428,57 @@ Float Function SponginessPlayerScalingFactor()
 EndFunction
 
 ;; ****************************************************************************
+;; Get the bracket value for Low Level NPC health Adjustment at the player's current level
+;;
+Float Function BracketAdjustmentForLowLevelNPCHealthAdjustment()
+  Int playerLevel = PlayerRef.GetLevel()
+  Int playerBracket = GetBracketForPlayerLevel()
+  Float bracketValue = BK_LowLevelNPCHealthAdjustment[playerBracket];
+
+  Debug.Trace("Low Level NPC Health Adjustment is being calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an initial SF of " + bracketValue + ".", 0)
+  Return bracketValue
+EndFunction
+
+;; ****************************************************************************
+;; Get the bracket values for the NPC to be considered low level at the player's current level
+;;
+Int Function BracketAdjustmentForLowLevelNPCVsPlayerLevelDifference()
+  Int playerLevel = PlayerRef.GetLevel()
+  Int playerBracket = GetBracketForPlayerLevel()
+  Int bracketValue = BK_LowLevelNPCVsPlayerLevelDifference[playerBracket];
+
+  Debug.Trace("Low Level NPC Level Difference to be considered low level is being calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an initial SF of " + bracketValue + ".", 0)
+  Return bracketValue
+EndFunction
+
+;; ****************************************************************************
+;; Set a float based game setting 
+;;
+Function SetGameSettingFloat(String gameSetting, Float value)
+  Debug.ExecuteConsole("setgs " + gameSetting + " " + value)
+EndFunction
+
+;; ****************************************************************************
+;; Set a float based game setting 
+;;
+Function SetGameSettingInt(String gameSetting, Int value)
+  Debug.ExecuteConsole("setgs " + gameSetting + " " + value)
+EndFunction
+
+;; ****************************************************************************
 ;; Get, scale, and update a float based game setting 
 ;;
-Function ScaleFloatGameSetting (String gameSetting, Float defaultValue, Float scaleFactor)
+Function ScaleGameSettingFloat(String gameSetting, Float defaultValue, Float scaleFactor)
   Float scaledValue = defaultValue * scaleFactor
-  Debug.ExecuteConsole("setgs " + gameSetting + " " + scaledValue)
+  SetGameSettingFloat(gameSetting, scaledValue)
+EndFunction
+
+;; ****************************************************************************
+;; Get, scale, and update a float based game setting 
+;;
+Function ScaleGameSettingInt(String gameSetting, Int defaultValue, Int scaleFactor)
+  Int scaledValue = defaultValue * scaleFactor
+  SetGameSettingInt(gameSetting, scaledValue)
 EndFunction
 
 
@@ -472,6 +550,29 @@ Function SetDefaultPlayerHealthBoost(Float value)
 EndFunction
 
 ;; ****************************************************************************
+;; Change the default Low Level NPC health multiplier. This works different then
+;; normal multipliers. This subtracts x% from the player health and sets the NPC
+;; health to that value. So at the default of 25% the NPC gets 75% of the player's
+;; health as its health
+;;
+;; Use: player.cf "VPI_LevelBasedScaling.SetDefaultLowLevelNPCHealthAdjustment" <newValue>
+;;   newValue -> The new float value to set
+;;
+Function SetDefaultLowLevelNPCHealthAdjustment(Float value)
+  DefaultLowLevelNPCHealthAdjustment = value
+EndFunction
+
+;; ****************************************************************************
+;; Change the default level difference at which a NPC is considered low level 
+;;
+;; Use: player.cf "VPI_LevelBasedScaling.SetDefaultLowLevelNPCVsPlayerLevelDifference" <newValue>
+;;   newValue -> The new float value to set
+;;
+Function SetDefaultLowLevelNPCVsPlayerLevelDifference(Int value)
+  DefaultLowLevelNPCVsPlayerLevelDifference = value
+EndFunction
+
+;; ****************************************************************************
 ;; Change a scaling factor in the specified level bracket for damage to player 
 ;;
 ;; Use: player.cf "VPI_LevelBasedScaling.SetDamageToPlayerSFForBracket" <bracket> <newSF>
@@ -516,6 +617,28 @@ Function SetPCBonusHealthSFForBracket(int bracket, Float newSF)
 EndFunction
 
 ;; ****************************************************************************
+;; Change a bracket values in the specified level bracket for the low level NPC health adjustment
+;;
+;; Use: player.cf "VPI_LevelBasedScaling.SetLowLevelNPCHealthAdjustmentValueForBracket" <bracket> <newValue>
+;;   bracket -> The bracket to change can be 1 to 10 only
+;;   newValue -> The new value to set for the bracket
+;;
+Function SetLowLevelNPCHealthAdjustmentValueForBracket(int bracket, Float newValue)
+  BK_LowLevelNPCHealthAdjustment[bracket]=newValue
+EndFunction
+
+;; ****************************************************************************
+;; Change a scaling factor in the specified level bracket for Player Bonus Health 
+;;
+;; Use: player.cf "VPI_LevelBasedScaling.SetLowLevelNPCVsPlayerLevelDifferenceValueForBracket" <bracket> <newValue>
+;;   bracket -> The bracket to change can be 1 to 10 only
+;;   newValue -> The new value to set for the bracket
+;;
+Function SetLowLevelNPCVsPlayerLevelDifferenceValueForBracket(int bracket, int newValue)
+  BK_LowLevelNPCVsPlayerLevelDifference[bracket] = newValue
+EndFunction
+
+;; ****************************************************************************
 ;; Update Starfield Damage Scaling Game Setting for my current level and 
 ;; scaling factor for that level
 ;;
@@ -523,7 +646,7 @@ EndFunction
 ;;
 Function ScaleForMyLevel()
   If (PlayerRef.IsInCombat())
-    Debug.Trace("Player is in combat so no new scaling values will be calculated.")
+    Debug.Trace("Player is in combat so no new scaling values will be calculated.", 1)
     return
   EndIf
 
@@ -531,21 +654,26 @@ Function ScaleForMyLevel()
   Float sfDamageToPlayer = GetDamageToPlayerScalingFactor()
   Float sfSponginessNPC = SponginessNPCScalingFactor()
   Float sfSponginessPlayer = SponginessPlayerScalingFactor()
+  Float bvLowLevelNPCHealthAdjustment = BracketAdjustmentForLowLevelNPCHealthAdjustment()
+  Int bvLowLevelNPCVsPlayerLevelDifference = BracketAdjustmentForLowLevelNPCVsPlayerLevelDifference()
 
-  ScaleFloatGameSetting("fNPCHealthLevelBonus", DefaultNPCHealthBonus, sfSponginessNPC)
-  ScaleFloatGameSetting("fHealthEnduranceOffset", DefaultPlayerHealthBonus, sfSponginessPlayer)
+  ScaleGameSettingFloat("fNPCHealthLevelBonus", DefaultNPCHealthBonus, sfSponginessNPC)
+  ScaleGameSettingFloat("fHealthEnduranceOffset", DefaultPlayerHealthBonus, sfSponginessPlayer)
 
-  ScaleFloatGameSetting("fDiffMultHPByPCVE", DefaultDamageByPlayerVE, sfDamageByPlayer)
-  ScaleFloatGameSetting("fDiffMultHPByPCE", DefaultDamageByPlayerE, sfDamageByPlayer)
-  ScaleFloatGameSetting("fDiffMultHPByPCN", DefaultDamageByPlayerN, sfDamageByPlayer)
-  ScaleFloatGameSetting("fDiffMultHPByPCH", DefaultDamageByPlayerH, sfDamageByPlayer)
-  ScaleFloatGameSetting("fDiffMultHPByPCVH", DefaultDamageByPlayerVH, sfDamageByPlayer)
+  SetGameSettingFloat("fLowLevelNPCBaseHealthMult", bvLowLevelNPCHealthAdjustment)
+  SetGameSettingInt("iLowLevelNPCMaxLevel", bvLowLevelNPCVsPlayerLevelDifference)
 
-  ScaleFloatGameSetting("fDiffMultHPToPCVE", DefaultDamageToPlayerVE, sfDamageToPlayer)
-  ScaleFloatGameSetting("fDiffMultHPToPCE", DefaultDamageToPlayerE, sfDamageToPlayer)
-  ScaleFloatGameSetting("fDiffMultHPToPCN", DefaultDamageToPlayerN, sfDamageToPlayer)
-  ScaleFloatGameSetting("fDiffMultHPToPCH", DefaultDamageToPlayerH, sfDamageToPlayer)
-  ScaleFloatGameSetting("fDiffMultHPToPCVH", DefaultDamageToPlayerVH, sfDamageToPlayer)    
+  ScaleGameSettingFloat("fDiffMultHPByPCVE", DefaultDamageByPlayerVE, sfDamageByPlayer)
+  ScaleGameSettingFloat("fDiffMultHPByPCE", DefaultDamageByPlayerE, sfDamageByPlayer)
+  ScaleGameSettingFloat("fDiffMultHPByPCN", DefaultDamageByPlayerN, sfDamageByPlayer)
+  ScaleGameSettingFloat("fDiffMultHPByPCH", DefaultDamageByPlayerH, sfDamageByPlayer)
+  ScaleGameSettingFloat("fDiffMultHPByPCVH", DefaultDamageByPlayerVH, sfDamageByPlayer)
+
+  ScaleGameSettingFloat("fDiffMultHPToPCVE", DefaultDamageToPlayerVE, sfDamageToPlayer)
+  ScaleGameSettingFloat("fDiffMultHPToPCE", DefaultDamageToPlayerE, sfDamageToPlayer)
+  ScaleGameSettingFloat("fDiffMultHPToPCN", DefaultDamageToPlayerN, sfDamageToPlayer)
+  ScaleGameSettingFloat("fDiffMultHPToPCH", DefaultDamageToPlayerH, sfDamageToPlayer)
+  ScaleGameSettingFloat("fDiffMultHPToPCVH", DefaultDamageToPlayerVH, sfDamageToPlayer)    
 EndFunction
 
 ;; ****************************************************************************
@@ -579,10 +707,15 @@ Function GetScalingMatrix()
   Float scaledSponginessNPC = Game.GetGameSettingFloat("fNPCHealthLevelBonus")
   Float scaledSponginessPlayer = Game.GetGameSettingFloat("fHealthEnduranceOffset")
 
+  Float scaledLowLevelNPCHealthAdjustment = Game.GetGameSettingFloat("fLowLevelNPCBaseHealthMult")
+  Int scaledLowLevelNPCVsPlayerLevelDifference = Game.GetGameSettingInt("iLowLevelNPCMaxLevel")
+
   String message = "Scaling for a player level of " + iPlayerLevel + " using scaling data from the level " + iPlayerBracket + " bracket.\n"
 
   message += "NPC Health Boost is " + scaledSponginessNPC + " (Default:" + DefaultNPCHealthBonus + " X SF:" + sfSponginessNPC + ").\n"
   message += "Player Health Boost is " + scaledSponginessPlayer + " (Default:" + DefaultPlayerHealthBonus + " X SF:" + sfSponginessPlayer + ").\n"
+
+  message += "Low Level NPC Health Adjustment is " + scaledLowLevelNPCHealthAdjustment + " %, subtracted from the players max health. NPC is considered low level after being " + scaledLowLevelNPCVsPlayerLevelDifference + " levels below player.\n"
 
   if (iDifficulty == 0)
     ;; Very Easy Difficulty
@@ -618,15 +751,18 @@ EndFunction
 Function DumpLevelScalingConfig() 
   string message = "*** Defaults ***\n\n"
   message += "NPC Health " + DefaultNPCHealthBonus + ".\nPlayer Health " + DefaultPlayerHealthBonus + ".\n"
+  message += "Low Level NPC Health Adjustment " + DefaultLowLevelNPCHealthAdjustment + ".\nNPC is considered low level whe under " + DefaultLowLevelNPCVsPlayerLevelDifference + " level from player.\n"
   message += "Damage To Player: |VE " + DefaultDamageToPlayerVE + "|E " + DefaultDamageToPlayerE + "|N " + DefaultDamageToPlayerN + "|H " + DefaultDamageToPlayerH + "|VH " + DefaultDamageToPlayerVH + "|\n"
   message += "Damage By Player: |VE " + DefaultDamageByPlayerVE + "|E " + DefaultDamageByPlayerE + "|N " + DefaultDamageByPlayerN + "|H " + DefaultDamageByPlayerH + "|VH " + DefaultDamageByPlayerVH + "|\n"
 
   message += "\n\n*** Scaling Factors ***\n\n"
-  message += "____________|____01____|____02____|____03____|____04____|____05____|____06____|____07____|____08____|____09____|____10____|\n"
-  message += "NPC Health  | " + SF_NPCHealthBoost[1] + " | " + SF_NPCHealthBoost[2] + " | " + SF_NPCHealthBoost[3] + " | " + SF_NPCHealthBoost[4] + " | " + SF_NPCHealthBoost[5] + " | " + SF_NPCHealthBoost[6] + " | " + SF_NPCHealthBoost[7] + " | " + SF_NPCHealthBoost[8] + " | " + SF_NPCHealthBoost[9] + " | " + SF_NPCHealthBoost[10] + " |\n"
-  message += "PC Health   | " + SF_PCHealthBoost[1] + " | " + SF_PCHealthBoost[2] + " | " + SF_PCHealthBoost[3] + " | " + SF_PCHealthBoost[4] + " | " + SF_PCHealthBoost[5] + " | " + SF_PCHealthBoost[6] + " | " + SF_PCHealthBoost[7] + " | " + SF_PCHealthBoost[8] + " | " + SF_PCHealthBoost[9] + " | " + SF_PCHealthBoost[10] + " |\n"
-  message += "Damage To PC| " + SF_DamageToPlayer[1] + " | " + SF_DamageToPlayer[2] + " | " + SF_DamageToPlayer[3] + " | " + SF_DamageToPlayer[4] + " | " + SF_DamageToPlayer[5] + " | " + SF_DamageToPlayer[6] + " | " + SF_DamageToPlayer[7] + " | " + SF_DamageToPlayer[8] + " | " + SF_DamageToPlayer[9] + " | " + SF_DamageToPlayer[10] + " |\n"
-  message += "Damage By PC| " + SF_DamageByPlayer[1] + " | " + SF_DamageByPlayer[2] + " | " + SF_DamageByPlayer[3] + " | " + SF_DamageByPlayer[4] + " | " + SF_DamageByPlayer[5] + " | " + SF_DamageByPlayer[6] + " | " + SF_DamageByPlayer[7] + " | " + SF_DamageByPlayer[8] + " | " + SF_DamageByPlayer[9] + " | " + SF_DamageByPlayer[10] + " |\n"
+  message += "______________|____01____|____02____|____03____|____04____|____05____|____06____|____07____|____08____|____09____|____10____|\n"
+  message += "NPC Health    | " + SF_NPCHealthBoost[1] + " | " + SF_NPCHealthBoost[2] + " | " + SF_NPCHealthBoost[3] + " | " + SF_NPCHealthBoost[4] + " | " + SF_NPCHealthBoost[5] + " | " + SF_NPCHealthBoost[6] + " | " + SF_NPCHealthBoost[7] + " | " + SF_NPCHealthBoost[8] + " | " + SF_NPCHealthBoost[9] + " | " + SF_NPCHealthBoost[10] + " |\n"
+  message += "PC Health     | " + SF_PCHealthBoost[1] + " | " + SF_PCHealthBoost[2] + " | " + SF_PCHealthBoost[3] + " | " + SF_PCHealthBoost[4] + " | " + SF_PCHealthBoost[5] + " | " + SF_PCHealthBoost[6] + " | " + SF_PCHealthBoost[7] + " | " + SF_PCHealthBoost[8] + " | " + SF_PCHealthBoost[9] + " | " + SF_PCHealthBoost[10] + " |\n"
+  message += "Damage To PC  | " + SF_DamageToPlayer[1] + " | " + SF_DamageToPlayer[2] + " | " + SF_DamageToPlayer[3] + " | " + SF_DamageToPlayer[4] + " | " + SF_DamageToPlayer[5] + " | " + SF_DamageToPlayer[6] + " | " + SF_DamageToPlayer[7] + " | " + SF_DamageToPlayer[8] + " | " + SF_DamageToPlayer[9] + " | " + SF_DamageToPlayer[10] + " |\n"
+  message += "Damage By PC  | " + SF_DamageByPlayer[1] + " | " + SF_DamageByPlayer[2] + " | " + SF_DamageByPlayer[3] + " | " + SF_DamageByPlayer[4] + " | " + SF_DamageByPlayer[5] + " | " + SF_DamageByPlayer[6] + " | " + SF_DamageByPlayer[7] + " | " + SF_DamageByPlayer[8] + " | " + SF_DamageByPlayer[9] + " | " + SF_DamageByPlayer[10] + " |\n"
+  message += "LL NPC HP ADJ | " + BK_LowLevelNPCHealthAdjustment[1] + " | " + BK_LowLevelNPCHealthAdjustment[2] + " | " + BK_LowLevelNPCHealthAdjustment[3] + " | " + BK_LowLevelNPCHealthAdjustment[4] + " | " + BK_LowLevelNPCHealthAdjustment[5] + " | " + BK_LowLevelNPCHealthAdjustment[6] + " | " + BK_LowLevelNPCHealthAdjustment[7] + " | " + BK_LowLevelNPCHealthAdjustment[8] + " | " + BK_LowLevelNPCHealthAdjustment[9] + " | " + BK_LowLevelNPCHealthAdjustment[10] + " |\n"
+  message += "LL NPC LVL DIF|     " + BK_LowLevelNPCVsPlayerLevelDifference[1] + "    |     " + BK_LowLevelNPCVsPlayerLevelDifference[2] + "    |     " + BK_LowLevelNPCVsPlayerLevelDifference[3] + "    |     " + BK_LowLevelNPCVsPlayerLevelDifference[4] + "    |     " + BK_LowLevelNPCVsPlayerLevelDifference[5] + "    |     " + BK_LowLevelNPCVsPlayerLevelDifference[6] + "    |     " + BK_LowLevelNPCVsPlayerLevelDifference[7] + "    |     " + BK_LowLevelNPCVsPlayerLevelDifference[8] + "    |     " + BK_LowLevelNPCVsPlayerLevelDifference[9] + "    |     " + BK_LowLevelNPCVsPlayerLevelDifference[10] + "    |\n"
 
   Int iPlayerLevel = PlayerRef.GetLevel()
   Float playerHealth = PlayerRef.GetValue(Health)

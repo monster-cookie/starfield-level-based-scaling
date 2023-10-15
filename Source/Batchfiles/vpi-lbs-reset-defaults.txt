@@ -18,7 +18,9 @@
 ;;
 player.cf "VPI_LevelBasedScaling.SetDefaultNPCHealthBoost" 0.00
 player.cf "VPI_LevelBasedScaling.SetDefaultPlayerHealthBoost" 0.00
-player.cf "VPI_LevelBasedScaling.SetDefaultPlayerExperienceBoost" 1.00
+
+player.cf "VPI_LevelBasedScaling.SetDefaultNPCLowLevelHealthMultiplier" 0.05
+player.cf "VPI_LevelBasedScaling.SetDefaultNPCLowLevelPlayerLevelDifference" 5
 
 player.cf "VPI_LevelBasedScaling.SetDefaultDamageToPlayerValue" 0 0.50
 player.cf "VPI_LevelBasedScaling.SetDefaultDamageToPlayerValue" 1 0.75
