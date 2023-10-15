@@ -522,6 +522,11 @@ EndFunction
 ;; Use: player.cf "VPI_LevelBasedScaling.ScaleForMyLevel"
 ;;
 Function ScaleForMyLevel()
+  If (PlayerRef.IsInCombat())
+    Debug.Trace("Player is in combat so no new scaling values will be calculated.")
+    return
+  EndIf
+
   Float sfDamageByPlayer = GetDamageByPlayerScalingFactor()
   Float sfDamageToPlayer = GetDamageToPlayerScalingFactor()
   Float sfSponginessNPC = SponginessNPCScalingFactor()
