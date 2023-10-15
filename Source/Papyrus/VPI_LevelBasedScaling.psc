@@ -20,6 +20,8 @@ ScriptName VPI_LevelBasedScaling Extends ReferenceAlias
 ;;; Properties
 ;;;
 
+String Property Version="1.1.6" Auto
+
 Actor Property PlayerRef Auto
 
 Perk Property Skill_Wellness Auto
@@ -40,11 +42,11 @@ Perk Property Skill_RifleCertification Auto
 Perk Property Skill_ArmorPenetration Auto
 Perk Property Skill_Crippling Auto
 
-String Property Version="1.1.5" Auto
+ActorValue Property Endurance Auto
+ActorValue Property Health Auto
 
 Float Property DefaultNPCHealthBonus=0.00 Auto
 Float Property DefaultPlayerHealthBonus=0.00 Auto
-Float Property DefaultPlayerExperienceBoost=1.00 Auto
 
 Float Property DefaultDamageToPlayerVE=0.50 Auto
 Float Property DefaultDamageToPlayerE=0.75 Auto
@@ -62,7 +64,6 @@ Float[] Property SF_PCHealthBoost Auto
 Float[] Property SF_NPCHealthBoost Auto
 Float[] Property SF_DamageToPlayer Auto
 Float[] Property SF_DamageByPlayer Auto
-Float[] Property SF_PlayerExperienceBoost Auto
 
 Float Property PerkADJ_DamageReduction=0.25 Auto
 Float Property PerkADJ_DamageAdd=0.25 Auto
@@ -80,7 +81,7 @@ Event OnInit()
   Debug.Trace("EVENT: OnInit triggered populating Properties and Regenerating Scaling Values", 0)
   Debug.Notification("Level Based Scaling " + version + " is currently running.")
 
-  UpdateSkillAndActorBindings()
+  UpdateBindings()
   CreateBracketArrays()
 
   ScaleForMyLevel()
@@ -96,7 +97,7 @@ Event OnPlayerLoadGame()
   Debug.Trace("EVENT: OnPlayerLoadGame triggered populating Properties and Regenerating Scaling Values", 0)
   Debug.Notification("Level Based Scaling " + version + " is currently running.")
 
-  UpdateSkillAndActorBindings()
+  UpdateBindings()
   CreateBracketArrays()
 
   ScaleForMyLevel()
@@ -125,10 +126,24 @@ EndEvent
 ;;; Private Member Functions
 ;;;
 
-Function UpdateSkillAndActorBindings()
+;; ****************************************************************************
+;; Update property bindings that can't automatically be bound without CK 
+;;
+Function UpdateBindings()
+  ;; The Player Object
   if (PlayerRef == None) 
     PlayerRef = Game.GetPlayer()
   EndIf
+
+  ;; Actor Values
+  if (Endurance == None) 
+    Endurance = Game.GetForm(0x000002C4) as ActorValue
+  EndIf
+  if (Health == None) 
+    Health = Game.GetForm(0x000002D4) as ActorValue
+  EndIf
+  
+  ;; Perks
   if (Skill_Wellness == None)
     Skill_Wellness =  Game.GetForm(0x002CE2E1) as Perk
   EndIf
@@ -225,19 +240,6 @@ Function CreateBracketArrays()
     SF_DamageByPlayer[8] = 0.40
     SF_DamageByPlayer[9] = 0.30
     SF_DamageByPlayer[10] = 0.15
-  EndIf
-  If (SF_PlayerExperienceBoost == None)
-    SF_PlayerExperienceBoost = new Float[11]
-    SF_PlayerExperienceBoost[1] = 1.00
-    SF_PlayerExperienceBoost[2] = 1.00
-    SF_PlayerExperienceBoost[3] = 1.25
-    SF_PlayerExperienceBoost[4] = 1.25
-    SF_PlayerExperienceBoost[5] = 1.50
-    SF_PlayerExperienceBoost[6] = 1.50
-    SF_PlayerExperienceBoost[7] = 2.00
-    SF_PlayerExperienceBoost[8] = 2.00
-    SF_PlayerExperienceBoost[9] = 2.50
-    SF_PlayerExperienceBoost[10] = 3.00
   EndIf
 EndFunction
 
@@ -394,26 +396,6 @@ Float Function SponginessPlayerScalingFactor()
 EndFunction
 
 ;; ****************************************************************************
-;; Get the scaling factor for Player experience boost for the player's current level
-;;
-Float Function PlayerExperienceBoostScalingFactor()
-  Int playerLevel = PlayerRef.GetLevel()
-  Int playerBracket = GetBracketForPlayerLevel()
-  Float scaleFactor = SF_PlayerExperienceBoost[playerBracket];
-
-  Debug.Trace("Player Experience Boost scaling is being calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an initial SF of " + scaleFactor + ".", 0)
-
-  If scaleFactor < 0 
-    Debug.Trace("SF is less than 0 so adjusting to minimum of 0.001.", 0)
-    Return 0.001
-  Else 
-    Return scaleFactor
-  EndIf
-
-  Debug.Trace("RESULT: Final Player Experience Boost scaling has been calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an final SF of " + scaleFactor + ".", 1)
-EndFunction
-
-;; ****************************************************************************
 ;; Get, scale, and update a float based game setting 
 ;;
 Function ScaleFloatGameSetting (String gameSetting, Float defaultValue, Float scaleFactor)
@@ -490,16 +472,6 @@ Function SetDefaultPlayerHealthBoost(Float value)
 EndFunction
 
 ;; ****************************************************************************
-;; Change the default Player experience multiplier. 
-;;
-;; Use: player.cf "VPI_LevelBasedScaling.SetDefaultPlayerExperienceBoost" <newValue>
-;;   newValue -> The new float value to set. Setting to 0 disables experience scaling.
-;;
-Function SetDefaultPlayerExperienceBoost(Float value)
-  DefaultPlayerExperienceBoost = value
-EndFunction
-
-;; ****************************************************************************
 ;; Change a scaling factor in the specified level bracket for damage to player 
 ;;
 ;; Use: player.cf "VPI_LevelBasedScaling.SetDamageToPlayerSFForBracket" <bracket> <newSF>
@@ -544,17 +516,6 @@ Function SetPCBonusHealthSFForBracket(int bracket, Float newSF)
 EndFunction
 
 ;; ****************************************************************************
-;; Change a scaling factor in the specified level bracket for Player Experience Bonus 
-;;
-;; Use: player.cf "VPI_LevelBasedScaling.SetPlayerExperienceBonusSFForBracket" <bracket> <newSF>
-;;   bracket -> The bracket to change can be 1 to 10 only
-;;   newSF -> The new scale factor to set for the bracket
-;;
-Function SetPlayerExperienceBonusSFForBracket(int bracket, Float newSF)
-  SF_PlayerExperienceBoost[bracket] = newSF
-EndFunction
-
-;; ****************************************************************************
 ;; Update Starfield Damage Scaling Game Setting for my current level and 
 ;; scaling factor for that level
 ;;
@@ -568,12 +529,6 @@ Function ScaleForMyLevel()
 
   ScaleFloatGameSetting("fNPCHealthLevelBonus", DefaultNPCHealthBonus, sfSponginessNPC)
   ScaleFloatGameSetting("fHealthEnduranceOffset", DefaultPlayerHealthBonus, sfSponginessPlayer)
-
-  ;; Only change scale experience if the default is > 0
-  if (DefaultPlayerExperienceBoost > 0)
-    Float sfPlayerEcperienceBoost = PlayerExperienceBoostScalingFactor()
-    ScaleFloatGameSetting("fXPModBase", DefaultPlayerExperienceBoost, sfPlayerEcperienceBoost)
-  EndIf
 
   ScaleFloatGameSetting("fDiffMultHPByPCVE", DefaultDamageByPlayerVE, sfDamageByPlayer)
   ScaleFloatGameSetting("fDiffMultHPByPCE", DefaultDamageByPlayerE, sfDamageByPlayer)
@@ -621,15 +576,6 @@ Function GetScalingMatrix()
 
   String message = "Scaling for a player level of " + iPlayerLevel + " using scaling data from the level " + iPlayerBracket + " bracket.\n"
 
-  ;; Only change scale experience if the default is > 0
-  if (DefaultPlayerExperienceBoost > 0)
-    Float sfPlayerEcperienceBoost = PlayerExperienceBoostScalingFactor()
-    Float scaledPlayerEcperienceBoost = Game.GetGameSettingFloat("fXPModBase")
-    message += "Player Experience Boost is " + scaledPlayerEcperienceBoost + " (Default:" + DefaultPlayerExperienceBoost + " X SF:" + sfPlayerEcperienceBoost + ").\n"
-  Else
-
-  EndIf
-
   message += "NPC Health Boost is " + scaledSponginessNPC + " (Default:" + DefaultNPCHealthBonus + " X SF:" + sfSponginessNPC + ").\n"
   message += "Player Health Boost is " + scaledSponginessPlayer + " (Default:" + DefaultPlayerHealthBonus + " X SF:" + sfSponginessPlayer + ").\n"
 
@@ -670,13 +616,27 @@ Function DumpLevelScalingConfig()
   message += "Damage To Player: |VE " + DefaultDamageToPlayerVE + "|E " + DefaultDamageToPlayerE + "|N " + DefaultDamageToPlayerN + "|H " + DefaultDamageToPlayerH + "|VH " + DefaultDamageToPlayerVH + "|\n"
   message += "Damage By Player: |VE " + DefaultDamageByPlayerVE + "|E " + DefaultDamageByPlayerE + "|N " + DefaultDamageByPlayerN + "|H " + DefaultDamageByPlayerH + "|VH " + DefaultDamageByPlayerVH + "|\n"
 
-  message += "\n\n*** Scaling Factores ***\n\n"
+  message += "\n\n*** Scaling Factors ***\n\n"
   message += "____________|____01____|____02____|____03____|____04____|____05____|____06____|____07____|____08____|____09____|____10____|\n"
-  message += "XP Bonus    | " + SF_PlayerExperienceBoost[1] + " | " + SF_PlayerExperienceBoost[2] + " | " + SF_PlayerExperienceBoost[3] + " | " + SF_PlayerExperienceBoost[4] + " | " + SF_PlayerExperienceBoost[5] + " | " + SF_PlayerExperienceBoost[6] + " | " + SF_PlayerExperienceBoost[7] + " | " + SF_PlayerExperienceBoost[8] + " | " + SF_PlayerExperienceBoost[9] + " | " + SF_PlayerExperienceBoost[10] + " |\n"
   message += "NPC Health  | " + SF_NPCHealthBoost[1] + " | " + SF_NPCHealthBoost[2] + " | " + SF_NPCHealthBoost[3] + " | " + SF_NPCHealthBoost[4] + " | " + SF_NPCHealthBoost[5] + " | " + SF_NPCHealthBoost[6] + " | " + SF_NPCHealthBoost[7] + " | " + SF_NPCHealthBoost[8] + " | " + SF_NPCHealthBoost[9] + " | " + SF_NPCHealthBoost[10] + " |\n"
   message += "PC Health   | " + SF_PCHealthBoost[1] + " | " + SF_PCHealthBoost[2] + " | " + SF_PCHealthBoost[3] + " | " + SF_PCHealthBoost[4] + " | " + SF_PCHealthBoost[5] + " | " + SF_PCHealthBoost[6] + " | " + SF_PCHealthBoost[7] + " | " + SF_PCHealthBoost[8] + " | " + SF_PCHealthBoost[9] + " | " + SF_PCHealthBoost[10] + " |\n"
   message += "Damage To PC| " + SF_DamageToPlayer[1] + " | " + SF_DamageToPlayer[2] + " | " + SF_DamageToPlayer[3] + " | " + SF_DamageToPlayer[4] + " | " + SF_DamageToPlayer[5] + " | " + SF_DamageToPlayer[6] + " | " + SF_DamageToPlayer[7] + " | " + SF_DamageToPlayer[8] + " | " + SF_DamageToPlayer[9] + " | " + SF_DamageToPlayer[10] + " |\n"
   message += "Damage By PC| " + SF_DamageByPlayer[1] + " | " + SF_DamageByPlayer[2] + " | " + SF_DamageByPlayer[3] + " | " + SF_DamageByPlayer[4] + " | " + SF_DamageByPlayer[5] + " | " + SF_DamageByPlayer[6] + " | " + SF_DamageByPlayer[7] + " | " + SF_DamageByPlayer[8] + " | " + SF_DamageByPlayer[9] + " | " + SF_DamageByPlayer[10] + " |\n"
+
+  Int iPlayerLevel = PlayerRef.GetLevel()
+  Float playerHealth = PlayerRef.GetValue(Health)
+  Float playerScaledBonusHealth = Game.GetGameSettingFloat("fHealthEnduranceOffset")
+  Float playerBaseHealth = Game.GetGameSettingFloat("fDefaultHealth")
+  Float playerLeveledBonusHealth = (iPlayerLevel - 1) * playerScaledBonusHealth
+  
+  message += "\n\n*** Mathmatics ***\n\n"
+  if (playerRef.HasPerk(Skill_Wellness)) 
+    Float playerCalculatedHealth = (playerBaseHealth + playerLeveledBonusHealth) * 1.40
+    message += "Player Heath (" + playerHealth + ") = Base Health (" + playerBaseHealth + ") + Bonus HP Per level (" + playerLeveledBonusHealth + ") * Wellness Perk (40%) => " + playerCalculatedHealth + "(calculated)"
+  Else
+    Float playerCalculatedHealth = playerBaseHealth + playerLeveledBonusHealth
+    message += "Player Heath (" + playerHealth + ") = Base Health (" + playerBaseHealth + ") + Bonus HP Per level (" + playerLeveledBonusHealth + ") * Wellness Perk (0%) => " + playerCalculatedHealth + "(calculated)"
+  EndIf
 
   Debug.Trace(message, 2)
   Debug.Messagebox(message)
