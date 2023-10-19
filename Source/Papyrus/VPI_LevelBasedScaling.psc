@@ -20,7 +20,7 @@ ScriptName VPI_LevelBasedScaling Extends ReferenceAlias
 ;;; Properties
 ;;;
 
-String Property Version="1.1.6" Auto
+String Property Version="1.1.7" Auto ;; -- MOD VERSION SET HERE
 
 Actor Property PlayerRef Auto
 
@@ -84,7 +84,7 @@ Float Property PerkADJ_SpecialCrippling=0.01 Auto
 ;; This event will run once, when the script is initialized and is a member of any and all scripts 
 ;; per docs. In the terms of ReferenceAlias is called when the script is bound to something. 
 Event OnInit() 
-  Debug.Trace("EVENT: OnInit triggered populating Properties and Regenerating Scaling Values", 0)
+  Debug.Trace("VPILBS_EVENT: OnInit triggered populating Properties and Regenerating Scaling Values", 0)
   Debug.Notification("Level Based Scaling " + version + " is currently running.")
 
   UpdateBindings()
@@ -100,8 +100,13 @@ EndEvent
 ;; then receive later events.
 Event OnPlayerLoadGame()
   Utility.Wait(1.0)
-  Debug.Trace("EVENT: OnPlayerLoadGame triggered populating Properties and Regenerating Scaling Values", 0)
+  Debug.Trace("VPILBS_EVENT: OnPlayerLoadGame triggered populating Properties and Regenerating Scaling Values", 0)
   Debug.Notification("Level Based Scaling " + version + " is currently running.")
+
+  ;; If Version is not set or not current update it -- MOD VERSION SET HERE
+  If (Version != "1.1.7")
+    Version = "1.1.7"
+  EndIf
 
   UpdateBindings()
   CreateBracketArrays()
@@ -110,19 +115,19 @@ Event OnPlayerLoadGame()
 EndEvent
 
 Event OnDifficultyChanged(Int aOldDifficulty, Int aNewDifficulty)
-  Debug.Trace("EVENT: OnDifficultyChanged triggered Regenerating Scaling Values", 0)
+  Debug.Trace("VPILBS_EVENT: OnDifficultyChanged triggered Regenerating Scaling Values", 0)
   ScaleForMyLevel()
 EndEvent
 
 ; Using ReferenceAlias (vs Actor) this is now actually triggered so don't think I need OnEnterShipInterior/OnExitShipInterior
 Event OnLocationChange(Location akOldLoc, Location akNewLoc)
-  Debug.Trace("EVENT: OnLocationChange triggered Regenerating Scaling Values", 0)
+  Debug.Trace("VPILBS_EVENT: OnLocationChange triggered Regenerating Scaling Values", 0)
   ScaleForMyLevel()
 EndEvent
 
 ;; Called on ever thinkg you kill player or beast -- probably a good tracking point as you gain XP from the kill
 Event OnKill(ObjectReference akVictim)
-  Debug.Trace("EVENT: OnKill triggered Regenerating Scaling Values", 1)
+  Debug.Trace("VPILBS_EVENT: OnKill triggered Regenerating Scaling Values", 1)
   ScaleForMyLevel()
 EndEvent
 
@@ -332,22 +337,22 @@ Float Function GetDamageToPlayerScalingFactor()
   Int playerBracket = GetBracketForPlayerLevel()
   Float scaleFactor = SF_DamageToPlayer[playerBracket];
 
-  Debug.Trace("Damage To Player scaling is being calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an initial SF of " + scaleFactor + ".", 0)
+  Debug.Trace("VPILBS_DEBUG: Damage To Player scaling is being calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an initial SF of " + scaleFactor + ".", 0)
 
   If (playerRef.HasPerk(Skill_Wellness) || playerRef.HasPerk(Skill_EnergyWeaponDissipation) || playerRef.HasPerk(Skill_PainTolerance) || playerRef.HasPerk(Skill_Rejuvenation))
     Float adjustment = PerkADJ_DamageReduction * (playerBracket/6)
     scaleFactor += adjustment
-    Debug.Trace("SF adjusted for damage reduction perks increased by " + adjustment + ".", 0)
+    Debug.Trace("VPILBS_DEBUG: SF adjusted for damage reduction perks increased by " + adjustment + ".", 0)
   EndIf
 
   If scaleFactor < 0 
-    Debug.Trace("SF is less than 0 so adjusting to minimum of 0.001.", 0)
+    Debug.Trace("VPILBS_DEBUG: SF is less than 0 so adjusting to minimum of 0.001.", 0)
     Return 0.001
   Else 
     Return scaleFactor
   EndIf
 
-  Debug.Trace("RESULT: Final Damage To Player scaling has been calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an final SF of " + scaleFactor + ".", 1)
+  Debug.Trace("VPILBS_FINAL_RESULT: Final Damage To Player scaling has been calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an final SF of " + scaleFactor + ".", 1)
 EndFunction
 
 ;; ****************************************************************************
@@ -359,32 +364,32 @@ Float Function GetDamageByPlayerScalingFactor()
   Int playerBracket = GetBracketForPlayerLevel()
   Float scaleFactor = SF_DamageByPlayer[playerBracket];
 
-  Debug.Trace("Damage By Player scaling is being calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an initial SF of " + scaleFactor + ".", 0)
+  Debug.Trace("VPILBS_DEBUG: Damage By Player scaling is being calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an initial SF of " + scaleFactor + ".", 0)
 
   If ((playerRef.HasPerk(Skill_PistolCertification) || playerRef.HasPerk(Skill_ShotgunCertification) || playerRef.HasPerk(Skill_HeavyWeaponsCertification) || playerRef.HasPerk(Skill_RifleCertification)) && (playerRef.HasPerk(Skill_Ballistics) || playerRef.HasPerk(Skill_Lasers) || playerRef.HasPerk(Skill_ParticleBeams) || playerRef.HasPerk(Skill_Marksmanship))) 
     Float adjustment = PerkADJ_DamageAdd * (playerBracket/6)
     scaleFactor -= adjustment
-    Debug.Trace("SF adjusted for damage add perks decreased by " + adjustment + ".", 0)
+    Debug.Trace("VPILBS_DEBUG: SF adjusted for damage add perks decreased by " + adjustment + ".", 0)
   EndIf
 
   If (playerRef.HasPerk(Skill_ArmorPenetration))
     scaleFactor -= PerkADJ_SpecialArmorPen
-    Debug.Trace("SF adjusted for Armor Penetration perk decreased by " + PerkADJ_SpecialArmorPen + ".", 0)
+    Debug.Trace("VPILBS_DEBUG: SF adjusted for Armor Penetration perk decreased by " + PerkADJ_SpecialArmorPen + ".", 0)
   EndIf
   
   If (playerRef.HasPerk(Skill_Crippling))
     scaleFactor -= PerkADJ_SpecialCrippling
-    Debug.Trace("SF adjusted for Crippling perk perk decreased by " + PerkADJ_SpecialCrippling + ".", 0)
+    Debug.Trace("VPILBS_DEBUG: SF adjusted for Crippling perk perk decreased by " + PerkADJ_SpecialCrippling + ".", 0)
   EndIf
 
   If scaleFactor < 0 
-    Debug.Trace("SF is less than 0 so adjusting to minimum of 0.001.", 0)
+    Debug.Trace("VPILBS_DEBUG: SF is less than 0 so adjusting to minimum of 0.001.", 0)
     Return 0.001
   Else 
     Return scaleFactor
   EndIf
 
-  Debug.Trace("RESULT: Final Damage By Player scaling has been calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an final SF of " + scaleFactor + ".", 1)
+  Debug.Trace("VPILBS_FINAL_RESULT: Final Damage By Player scaling has been calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an final SF of " + scaleFactor + ".", 1)
 EndFunction
 
 ;; ****************************************************************************
@@ -395,16 +400,16 @@ Float Function SponginessNPCScalingFactor()
   Int playerBracket = GetBracketForPlayerLevel()
   Float scaleFactor = SF_NPCHealthBoost[playerBracket];
 
-  Debug.Trace("NPC Bonus Health scaling is being calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an initial SF of " + scaleFactor + ".", 0)
+  Debug.Trace("VPILBS_DEBUG: NPC Bonus Health scaling is being calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an initial SF of " + scaleFactor + ".", 0)
 
   If scaleFactor < 0 
-    Debug.Trace("SF is less than 0 so adjusting to minimum of 0.001.", 0)
+    Debug.Trace("VPILBS_DEBUG: SF is less than 0 so adjusting to minimum of 0.001.", 0)
     Return 0.001
   Else 
     Return scaleFactor
   EndIf
 
-  Debug.Trace("RESULT: Final NPC Bonus Health scaling has been calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an final SF of " + scaleFactor + ".", 1)
+  Debug.Trace("VPILBS_FINAL_RESULT: Final NPC Bonus Health scaling has been calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an final SF of " + scaleFactor + ".", 1)
 EndFunction
 
 ;; ****************************************************************************
@@ -415,16 +420,16 @@ Float Function SponginessPlayerScalingFactor()
   Int playerBracket = GetBracketForPlayerLevel()
   Float scaleFactor = SF_PCHealthBoost[playerBracket];
 
-  Debug.Trace("Player Bonus Health scaling is being calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an initial SF of " + scaleFactor + ".", 0)
+  Debug.Trace("VPILBS_DEBUG: Player Bonus Health scaling is being calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an initial SF of " + scaleFactor + ".", 0)
 
   If scaleFactor < 0 
-    Debug.Trace("SF is less than 0 so adjusting to minimum of 0.001.", 0)
+    Debug.Trace("VPILBS_DEBUG: SF is less than 0 so adjusting to minimum of 0.001.", 0)
     Return 0.001
   Else 
     Return scaleFactor
   EndIf
 
-  Debug.Trace("RESULT: Final Player Bonus Health scaling has been calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an final SF of " + scaleFactor + ".", 1)
+  Debug.Trace("VPILBS_FINAL_RESULT: Final Player Bonus Health scaling has been calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an final SF of " + scaleFactor + ".", 1)
 EndFunction
 
 ;; ****************************************************************************
@@ -447,7 +452,7 @@ Int Function BracketAdjustmentForLowLevelNPCVsPlayerLevelDifference()
   Int playerBracket = GetBracketForPlayerLevel()
   Int bracketValue = BK_LowLevelNPCVsPlayerLevelDifference[playerBracket];
 
-  Debug.Trace("Low Level NPC Level Difference to be considered low level is being calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an initial SF of " + bracketValue + ".", 0)
+  Debug.Trace("VPILBS_DEBUG: Low Level NPC Level Difference to be considered low level is being calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an initial SF of " + bracketValue + ".", 0)
   Return bracketValue
 EndFunction
 
@@ -646,7 +651,7 @@ EndFunction
 ;;
 Function ScaleForMyLevel()
   If (PlayerRef.IsInCombat())
-    Debug.Trace("Player is in combat so no new scaling values will be calculated.", 1)
+    Debug.Trace("VPILBS_DEBUG: Player is in combat so no new scaling values will be calculated.", 1)
     return
   EndIf
 
@@ -739,7 +744,7 @@ Function GetScalingMatrix()
     message += "Damage By Player is " + scaledDamageByPlayerVH + " (Default:" + DefaultDamageByPlayerVH + " X SF:" + sfDamageByPlayer + ").\n"
   EndIf
 
-  Debug.Trace(message, 2)
+  Debug.Trace("VPILBS_DEBUG: " + message, 2)
   Debug.Messagebox(message)
 EndFunction
 
@@ -779,7 +784,7 @@ Function DumpLevelScalingConfig()
     message += "Player Heath (" + playerHealth + ") = Base Health (" + playerBaseHealth + ") + Bonus HP Per level (" + playerLeveledBonusHealth + ") * Wellness Perk (0%) => " + playerCalculatedHealth + "(calculated)"
   EndIf
 
-  Debug.Trace(message, 2)
+  Debug.Trace("VPILBS_DEBUG: " + message, 2)
   Debug.Messagebox(message)
 EndFunction
 
@@ -789,5 +794,5 @@ EndFunction
 ;; Use: player.cf "VPI_LevelBasedScaling.GetVersion"
 ;;
 Function GetVersion()
-	Debug.Messagebox("VPI_LevelBasedScaling Version: " + Version)
+  Debug.Messagebox("Level Based Scaling " + version + " is currently running.")
 EndFunction
