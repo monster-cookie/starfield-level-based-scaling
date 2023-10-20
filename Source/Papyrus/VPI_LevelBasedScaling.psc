@@ -20,7 +20,7 @@ ScriptName VPI_LevelBasedScaling Extends ReferenceAlias
 ;;; Properties
 ;;;
 
-String Property Version="1.1.8" Auto ;; -- MOD VERSION SET HERE
+String Property Version="1.1.9" Auto ;; -- MOD VERSION SET HERE
 
 Actor Property PlayerRef Auto
 
@@ -104,8 +104,8 @@ Event OnPlayerLoadGame()
   Debug.Notification("Level Based Scaling " + version + " is currently running.")
 
   ;; If Version is not set or not current update it -- MOD VERSION SET HERE
-  If (Version != "1.1.8")
-    Version = "1.1.8"
+  If (Version != "1.1.9")
+    Version = "1.1.9"
   EndIf
 
   UpdateBindings()

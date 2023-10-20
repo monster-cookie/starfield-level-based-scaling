@@ -81,17 +81,6 @@ player.cf "VPI_LevelBasedScaling.SetDamageByPlayerSFForBracket" 8 0.40
 player.cf "VPI_LevelBasedScaling.SetDamageByPlayerSFForBracket" 9 0.30
 player.cf "VPI_LevelBasedScaling.SetDamageByPlayerSFForBracket" 10 0.15
 
-player.cf "VPI_LevelBasedScaling.SetPlayerExperienceBonusSFForBracket" 1 1.00
-player.cf "VPI_LevelBasedScaling.SetPlayerExperienceBonusSFForBracket" 2 1.00
-player.cf "VPI_LevelBasedScaling.SetPlayerExperienceBonusSFForBracket" 3 1.25
-player.cf "VPI_LevelBasedScaling.SetPlayerExperienceBonusSFForBracket" 4 1.25
-player.cf "VPI_LevelBasedScaling.SetPlayerExperienceBonusSFForBracket" 5 1.50
-player.cf "VPI_LevelBasedScaling.SetPlayerExperienceBonusSFForBracket" 6 1.50
-player.cf "VPI_LevelBasedScaling.SetPlayerExperienceBonusSFForBracket" 7 2.00
-player.cf "VPI_LevelBasedScaling.SetPlayerExperienceBonusSFForBracket" 8 2.00
-player.cf "VPI_LevelBasedScaling.SetPlayerExperienceBonusSFForBracket" 9 2.50
-player.cf "VPI_LevelBasedScaling.SetPlayerExperienceBonusSFForBracket" 10 3.00
-
 player.cf "VPI_LevelBasedScaling.ScaleForMyLevel"
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
