@@ -87,17 +87,6 @@ player.cf "VPI_LevelBasedScaling.SetDamageByPlayerSFForBracket" 8 0.40          
 player.cf "VPI_LevelBasedScaling.SetDamageByPlayerSFForBracket" 9 0.30          ;; B09 => Level 251-300
 player.cf "VPI_LevelBasedScaling.SetDamageByPlayerSFForBracket" 10 0.15         ;; B10 => Level 301-999
 
-player.cf "VPI_LevelBasedScaling.SetPlayerExperienceBonusSFForBracket" 1 1.00   ;; B01 => Level 001-025
-player.cf "VPI_LevelBasedScaling.SetPlayerExperienceBonusSFForBracket" 2 1.00   ;; B02 => Level 026-050
-player.cf "VPI_LevelBasedScaling.SetPlayerExperienceBonusSFForBracket" 3 1.25   ;; B03 => Level 051-075
-player.cf "VPI_LevelBasedScaling.SetPlayerExperienceBonusSFForBracket" 4 1.25   ;; B04 => Level 076-100
-player.cf "VPI_LevelBasedScaling.SetPlayerExperienceBonusSFForBracket" 5 1.50   ;; B05 => Level 101-125
-player.cf "VPI_LevelBasedScaling.SetPlayerExperienceBonusSFForBracket" 6 1.50   ;; B06 => Level 126-150
-player.cf "VPI_LevelBasedScaling.SetPlayerExperienceBonusSFForBracket" 7 2.00   ;; B07 => Level 151-200
-player.cf "VPI_LevelBasedScaling.SetPlayerExperienceBonusSFForBracket" 8 2.00   ;; B08 => Level 201-250
-player.cf "VPI_LevelBasedScaling.SetPlayerExperienceBonusSFForBracket" 9 2.50   ;; B09 => Level 251-300
-player.cf "VPI_LevelBasedScaling.SetPlayerExperienceBonusSFForBracket" 10 3.00  ;; B10 => Level 301-999
-
 player.cf "VPI_LevelBasedScaling.ScaleForMyLevel"
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
