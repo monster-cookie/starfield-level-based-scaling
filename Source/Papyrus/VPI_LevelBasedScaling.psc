@@ -67,6 +67,8 @@ Float Property DefaultDamageByPlayerN=1.00 Auto
 Float Property DefaultDamageByPlayerH=0.75 Auto
 Float Property DefaultDamageByPlayerVH=0.50 Auto
 
+Float Property BaseResistanceScalingFactor=0.0015 Auto
+
 Float[] Property SF_PCHealthBoost Auto
 Float[] Property SF_NPCHealthBoost Auto
 Float[] Property SF_DamageToPlayer Auto
@@ -351,7 +353,7 @@ Float Function GetDamageToPlayerScalingFactor()
   Float playerPhysicalResist = PlayerRef.GetValue(PhysicalResist)
   Float playerEnergyResist = PlayerRef.GetValue(EnergyResist)
   Float playerElectromagneticResist = PlayerRef.GetValue(ElectromagneticResist)
-  Float playerbaseScalingToAdjustForArmor = ((playerPhysicalResist + playerEnergyResist + playerElectromagneticResist)/3) * 0.003
+  Float playerbaseScalingToAdjustForArmor = ((playerPhysicalResist + playerEnergyResist + playerElectromagneticResist)/3) * (BaseResistanceScalingFactor * Math.Floor(playerLevel/25))
   Float scaleFactor = SF_DamageToPlayer[playerBracket] + playerbaseScalingToAdjustForArmor
 
   Debug.Trace("VPILBS_DEBUG: Damage To Player scaling is being calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an initial SF of " + scaleFactor + ".", 0)
@@ -453,7 +455,7 @@ Float Function BracketAdjustmentForLowLevelNPCHealthAdjustment()
   Int playerBracket = GetBracketForPlayerLevel()
   Float bracketValue = BK_LowLevelNPCHealthAdjustment[playerBracket];
 
-  Debug.Trace("Low Level NPC Health Adjustment is being calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an initial SF of " + bracketValue + ".", 0)
+  Debug.Trace("VPILBS_DEBUG: Low Level NPC Health Adjustment is being calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an initial SF of " + bracketValue + ".", 0)
   Return bracketValue
 EndFunction
 
