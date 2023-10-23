@@ -20,7 +20,7 @@ ScriptName VPI_LevelBasedScaling Extends ReferenceAlias
 ;;; Properties
 ;;;
 
-String Property Version="1.1.9" Auto ;; -- MOD VERSION SET HERE
+String Property Version="1.1.10" Auto ;; -- MOD VERSION SET HERE
 
 Actor Property PlayerRef Auto
 
@@ -45,6 +45,10 @@ Perk Property Skill_Crippling Auto
 ActorValue Property Endurance Auto
 ActorValue Property Health Auto
 
+ActorValue Property PhysicalResist Auto
+ActorValue Property EnergyResist Auto
+ActorValue Property ElectromagneticResist Auto
+
 Float Property DefaultNPCHealthBonus=0.00 Auto
 Float Property DefaultPlayerHealthBonus=0.00 Auto
 
@@ -62,6 +66,8 @@ Float Property DefaultDamageByPlayerE=1.50 Auto
 Float Property DefaultDamageByPlayerN=1.00 Auto
 Float Property DefaultDamageByPlayerH=0.75 Auto
 Float Property DefaultDamageByPlayerVH=0.50 Auto
+
+Float Property BaseResistanceScalingFactor=0.0015 Auto
 
 Float[] Property SF_PCHealthBoost Auto
 Float[] Property SF_NPCHealthBoost Auto
@@ -104,8 +110,8 @@ Event OnPlayerLoadGame()
   Debug.Notification("Level Based Scaling " + version + " is currently running.")
 
   ;; If Version is not set or not current update it -- MOD VERSION SET HERE
-  If (Version != "1.1.9")
-    Version = "1.1.9"
+  If (Version != "1.1.10")
+    Version = "1.1.10"
   EndIf
 
   UpdateBindings()
@@ -152,6 +158,15 @@ Function UpdateBindings()
   EndIf
   if (Health == None) 
     Health = Game.GetForm(0x000002D4) as ActorValue
+  EndIf
+  if (PhysicalResist == None) 
+    PhysicalResist = Game.GetForm(0x000002E3) as ActorValue
+  EndIf
+  if (EnergyResist == None) 
+    EnergyResist = Game.GetForm(0x00000392) as ActorValue
+  EndIf
+  if (ElectromagneticResist == None) 
+    ElectromagneticResist = Game.GetForm(0x000002EB) as ActorValue
   EndIf
   
   ;; Perks
@@ -335,7 +350,11 @@ EndFunction
 Float Function GetDamageToPlayerScalingFactor() 
   Int playerLevel = PlayerRef.GetLevel()
   Int playerBracket = GetBracketForPlayerLevel()
-  Float scaleFactor = SF_DamageToPlayer[playerBracket];
+  Float playerPhysicalResist = PlayerRef.GetValue(PhysicalResist)
+  Float playerEnergyResist = PlayerRef.GetValue(EnergyResist)
+  Float playerElectromagneticResist = PlayerRef.GetValue(ElectromagneticResist)
+  Float playerbaseScalingToAdjustForArmor = ((playerPhysicalResist + playerEnergyResist + playerElectromagneticResist)/3) * (BaseResistanceScalingFactor * Math.Floor(playerLevel/25))
+  Float scaleFactor = SF_DamageToPlayer[playerBracket] + playerbaseScalingToAdjustForArmor
 
   Debug.Trace("VPILBS_DEBUG: Damage To Player scaling is being calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an initial SF of " + scaleFactor + ".", 0)
 
@@ -347,12 +366,11 @@ Float Function GetDamageToPlayerScalingFactor()
 
   If scaleFactor < 0 
     Debug.Trace("VPILBS_DEBUG: SF is less than 0 so adjusting to minimum of 0.001.", 0)
-    Return 0.001
-  Else 
-    Return scaleFactor
+    scaleFactor=0.001
   EndIf
 
-  Debug.Trace("VPILBS_FINAL_RESULT: Final Damage To Player scaling has been calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an final SF of " + scaleFactor + ".", 1)
+  Debug.Trace("VPILBS_FINAL_RESULT: Final Damage To Player scaling has been calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an final SF of " + scaleFactor + "(Base from armor was " + playerbaseScalingToAdjustForArmor + ").", 1)
+  Return scaleFactor
 EndFunction
 
 ;; ****************************************************************************
@@ -384,12 +402,11 @@ Float Function GetDamageByPlayerScalingFactor()
 
   If scaleFactor < 0 
     Debug.Trace("VPILBS_DEBUG: SF is less than 0 so adjusting to minimum of 0.001.", 0)
-    Return 0.001
-  Else 
-    Return scaleFactor
+    scaleFactor=0.001
   EndIf
 
   Debug.Trace("VPILBS_FINAL_RESULT: Final Damage By Player scaling has been calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an final SF of " + scaleFactor + ".", 1)
+  Return scaleFactor
 EndFunction
 
 ;; ****************************************************************************
@@ -404,12 +421,11 @@ Float Function SponginessNPCScalingFactor()
 
   If scaleFactor < 0 
     Debug.Trace("VPILBS_DEBUG: SF is less than 0 so adjusting to minimum of 0.001.", 0)
-    Return 0.001
-  Else 
-    Return scaleFactor
+    scaleFactor=0.001
   EndIf
 
   Debug.Trace("VPILBS_FINAL_RESULT: Final NPC Bonus Health scaling has been calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an final SF of " + scaleFactor + ".", 1)
+  Return scaleFactor
 EndFunction
 
 ;; ****************************************************************************
@@ -424,12 +440,11 @@ Float Function SponginessPlayerScalingFactor()
 
   If scaleFactor < 0 
     Debug.Trace("VPILBS_DEBUG: SF is less than 0 so adjusting to minimum of 0.001.", 0)
-    Return 0.001
-  Else 
-    Return scaleFactor
+    scaleFactor=0.001
   EndIf
 
   Debug.Trace("VPILBS_FINAL_RESULT: Final Player Bonus Health scaling has been calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an final SF of " + scaleFactor + ".", 1)
+  Return scaleFactor
 EndFunction
 
 ;; ****************************************************************************
@@ -440,7 +455,7 @@ Float Function BracketAdjustmentForLowLevelNPCHealthAdjustment()
   Int playerBracket = GetBracketForPlayerLevel()
   Float bracketValue = BK_LowLevelNPCHealthAdjustment[playerBracket];
 
-  Debug.Trace("Low Level NPC Health Adjustment is being calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an initial SF of " + bracketValue + ".", 0)
+  Debug.Trace("VPILBS_DEBUG: Low Level NPC Health Adjustment is being calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an initial SF of " + bracketValue + ".", 0)
   Return bracketValue
 EndFunction
 
