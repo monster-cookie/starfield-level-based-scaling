@@ -29,7 +29,7 @@ GlobalVariable Property BasePerkAdjustmentDamageAdd Auto Const Mandatory
 ;;; Properties
 ;;;
 
-String Property DynamicScalingVersion="2.0.3" Auto ;; -- MOD VERSION SET HERE
+String Property DynamicScalingVersion="2.0.5" Auto ;; -- MOD VERSION SET HERE
 
 Perk Property Skill_Wellness Auto
 Perk Property Skill_EnergyWeaponDissipation Auto
@@ -76,14 +76,14 @@ EndEvent
 
 ;; Event called when the player loads a save game. 
 Event OnPlayerLoadGame()
+  ;; If Version is not set or not current update it -- MOD VERSION SET HERE
+  If (DynamicScalingVersion != "2.0.5")
+    DynamicScalingVersion = "2.0.5"
+  EndIf
+
   Debug.Trace("VPI_DS_EVENT: OnPlayerLoadGame triggered regenerating scaling values using Dynamic Scaling Version " + DynamicScalingVersion, 0)
   Utility.Wait(2)
   Debug.Notification("Dynamic Scaling " + DynamicScalingVersion + " is currently running.")
-
-  ;; If Version is not set or not current update it -- MOD VERSION SET HERE
-  If (DynamicScalingVersion != "2.0.3")
-    DynamicScalingVersion = "2.0.3"
-  EndIf
 
   CreateBracketArrays()
   ScaleSettings()
@@ -212,7 +212,7 @@ Float Function GetDamageToPlayerScalingFactor()
     scaleFactor=0.001
   EndIf
 
-  Debug.Trace("VPILBS_FINAL_RESULT: Final Damage To Player scaling has been calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an final SF of " + scaleFactor + "(Base from armor was " + playerbaseScalingToAdjustForArmor + ").", 1)
+  Debug.Trace("VPI_DS_FINAL_RESULT: Final Damage To Player scaling has been calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an final SF of " + scaleFactor + "(Base from armor was " + playerbaseScalingToAdjustForArmor + ").", 1)
   Return scaleFactor
 EndFunction
 
@@ -239,7 +239,7 @@ Float Function GetDamageByPlayerScalingFactor()
     scaleFactor=0.001
   EndIf
 
-  Debug.Trace("VPILBS_FINAL_RESULT: Final Damage By Player scaling has been calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an final SF of " + scaleFactor + ".", 1)
+  Debug.Trace("VPI_DS_FINAL_RESULT: Final Damage By Player scaling has been calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an final SF of " + scaleFactor + ".", 1)
   Return scaleFactor
 EndFunction
 
@@ -258,7 +258,7 @@ Float Function SponginessNPCScalingFactor()
     scaleFactor=0.001
   EndIf
 
-  Debug.Trace("VPILBS_FINAL_RESULT: Final NPC Bonus Health scaling has been calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an final SF of " + scaleFactor + ".", 1)
+  Debug.Trace("VPI_DS_FINAL_RESULT: Final NPC Bonus Health scaling has been calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an final SF of " + scaleFactor + ".", 1)
   Return scaleFactor
 EndFunction
 
@@ -277,7 +277,7 @@ Float Function SponginessPlayerScalingFactor()
     scaleFactor=0.001
   EndIf
 
-  Debug.Trace("VPILBS_FINAL_RESULT: Final Player Bonus Health scaling has been calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an final SF of " + scaleFactor + ".", 1)
+  Debug.Trace("VPI_DS_FINAL_RESULT: Final Player Bonus Health scaling has been calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an final SF of " + scaleFactor + ".", 1)
   Return scaleFactor
 EndFunction
 
