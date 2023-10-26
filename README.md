@@ -10,6 +10,7 @@ Use "set XX?????? to YY' to set these values below. XX is the load order on your
 the form ID below. YY is the new value to set. 
 
 | Form ID | Global Varaible                        | Default Value |
+|:-------:|:--------------------------------------:|:-------------:|
 | 000856  | BaseNPCHealthBonus                     | 5             |
 | 000857  | BasePlayerHealthBonus                  | 5             |
 | 000858  | BaseLowLevelNPCHealthAdjustment        | 0.05          |
