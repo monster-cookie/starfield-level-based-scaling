@@ -36,7 +36,7 @@
 ;; set XX000861 to 1.00   ;; BaseDamageByPlayerN
 ;; set XX000862 to 0.75   ;; BaseDamageByPlayerH
 ;; set XX000863 to 0.50   ;; BaseDamageByPlayerVH
-;; set XX000864 to 0.0015 ;; BaseResistanceScalingFactor
+;; set XX000864 to 0.001  ;; BaseResistanceScalingFactor
 ;; set XX000865 to 0.25   ;; BasePerkAdjustmentDamageReduction
 ;; set XX000866 to 0.25   ;; BasePerkAdjustmentDamageAdd
 
