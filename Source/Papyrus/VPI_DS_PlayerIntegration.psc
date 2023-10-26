@@ -196,10 +196,12 @@ Float Function GetDamageToPlayerScalingFactor()
   Float playerElectromagneticResist = GetValue(ElectromagneticDamageResist)
   Float scalefactorResistance = BaseResistanceScalingFactor.GetValue()
   Float scalefactorDamageReduction = BasePerkAdjustmentDamageReduction.GetValue()
-  Float playerbaseScalingToAdjustForArmor = ((playerPhysicalResist + playerEnergyResist + playerElectromagneticResist)/3) * (scalefactorResistance * Math.Floor(playerLevel/25))
+  Float playerbaseScalingToAdjustForArmor = ((playerPhysicalResist + playerEnergyResist + playerElectromagneticResist)/3) * (scalefactorResistance * Math.Floor(playerLevel/50))
   Float scaleFactor = SF_DamageToPlayer[playerBracket] + playerbaseScalingToAdjustForArmor
-
   Debug.Trace("VPI_DS_DEBUG: Damage To Player scaling is being calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an initial SF of " + scaleFactor + ".", 0)
+
+  ; Debug.Trace("VPI_DS_DEBUG: Armor Adustment --->\n\n((playerPhysicalResist + playerEnergyResist + playerElectromagneticResist)/3) * (scalefactorResistance * Math.Floor(playerLevel/50))\n((" + playerPhysicalResist + " + " + playerEnergyResist + " + " + playerElectromagneticResist + ")/3) * (" + scalefactorResistance + " * Math.Floor(" + playerLevel + "/50))\n", 2)
+  ; Debug.Trace("VPI_DS_DEBUG: Player Armor Adjustment Factor is " + playerbaseScalingToAdjustForArmor + " base bracket scale factor is " + SF_DamageToPlayer[playerBracket], 0)
 
   If (HasPerk(Skill_Wellness) || HasPerk(Skill_EnergyWeaponDissipation) || HasPerk(Skill_PainTolerance) || HasPerk(Skill_Rejuvenation))
     Float adjustment = scalefactorDamageReduction * (playerBracket/6)
