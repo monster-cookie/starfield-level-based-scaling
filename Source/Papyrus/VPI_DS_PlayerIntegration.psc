@@ -22,6 +22,9 @@ GlobalVariable Property BaseDamageByPlayerVH Auto Const Mandatory
 GlobalVariable Property BaseResistanceScalingFactor Auto Const Mandatory
 GlobalVariable Property BasePerkAdjustmentDamageReduction Auto Const Mandatory
 GlobalVariable Property BasePerkAdjustmentDamageAdd Auto Const Mandatory
+GlobalVariable Property EnableScalingDamage Auto Const Mandatory
+GlobalVariable Property EnableScalingHealth Auto Const Mandatory
+GlobalVariable Property EnableScalingXP Auto Const Mandatory
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -29,7 +32,7 @@ GlobalVariable Property BasePerkAdjustmentDamageAdd Auto Const Mandatory
 ;;; Properties
 ;;;
 
-String Property DynamicScalingVersion="2.0.6" Auto ;; -- MOD VERSION SET HERE
+String Property DynamicScalingVersion="2.0.7" Auto ;; -- MOD VERSION SET HERE
 
 Perk Property Skill_Wellness Auto
 Perk Property Skill_EnergyWeaponDissipation Auto
@@ -77,8 +80,8 @@ EndEvent
 ;; Event called when the player loads a save game. 
 Event OnPlayerLoadGame()
   ;; If Version is not set or not current update it -- MOD VERSION SET HERE
-  If (DynamicScalingVersion != "2.0.6")
-    DynamicScalingVersion = "2.0.6"
+  If (DynamicScalingVersion != "2.0.7")
+    DynamicScalingVersion = "2.0.7"
   EndIf
 
   Debug.Trace("VPI_DS_EVENT: OnPlayerLoadGame triggered regenerating scaling values using Dynamic Scaling Version " + DynamicScalingVersion, 0)
@@ -320,30 +323,46 @@ Function ScaleSettings()
   VPI_Helper.SetGameSettingInt("iCalcLevelAdjustUp", adjustedScalingLevel)
   VPI_Helper.SetGameSettingInt("iCalcLevelAdjustDown", 0)
 
-  Float sfDamageByPlayer = GetDamageByPlayerScalingFactor()
-  Float sfDamageToPlayer = GetDamageToPlayerScalingFactor()
-  Float sfSponginessNPC = SponginessNPCScalingFactor()
-  Float sfSponginessPlayer = SponginessPlayerScalingFactor()
   Float bvLowLevelNPCHealthAdjustment = BracketAdjustmentForLowLevelNPCHealthAdjustment()
-  Int bvLowLevelNPCVsPlayerLevelDifference = BaseLowLevelNPCVsPlayerLevelDifference.GetValueInt()
-
-  VPI_Helper.ScaleGameSettingFloat("fNPCHealthLevelBonus", BaseNPCHealthBonus.GetValueInt(), sfSponginessNPC)
-  VPI_Helper.ScaleGameSettingFloat("fHealthEnduranceOffset", BasePlayerHealthBonus.GetValueInt(), sfSponginessPlayer)
-
   VPI_Helper.SetGameSettingFloat("fLowLevelNPCBaseHealthMult", bvLowLevelNPCHealthAdjustment)
+
+  Int bvLowLevelNPCVsPlayerLevelDifference = BaseLowLevelNPCVsPlayerLevelDifference.GetValueInt()
   VPI_Helper.SetGameSettingInt("iLowLevelNPCMaxLevel", bvLowLevelNPCVsPlayerLevelDifference)
 
-  VPI_Helper.ScaleGameSettingFloat("fDiffMultHPByPCVE", BaseDamageByPlayerVE.GetValue(), sfDamageByPlayer)
-  VPI_Helper.ScaleGameSettingFloat("fDiffMultHPByPCE", BaseDamageByPlayerE.GetValue(), sfDamageByPlayer)
-  VPI_Helper.ScaleGameSettingFloat("fDiffMultHPByPCN", BaseDamageByPlayerN.GetValue(), sfDamageByPlayer)
-  VPI_Helper.ScaleGameSettingFloat("fDiffMultHPByPCH", BaseDamageByPlayerH.GetValue(), sfDamageByPlayer)
-  VPI_Helper.ScaleGameSettingFloat("fDiffMultHPByPCVH", BaseDamageByPlayerVH.GetValue(), sfDamageByPlayer)
+  If (EnableScalingDamage.GetValueInt() == 1)
+    Float sfDamageByPlayer = GetDamageByPlayerScalingFactor()
+    Float sfDamageToPlayer = GetDamageToPlayerScalingFactor()
 
-  VPI_Helper.ScaleGameSettingFloat("fDiffMultHPToPCVE", BaseDamageToPlayerVE.GetValue(), sfDamageToPlayer)
-  VPI_Helper.ScaleGameSettingFloat("fDiffMultHPToPCE", BaseDamageToPlayerE.GetValue(), sfDamageToPlayer)
-  VPI_Helper.ScaleGameSettingFloat("fDiffMultHPToPCN", BaseDamageToPlayerN.GetValue(), sfDamageToPlayer)
-  VPI_Helper.ScaleGameSettingFloat("fDiffMultHPToPCH", BaseDamageToPlayerH.GetValue(), sfDamageToPlayer)
-  VPI_Helper.ScaleGameSettingFloat("fDiffMultHPToPCVH", BaseDamageToPlayerVH.GetValue(), sfDamageToPlayer)    
+    VPI_Helper.ScaleGameSettingFloat("fDiffMultHPByPCVE", BaseDamageByPlayerVE.GetValue(), sfDamageByPlayer)
+    VPI_Helper.ScaleGameSettingFloat("fDiffMultHPByPCE", BaseDamageByPlayerE.GetValue(), sfDamageByPlayer)
+    VPI_Helper.ScaleGameSettingFloat("fDiffMultHPByPCN", BaseDamageByPlayerN.GetValue(), sfDamageByPlayer)
+    VPI_Helper.ScaleGameSettingFloat("fDiffMultHPByPCH", BaseDamageByPlayerH.GetValue(), sfDamageByPlayer)
+    VPI_Helper.ScaleGameSettingFloat("fDiffMultHPByPCVH", BaseDamageByPlayerVH.GetValue(), sfDamageByPlayer)
+  
+    VPI_Helper.ScaleGameSettingFloat("fDiffMultHPToPCVE", BaseDamageToPlayerVE.GetValue(), sfDamageToPlayer)
+    VPI_Helper.ScaleGameSettingFloat("fDiffMultHPToPCE", BaseDamageToPlayerE.GetValue(), sfDamageToPlayer)
+    VPI_Helper.ScaleGameSettingFloat("fDiffMultHPToPCN", BaseDamageToPlayerN.GetValue(), sfDamageToPlayer)
+    VPI_Helper.ScaleGameSettingFloat("fDiffMultHPToPCH", BaseDamageToPlayerH.GetValue(), sfDamageToPlayer)
+    VPI_Helper.ScaleGameSettingFloat("fDiffMultHPToPCVH", BaseDamageToPlayerVH.GetValue(), sfDamageToPlayer)    
+  Else
+    Debug.Trace("VPI_DS_DEBUG: Damage Scaling is disabled.", 0)
+  EndIF
+
+  If (EnableScalingHealth.GetValueInt() == 1)
+    Float sfSponginessNPC = SponginessNPCScalingFactor()
+    Float sfSponginessPlayer = SponginessPlayerScalingFactor()
+
+    VPI_Helper.ScaleGameSettingFloat("fNPCHealthLevelBonus", BaseNPCHealthBonus.GetValueInt(), sfSponginessNPC)
+    VPI_Helper.ScaleGameSettingFloat("fHealthEnduranceOffset", BasePlayerHealthBonus.GetValueInt(), sfSponginessPlayer)
+  Else
+    Debug.Trace("VPI_DS_DEBUG: Health Scaling is disabled.", 0)
+  EndIF
+
+  If (EnableScalingHealth.GetValueInt() == 1)
+    ;; COMING SOON LOL
+  Else
+    Debug.Trace("VPI_DS_DEBUG: XP Scaling is disabled.", 0)
+  EndIF
 EndFunction
 
 
