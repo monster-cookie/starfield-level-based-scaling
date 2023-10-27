@@ -191,7 +191,7 @@ EndFunction
 ;; Get the scaling factor for damage done to the player by NPCs at the 
 ;; player's current level
 ;;
-Float Function GetDamageToPlayerScalingFactor() 
+Float Function GetDamageToPlayerScalingFactor()
   Int playerLevel = GetLevel()
   Int playerBracket = VPI_Helper.GetBracketForPlayerLevel(playerLevel)
   Float playerPhysicalResist = GetValue(DamageResist)
@@ -201,11 +201,11 @@ Float Function GetDamageToPlayerScalingFactor()
   Float scalefactorDamageReduction = BasePerkAdjustmentDamageReduction.GetValue()
   Float playerbaseScalingToAdjustForArmor = ((playerPhysicalResist + playerEnergyResist + playerElectromagneticResist)/3) * (scalefactorResistance * Math.Floor(playerLevel/50))
   Float scaleFactor = SF_DamageToPlayer[playerBracket] + playerbaseScalingToAdjustForArmor
+  Debug.Trace("VPI_DS_DEBUG: Player Armor Adjustment Factor is " + playerbaseScalingToAdjustForArmor + " base bracket scale factor is " + SF_DamageToPlayer[playerBracket], 0)
   Debug.Trace("VPI_DS_DEBUG: Damage To Player scaling is being calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an initial SF of " + scaleFactor + ".", 0)
 
-  ; Debug.Trace("VPI_DS_DEBUG: Armor Adustment --->\n\n((playerPhysicalResist + playerEnergyResist + playerElectromagneticResist)/3) * (scalefactorResistance * Math.Floor(playerLevel/50))\n((" + playerPhysicalResist + " + " + playerEnergyResist + " + " + playerElectromagneticResist + ")/3) * (" + scalefactorResistance + " * Math.Floor(" + playerLevel + "/50))\n", 2)
-  ; Debug.Trace("VPI_DS_DEBUG: Player Armor Adjustment Factor is " + playerbaseScalingToAdjustForArmor + " base bracket scale factor is " + SF_DamageToPlayer[playerBracket], 0)
-
+  ;; Debug.Trace("VPI_DS_DEBUG: Armor Adustment --->\n\n((playerPhysicalResist + playerEnergyResist + playerElectromagneticResist)/3) * (scalefactorResistance * Math.Floor(playerLevel/50))\n((" + playerPhysicalResist + " + " + playerEnergyResist + " + " + playerElectromagneticResist + ")/3) * (" + scalefactorResistance + " * Math.Floor(" + playerLevel + "/50))\n", 2)
+  
   If (HasPerk(Skill_Wellness) || HasPerk(Skill_EnergyWeaponDissipation) || HasPerk(Skill_PainTolerance) || HasPerk(Skill_Rejuvenation))
     Float adjustment = scalefactorDamageReduction * (playerBracket/6)
     scaleFactor += adjustment
@@ -217,7 +217,7 @@ Float Function GetDamageToPlayerScalingFactor()
     scaleFactor=0.001
   EndIf
 
-  Debug.Trace("VPI_DS_FINAL_RESULT: Final Damage To Player scaling has been calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an final SF of " + scaleFactor + "(Base from armor was " + playerbaseScalingToAdjustForArmor + ").", 1)
+  Debug.Trace("VPI_DS_FINAL_RESULT: Final Damage To Player scaling has been calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an final SF of " + scaleFactor + " (Base from armor was " + playerbaseScalingToAdjustForArmor + ").", 1)
   Return scaleFactor
 EndFunction
 

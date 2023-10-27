@@ -19,6 +19,7 @@ mkdir "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\
 mkdir "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data\Batchfiles"
 mkdir "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Optional\Balanced\Data\Batchfiles"
 mkdir "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Optional\Hard\Data\Batchfiles"
+mkdir "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Optional\Experimental\Data\Batchfiles"
 
 REM Deploy to Dist DIR
 Caprica-Experimental.exe --game starfield --flags "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Tools\Starfield_Papyrus_Flags.flg" --import "D:\SteamLibrary\steamapps\common\Starfield\Data\Scripts\Source\Base;C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus" --output "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data\Scripts" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus\VPI_DS_PlayerIntegration.psc"
@@ -38,3 +39,4 @@ copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Sou
 REM Deploy Options Config Files
 copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Batchfiles\vpi-ds-config-balanced.txt" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Optional\Balanced\Data\Batchfiles"
 copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Batchfiles\vpi-ds-config-hard.txt" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Optional\Hard\Data\Batchfiles"
+copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Batchfiles\vpi-ds-config-experimental.txt" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Optional\Experimental\Data\Batchfiles"
