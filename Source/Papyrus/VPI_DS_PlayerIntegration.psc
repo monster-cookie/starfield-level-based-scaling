@@ -32,7 +32,7 @@ GlobalVariable Property EnableScalingXP Auto Const Mandatory
 ;;; Properties
 ;;;
 
-String Property DynamicScalingVersion="2.0.7" Auto ;; -- MOD VERSION SET HERE
+String Property DynamicScalingVersion="2.0.8" Auto ;; -- MOD VERSION SET HERE
 
 Perk Property Skill_Wellness Auto
 Perk Property Skill_EnergyWeaponDissipation Auto
@@ -80,8 +80,8 @@ EndEvent
 ;; Event called when the player loads a save game. 
 Event OnPlayerLoadGame()
   ;; If Version is not set or not current update it -- MOD VERSION SET HERE
-  If (DynamicScalingVersion != "2.0.7")
-    DynamicScalingVersion = "2.0.7"
+  If (DynamicScalingVersion != "2.0.8")
+    DynamicScalingVersion = "2.0.8"
   EndIf
 
   Debug.Trace("VPI_DS_EVENT: OnPlayerLoadGame triggered regenerating scaling values using Dynamic Scaling Version " + DynamicScalingVersion, 0)
