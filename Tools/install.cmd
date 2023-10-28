@@ -15,4 +15,4 @@ copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dis
 copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Optional\Hard\Data\Batchfiles\vpi-ds-config-hard.txt" "D:\SteamLibrary\steamapps\common\Starfield\Data\Batchfiles"
 REM copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Optional\Experimental\Data\Batchfiles\vpi-ds-config-experimental.txt" "D:\SteamLibrary\steamapps\common\Starfield\Data\Batchfiles"
 
-REM DO NOT COPY THE ESM IN FROM THE DIST DIR XEDIT'S VERISON TO THE TRUTH
+REM DO NOT COPY THE ESM IN FROM THE DIST DIR XEDIT'S VERISON IS THE TRUTH

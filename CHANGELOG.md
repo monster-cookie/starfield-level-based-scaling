@@ -1,5 +1,11 @@
 # V2.0 Dynamic Scaling ESM Version
 
+## V2.0.9 Changes
+* Turns out finding rando Syndicate spawns is hard so now all factions have an Experimenter testing truly dynamic spawning
+* Initial version of fully dynamic scaling applied to all the Experimenters and the Pirate faction. It uses fLowLevelNPCBaseHealthMult to handle health scaling. Please give me feedback.
+* NOTE: I still need to tune the scale factors for the new high level NPCs. 
+* Factions remaining to convert: Varuun, Starborn, Terrormorphs, Elder Terrormorphs, The First
+
 ## V2.0.8 Changes
 * Added Creatures (Doesn't apply to Terrormorphs)
 * Special Exception Tough Creatures and Syndicate - I only did every 10 levels and then lean heavily on the autoscaling +/- 5 levels should still preform decently with the middle of level range stats. If this works I'll probably expand the level range out to 500. Looking for feedback like they are still easy to kill vs the other combat factions that get stat boosts every 5 levels. 
