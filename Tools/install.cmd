@@ -3,6 +3,9 @@
 copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data\Scripts\VPI_DS_PlayerIntegration.pex" "D:\SteamLibrary\steamapps\common\Starfield\Data\Scripts"
 copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data\Scripts\Source\VPI_DS_PlayerIntegration.psc" "D:\SteamLibrary\steamapps\common\Starfield\Data\Scripts\Source"
 
+copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data\Scripts\VPI_DS_NPCScaler.pex" "D:\SteamLibrary\steamapps\common\Starfield\Data\Scripts"
+copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data\Scripts\Source\VPI_DS_NPCScaler.psc" "D:\SteamLibrary\steamapps\common\Starfield\Data\Scripts\Source"
+
 copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data\Scripts\VPI_Helper.pex" "D:\SteamLibrary\steamapps\common\Starfield\Data\Scripts"
 copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data\Scripts\Source\VPI_Helper.psc" "D:\SteamLibrary\steamapps\common\Starfield\Data\Scripts\Source"
 
