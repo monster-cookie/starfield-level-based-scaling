@@ -24,26 +24,23 @@
 ;; 
 ;; Fix Default Values -- REPLACE XX with the load order index from MO2, Loot, or xEdit
 ;;
-;; set XX000856 to 5      ;; BaseNPCHealthBonus
-;; set XX000857 to 5      ;; BasePlayerHealthBonus
-;; set XX000858 to 0.05   ;; BaseLowLevelNPCHealthAdjustment
-;; set XX000859 to 5      ;; BaseLowLevelNPCVsPlayerLevelDifference
-;; set XX00085A to 0.50   ;; BaseDamageToPlayerVE
-;; set XX00085B to 0.75   ;; BaseDamageToPlayerE
-;; set XX00085C to 1.00   ;; BaseDamageToPlayerN
-;; set XX00085D to 1.50   ;; BaseDamageToPlayerH
-;; set XX00085E to 2.00   ;; BaseDamageToPlayerVH
-;; set XX00085F to 2.00   ;; BaseDamageByPlayerVE
-;; set XX000860 to 1.50   ;; BaseDamageByPlayerE
-;; set XX000861 to 1.00   ;; BaseDamageByPlayerN
-;; set XX000862 to 0.75   ;; BaseDamageByPlayerH
-;; set XX000863 to 0.50   ;; BaseDamageByPlayerVH
-;; set XX000864 to 0.001  ;; BaseResistanceScalingFactor
-;; set XX000865 to 0.25   ;; BasePerkAdjustmentDamageReduction
-;; set XX000866 to 0.25   ;; BasePerkAdjustmentDamageAdd
-
-;; set XX000858 to 0.10    ;; Adjusting due to the autoscaling including partly scaled base health meaning the NPCs will have randomly more health then you
-;; set XX000864 to 0.0008  ;; With the leveled NPCs .001 increased damage to player too much. This may not even be needed with the true scaling
+;; set XX000856 to 5       ;; BaseNPCHealthBonus
+;; set XX000857 to 5       ;; BasePlayerHealthBonus
+;; set XX000858 to 0.10    ;; BaseLowLevelNPCHealthAdjustment  ;; FIXME AND RUN -- Adjusting due to the autoscaling including partly scaled base health meaning the NPCs will have randomly more health then you
+;; set XX000859 to 5       ;; BaseLowLevelNPCVsPlayerLevelDifference
+;; set XX00085A to 0.50    ;; BaseDamageToPlayerVE
+;; set XX00085B to 0.75    ;; BaseDamageToPlayerE
+;; set XX00085C to 1.00    ;; BaseDamageToPlayerN
+;; set XX00085D to 1.50    ;; BaseDamageToPlayerH
+;; set XX00085E to 2.00    ;; BaseDamageToPlayerVH
+;; set XX00085F to 2.00    ;; BaseDamageByPlayerVE
+;; set XX000860 to 1.50    ;; BaseDamageByPlayerE
+;; set XX000861 to 1.00    ;; BaseDamageByPlayerN
+;; set XX000862 to 0.75    ;; BaseDamageByPlayerH
+;; set XX000863 to 0.50    ;; BaseDamageByPlayerVH
+;; set XX000864 to 0.0008  ;; BaseResistanceScalingFactor  ;; FIXME AND RUN -- With the leveled NPCs .001 increased damage to player too much. This may not even be needed with the true scaling
+;; set XX000865 to 0.25    ;; BasePerkAdjustmentDamageReduction
+;; set XX000866 to 0.25    ;; BasePerkAdjustmentDamageAdd
 
 ;; 
 ;; Fix Scaling Factors
