@@ -42,7 +42,8 @@
 ;; set XX000865 to 0.25   ;; BasePerkAdjustmentDamageReduction
 ;; set XX000866 to 0.25   ;; BasePerkAdjustmentDamageAdd
 
-;; set XX000864 to 0.0008 ;; FIX AND RUN ME
+;; set XX000858 to 0.10    ;; Adjusting due to the autoscaling including partly scaled base health meaning the NPCs will have randomly more health then you
+;; set XX000864 to 0.0008  ;; With the leveled NPCs .001 increased damage to player too much. This may not even be needed with the true scaling
 
 ;; 
 ;; Fix Scaling Factors
@@ -80,16 +81,16 @@ player.cf "SetDamageToPlayerSFForBracket" 8 1.40          ;; B08 => Level 201-25
 player.cf "SetDamageToPlayerSFForBracket" 9 1.50          ;; B09 => Level 251-300 
 player.cf "SetDamageToPlayerSFForBracket" 10 1.75         ;; B10 => Level 301-999 
        
-player.cf "SetDamageByPlayerSFForBracket" 1 1.10          ;; B01 => Level 001-025
-player.cf "SetDamageByPlayerSFForBracket" 2 1.00          ;; B02 => Level 026-050
-player.cf "SetDamageByPlayerSFForBracket" 3 0.90          ;; B03 => Level 051-075
-player.cf "SetDamageByPlayerSFForBracket" 4 0.80          ;; B04 => Level 076-100
-player.cf "SetDamageByPlayerSFForBracket" 5 0.70          ;; B05 => Level 101-125
-player.cf "SetDamageByPlayerSFForBracket" 6 0.60          ;; B06 => Level 126-150
-player.cf "SetDamageByPlayerSFForBracket" 7 0.50          ;; B07 => Level 151-200
-player.cf "SetDamageByPlayerSFForBracket" 8 0.40          ;; B08 => Level 201-250
-player.cf "SetDamageByPlayerSFForBracket" 9 0.30          ;; B09 => Level 251-300
-player.cf "SetDamageByPlayerSFForBracket" 10 0.15         ;; B10 => Level 301-999
+player.cf "SetDamageByPlayerSFForBracket" 1 1.10          ;; B01 => Level 001-025 ;; This needed drastically buffed with true dynamic scaling an their random bonus health
+player.cf "SetDamageByPlayerSFForBracket" 2 1.10          ;; B02 => Level 026-050
+player.cf "SetDamageByPlayerSFForBracket" 3 1.00          ;; B03 => Level 051-075
+player.cf "SetDamageByPlayerSFForBracket" 4 1.00          ;; B04 => Level 076-100
+player.cf "SetDamageByPlayerSFForBracket" 5 0.90          ;; B05 => Level 101-125
+player.cf "SetDamageByPlayerSFForBracket" 6 0.80          ;; B06 => Level 126-150
+player.cf "SetDamageByPlayerSFForBracket" 7 0.70          ;; B07 => Level 151-200
+player.cf "SetDamageByPlayerSFForBracket" 8 0.60          ;; B08 => Level 201-250
+player.cf "SetDamageByPlayerSFForBracket" 9 0.50          ;; B09 => Level 251-300
+player.cf "SetDamageByPlayerSFForBracket" 10 0.30         ;; B10 => Level 301-999
 
 player.cf "ScaleSettings"
 
