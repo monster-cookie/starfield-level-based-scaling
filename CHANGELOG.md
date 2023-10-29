@@ -1,5 +1,8 @@
 # V2.0 Dynamic Scaling ESM Version
 
+## V2.0.10
+* Restoring script to reset game settings to default
+
 ## V2.0.9 Changes
 * Turns out finding rando Syndicate spawns is hard so now all factions have an Experimenter testing truly dynamic spawning
 * Initial version of fully dynamic scaling applied to all the Experimenters and the Pirate faction. It uses fLowLevelNPCBaseHealthMult to handle health scaling. Please give me feedback.

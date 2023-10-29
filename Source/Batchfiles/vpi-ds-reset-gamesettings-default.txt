@@ -1,0 +1,20 @@
+;;setgs iCalcLevelAdjustUp 0   ;; Only run this line if fully uninstalling oor you will break enemy level scaling
+;;setgs iCalcLevelAdjustDown 0 ;; Only run this line if fully uninstalling oor you will break enemy level scaling
+
+;;setgs fLowLevelNPCBaseHealthMult 0.25  ;; Only run this line if fully uninstalling oor you will break enemy level scaling
+;;setgs iLowLevelNPCMaxLevel 3           ;; Only run this line if fully uninstalling oor you will break enemy level scaling
+
+setgs fNPCHealthLevelBonus 20
+setgs fHealthEnduranceOffset 20
+
+setgs fDiffMultHPByPCVE 2.00
+setgs fDiffMultHPByPCE 1.50
+setgs fDiffMultHPByPCN 1.00
+setgs fDiffMultHPByPCH 0.75
+setgs fDiffMultHPByPCVH 0.50
+
+setgs fDiffMultHPToPCVE 0.50
+setgs fDiffMultHPToPCE 0.75
+setgs fDiffMultHPToPCN 1.00
+setgs fDiffMultHPToPCH 1.50
+setgs fDiffMultHPToPCVH 2.00

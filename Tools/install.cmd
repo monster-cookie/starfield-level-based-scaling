@@ -12,6 +12,7 @@ copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dis
 REM Default and Reset Scripts
 copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data\Batchfiles\vpi-ds-reset-vanilla.txt" "D:\SteamLibrary\steamapps\common\Starfield\Data\Batchfiles"
 copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data\Batchfiles\vpi-ds-reset-defaults.txt" "D:\SteamLibrary\steamapps\common\Starfield\Data\Batchfiles"
+copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data\Batchfiles\vpi-ds-reset-gamesettings-default.txt" "D:\SteamLibrary\steamapps\common\Starfield\Data\Batchfiles"
 
 REM Optional Config Scripts
 copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Optional\Balanced\Data\Batchfiles\vpi-ds-config-balanced.txt" "D:\SteamLibrary\steamapps\common\Starfield\Data\Batchfiles"

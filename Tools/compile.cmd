@@ -38,6 +38,7 @@ copy /y "D:\SteamLibrary\steamapps\common\Starfield\Data\DynamicScaling.esm" "C:
 
 copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Batchfiles\vpi-ds-reset-vanilla.txt" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data\Batchfiles"
 copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Batchfiles\vpi-ds-reset-defaults.txt" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data\Batchfiles"
+copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Batchfiles\vpi-ds-reset-gamesettings-default.txt" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data\Batchfiles"
 
 REM Deploy Options Config Files
 copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Batchfiles\vpi-ds-config-balanced.txt" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Optional\Balanced\Data\Batchfiles"
