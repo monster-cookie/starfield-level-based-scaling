@@ -1,6 +1,9 @@
 # V2.0 Dynamic Scaling ESM Version
 
 ## V2.0.12
+* Having to scale damage resists too
+
+## V2.0.12
 * Turned out leaving the Pirates/Crimson Fleet on the old system as a backup was a mistake it stopped scaling for that faction
 
 ## V2.0.11
