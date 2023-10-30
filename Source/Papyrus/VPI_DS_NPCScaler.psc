@@ -16,11 +16,6 @@ Actor Property PlayerRef Auto
 ActorValue Property Endurance Auto
 ActorValue Property Health Auto
 
-ActorValue Property UnarmedDamage Auto
-ActorValue Property MeleeDamage Auto
-ActorValue Property RangedDamage Auto
-ActorValue Property ReflectDamage Auto
-
 ActorValue Property CriticalHitChance Auto
 ActorValue Property CriticalHitDamageMult Auto
 
@@ -38,26 +33,29 @@ ActorValue Property ElectromagneticDamageResist Auto
 
 ;; Cannot use its called when the leveld list is populated and scaling that early isn't valid plus it fired hundreds of times. 
 ; Event OnInit() 
-;   DebugNPC()
+;   DebugNPC("OnInit")
 ;   Debug.Trace("VPI_DS_EVENT (NPCScaler): OnInit triggered", 0)
 ; EndEvent
 
 Event OnCellAttach()
   Debug.Trace("VPI_DS_EVENT (NPCScaler): OnCellAttach triggered", 0)
-  ScaleToPlayer()
+  DebugNPC("OnCellAttach")
 EndEvent
 
 Event OnLoad()
   Debug.Trace("VPI_DS_EVENT (NPCScaler): OnLoad triggered", 0)
+  DebugNPC("OnLoad")
 EndEvent
 
 Event OnCellLoad()
   Debug.Trace("VPI_DS_EVENT (NPCScaler): OnCellLoad triggered", 0)
+  DebugNPC("OnCellLoad")
 EndEvent
 
-; Event OnCombatStateChanged(ObjectReference akTarget, Int aeCombatState)
-;   Debug.Trace("VPI_DS_EVENT (NPCScaler): OnCombatStateChanged triggered", 0)
-; EndEvent
+Event OnCombatStateChanged(ObjectReference akTarget, Int aeCombatState)
+  Debug.Trace("VPI_DS_EVENT (NPCScaler): OnCombatStateChanged triggered", 0)
+  DebugNPC("OnCombatStateChanged")
+EndEvent
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -115,18 +113,6 @@ Function DebugNPC(string checkPlace)
   int playerEMDamageResist = PlayerRef.GetValueInt(ElectromagneticDamageResist)
   int myEMDamageResist = GetValueInt(ElectromagneticDamageResist)
 
-  int playerMeleeDamage = PlayerRef.GetValueInt(MeleeDamage)
-  int myMeleeDamage = GetValueInt(MeleeDamage)
-
-  int playerUnarmedDamage = PlayerRef.GetValueInt(UnarmedDamage)
-  int myUnarmedDamage = GetValueInt(UnarmedDamage)
-
-  int playerRangedDamage = PlayerRef.GetValueInt(RangedDamage)
-  int myRangedDamage = GetValueInt(RangedDamage)
-
-  int playerReflectDamage = PlayerRef.GetValueInt(ReflectDamage)
-  int myReflectDamage = GetValueInt(ReflectDamage)
-
   int playerCriticalHitChance = PlayerRef.GetValueInt(CriticalHitChance)
   int myCriticalHitChance = GetValueInt(CriticalHitChance)
 
@@ -142,11 +128,6 @@ Function DebugNPC(string checkPlace)
   message += "My/Player Damage Resist: " + myDamageResist + "/" + playerDamageResist + ".\n"
   message += "My/Player Energy Resist: " + myEnergyResist + "/" + playerEnergyResist + ".\n"
   message += "My/Player EM Resist: " + myEMDamageResist + "/" + playerEMDamageResist + ".\n"
-
-  message += "My/Player Reflect Damage: " + myReflectDamage + "/" + playerReflectDamage + ".\n"
-  message += "My/Player Melee Damage: " + myMeleeDamage + "/" + playerMeleeDamage + ".\n"
-  message += "My/Player Unarmed Damage: " + myUnarmedDamage + "/" + playerUnarmedDamage + ".\n"
-  message += "My/Player Ranged Damage: " + myReflectDamage + "/" + playerReflectDamage + ".\n"
 
   message += "My/Player Critical Chance: " + myCriticalHitChance + "/" + playerCriticalHitChance + ".\n"
   message += "My/Player Critical Multiplier: " + myCriticalHitDamageMult + "/" + playerCriticalHitDamageMult + ".\n"
