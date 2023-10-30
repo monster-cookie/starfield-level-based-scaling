@@ -1,6 +1,12 @@
 # V2.0 Dynamic Scaling ESM Version
 
 ## V2.0.12
+* Having to scale damage resists too now. I think I see why BS disabled the auto scaler it doesn't seem to be reliable. I will also need to explore how to scale damage via scripting that isn't stored in Actor Values. If this doesn't work I'll probably need to go back to static leveled lists with npc defined every 10 levels up to level 990. 
+* NOTE: I still need to tune the scale factors for the new high level NPCs. 
+* Factions remaining to convert: Terrormorphs, Elder Terrormorphs
+
+
+## V2.0.12
 * Turned out leaving the Pirates/Crimson Fleet on the old system as a backup was a mistake it stopped scaling for that faction
 
 ## V2.0.11
