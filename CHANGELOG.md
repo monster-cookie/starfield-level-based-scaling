@@ -1,5 +1,8 @@
 # V2.0 Dynamic Scaling ESM Version
 
+## V2.0.12
+* Turned out leaving the Pirates/Crimson Fleet on the old system as a backup was a mistake it stopped scaling for that faction
+
 ## V2.0.11
 * Adding The First, Starborn, and Va'ruun factions to dynamic backend scaling system but this time reusing the base leveled chars instead of making my own.
 * Converted the Spacers, Crimson Fleet/Pirates, and Ecliptic to dynamic backend again reusing and extending the base encounter chars. 
