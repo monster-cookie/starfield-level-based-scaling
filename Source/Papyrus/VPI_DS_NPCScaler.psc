@@ -30,26 +30,30 @@ ActorValue Property ElectromagneticDamageResist Auto
 
 ;; Cannot use its called when the leveld list is populated and scaling that early isn't valid plus it fired hundreds of times. 
 ; Event OnInit() 
-;   DebugNPC()
+;   DebugNPC("OnInit")
 ;   Debug.Trace("VPI_DS_EVENT (NPCScaler): OnInit triggered", 0)
 ; EndEvent
 
 Event OnCellAttach()
   Debug.Trace("VPI_DS_EVENT (NPCScaler): OnCellAttach triggered", 0)
-  ScaleToPlayer()
+  DebugNPC("OnCellAttach")
 EndEvent
 
 Event OnLoad()
   Debug.Trace("VPI_DS_EVENT (NPCScaler): OnLoad triggered", 0)
+  DebugNPC("OnLoad")
 EndEvent
 
 Event OnCellLoad()
   Debug.Trace("VPI_DS_EVENT (NPCScaler): OnCellLoad triggered", 0)
+  ScaleToPlayer()
+  DebugNPC("OnCellLoad")
 EndEvent
 
-; Event OnCombatStateChanged(ObjectReference akTarget, Int aeCombatState)
-;   Debug.Trace("VPI_DS_EVENT (NPCScaler): OnCombatStateChanged triggered", 0)
-; EndEvent
+Event OnCombatStateChanged(ObjectReference akTarget, Int aeCombatState)
+  Debug.Trace("VPI_DS_EVENT (NPCScaler): OnCombatStateChanged triggered", 0)
+  DebugNPC("OnCombatStateChanged")
+EndEvent
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -69,50 +73,54 @@ Function ScaleToPlayer()
 
   ;; The built in autoscaler handles everything but health 
   Float calculatedHealthForNPC = (playerHealth * npcScalingAdjustmentToPlayer) + myHealth
-  SetValue(Health, calculatedHealthForNPC)
+  self.SetValue(Health, calculatedHealthForNPC)
 
   ;; Assuming auto scale failed 
   if (myLevel+10 < playerLevel)
     int myDamageResist = GetValueInt(DamageResist)
     int playerDamageResist = PlayerRef.GetValueInt(DamageResist)
     Float calculatedDamageResistForNPC = (playerDamageResist * npcScalingAdjustmentToPlayer) + myDamageResist
-    ModValueTo(DamageResist, calculatedDamageResistForNPC)
+    self.ModValueTo(DamageResist, calculatedDamageResistForNPC)
 
     int myEnergyResist = GetValueInt(EnergyResist)
     int playerEnergyResist = PlayerRef.GetValueInt(EnergyResist)
     Float calculatedEnergyResistForNPC = (playerEnergyResist * npcScalingAdjustmentToPlayer) + myEnergyResist
-    ModValueTo(EnergyResist, calculatedEnergyResistForNPC)
+    self.ModValueTo(EnergyResist, calculatedEnergyResistForNPC)
   
     int myEMDamageResist = GetValueInt(ElectromagneticDamageResist)
     int playerEMDamageResist = PlayerRef.GetValueInt(ElectromagneticDamageResist)
     Float calculatedEMDamageResistForNPC = (playerEMDamageResist * npcScalingAdjustmentToPlayer) + myEMDamageResist
-    ModValueTo(ElectromagneticDamageResist, calculatedEMDamageResistForNPC)
+    self.ModValueTo(ElectromagneticDamageResist, calculatedEMDamageResistForNPC)
   EndIf
   DebugNPC("FINAL")
 EndFunction
 
 Function DebugNPC(string checkPlace)
   int playerLevel = PlayerRef.GetLevel()
-  int myLevel = GetLevel()
+  int myLevel = self.GetLevel()
 
   int playerHealth = PlayerRef.GetValueInt(Health)
-  int myHealth = GetValueInt(Health)
+  int myHealth = self.GetValueInt(Health)
 
   int playerDamageResist = PlayerRef.GetValueInt(DamageResist)
-  int playerEnergyResist = PlayerRef.GetValueInt(EnergyResist)
-  int playerEMDamageResist = PlayerRef.GetValueInt(ElectromagneticDamageResist)
-  int myDamageResist = GetValueInt(DamageResist)
-  int myEnergyResist = GetValueInt(EnergyResist)
-  int myEMDamageResist = GetValueInt(ElectromagneticDamageResist)
+  int myDamageResist = self.GetValueInt(DamageResist)
 
-  int encounterlevel = CalculateEncounterLevel(Game.GetDifficulty())
+  int playerEnergyResist = PlayerRef.GetValueInt(EnergyResist)
+  int myEnergyResist = self.GetValueInt(EnergyResist)
+
+  int playerEMDamageResist = PlayerRef.GetValueInt(ElectromagneticDamageResist)
+  int myEMDamageResist = self.GetValueInt(ElectromagneticDamageResist)
+
+  int encounterlevel = self.CalculateEncounterLevel(Game.GetDifficulty())
 
   string message = "Current stats (EncLevel " + encounterlevel +"):\n\n"
   message += "My/Player Level: " + myLevel + "/" + playerLevel + ".\n"
   message += "My/Player Health: " + myHealth + "/" + playerHealth + ".\n"
+  
   message += "My/Player Damage Resist: " + myDamageResist + "/" + playerDamageResist + ".\n"
   message += "My/Player Energy Resist: " + myEnergyResist + "/" + playerEnergyResist + ".\n"
   message += "My/Player EM Resist: " + myEMDamageResist + "/" + playerEMDamageResist + ".\n"
+
   Debug.Trace("VPI_DS_DEBUG (NPCScaler): [" + checkPlace + "]" + message, 0)
 EndFunction
 
