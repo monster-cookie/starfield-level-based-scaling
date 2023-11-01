@@ -49,6 +49,7 @@ EndEvent
 
 Event OnCellLoad()
   Debug.Trace("VPI_DS_EVENT (NPCScaler): OnCellLoad triggered", 0)
+  ScaleToPlayer()
   DebugNPC("OnCellLoad")
 EndEvent
 
@@ -75,51 +76,51 @@ Function ScaleToPlayer()
 
   ;; The built in autoscaler handles everything but health 
   Float calculatedHealthForNPC = (playerHealth * npcScalingAdjustmentToPlayer) + myHealth
-  SetValue(Health, calculatedHealthForNPC)
+  self.SetValue(Health, calculatedHealthForNPC)
 
   ;; Assuming auto scale failed 
   if (myLevel+10 < playerLevel)
     int myDamageResist = GetValueInt(DamageResist)
     int playerDamageResist = PlayerRef.GetValueInt(DamageResist)
     Float calculatedDamageResistForNPC = (playerDamageResist * npcScalingAdjustmentToPlayer) + myDamageResist
-    ModValueTo(DamageResist, calculatedDamageResistForNPC)
+    self.ModValueTo(DamageResist, calculatedDamageResistForNPC)
 
     int myEnergyResist = GetValueInt(EnergyResist)
     int playerEnergyResist = PlayerRef.GetValueInt(EnergyResist)
     Float calculatedEnergyResistForNPC = (playerEnergyResist * npcScalingAdjustmentToPlayer) + myEnergyResist
-    ModValueTo(EnergyResist, calculatedEnergyResistForNPC)
+    self.ModValueTo(EnergyResist, calculatedEnergyResistForNPC)
   
     int myEMDamageResist = GetValueInt(ElectromagneticDamageResist)
     int playerEMDamageResist = PlayerRef.GetValueInt(ElectromagneticDamageResist)
     Float calculatedEMDamageResistForNPC = (playerEMDamageResist * npcScalingAdjustmentToPlayer) + myEMDamageResist
-    ModValueTo(ElectromagneticDamageResist, calculatedEMDamageResistForNPC)
+    self.ModValueTo(ElectromagneticDamageResist, calculatedEMDamageResistForNPC)
   EndIf
   DebugNPC("FINAL")
 EndFunction
 
 Function DebugNPC(string checkPlace)
   int playerLevel = PlayerRef.GetLevel()
-  int myLevel = GetLevel()
+  int myLevel = self.GetLevel()
 
   int playerHealth = PlayerRef.GetValueInt(Health)
-  int myHealth = GetValueInt(Health)
+  int myHealth = self.GetValueInt(Health)
 
   int playerDamageResist = PlayerRef.GetValueInt(DamageResist)
-  int myDamageResist = GetValueInt(DamageResist)
+  int myDamageResist = self.GetValueInt(DamageResist)
 
   int playerEnergyResist = PlayerRef.GetValueInt(EnergyResist)
-  int myEnergyResist = GetValueInt(EnergyResist)
+  int myEnergyResist = self.GetValueInt(EnergyResist)
 
   int playerEMDamageResist = PlayerRef.GetValueInt(ElectromagneticDamageResist)
-  int myEMDamageResist = GetValueInt(ElectromagneticDamageResist)
+  int myEMDamageResist = self.GetValueInt(ElectromagneticDamageResist)
 
   int playerCriticalHitChance = PlayerRef.GetValueInt(CriticalHitChance)
-  int myCriticalHitChance = GetValueInt(CriticalHitChance)
+  int myCriticalHitChance = self.GetValueInt(CriticalHitChance)
 
   int playerCriticalHitDamageMult = PlayerRef.GetValueInt(CriticalHitDamageMult)
-  int myCriticalHitDamageMult = GetValueInt(CriticalHitDamageMult)
+  int myCriticalHitDamageMult = self.GetValueInt(CriticalHitDamageMult)
 
-  int encounterlevel = CalculateEncounterLevel(Game.GetDifficulty())
+  int encounterlevel = self.CalculateEncounterLevel(Game.GetDifficulty())
 
   string message = "Current stats (EncLevel " + encounterlevel +"):\n\n"
   message += "My/Player Level: " + myLevel + "/" + playerLevel + ".\n"
