@@ -1,5 +1,8 @@
 # V2.0 Dynamic Scaling ESM Version
 
+## V2.0.15
+* Using PC Level Mult and No Calc Flags to see if that fixes the level but leaves the stats alone.
+
 ## V2.0.14
 * Reverted to v2.0.10
 * Reimplemented Crimson Fleet/Pirate from level 1 to 500 every 10 levels, have structure for going to 990 but need better testing first. 
