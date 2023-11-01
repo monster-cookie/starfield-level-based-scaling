@@ -16,9 +16,6 @@ Actor Property PlayerRef Auto
 ActorValue Property Endurance Auto
 ActorValue Property Health Auto
 
-ActorValue Property CriticalHitChance Auto
-ActorValue Property CriticalHitDamageMult Auto
-
 ActorValue Property DamageResist Auto
 ActorValue Property EnergyResist Auto
 ActorValue Property ElectromagneticDamageResist Auto
@@ -114,12 +111,6 @@ Function DebugNPC(string checkPlace)
   int playerEMDamageResist = PlayerRef.GetValueInt(ElectromagneticDamageResist)
   int myEMDamageResist = self.GetValueInt(ElectromagneticDamageResist)
 
-  int playerCriticalHitChance = PlayerRef.GetValueInt(CriticalHitChance)
-  int myCriticalHitChance = self.GetValueInt(CriticalHitChance)
-
-  int playerCriticalHitDamageMult = PlayerRef.GetValueInt(CriticalHitDamageMult)
-  int myCriticalHitDamageMult = self.GetValueInt(CriticalHitDamageMult)
-
   int encounterlevel = self.CalculateEncounterLevel(Game.GetDifficulty())
 
   string message = "Current stats (EncLevel " + encounterlevel +"):\n\n"
@@ -129,9 +120,6 @@ Function DebugNPC(string checkPlace)
   message += "My/Player Damage Resist: " + myDamageResist + "/" + playerDamageResist + ".\n"
   message += "My/Player Energy Resist: " + myEnergyResist + "/" + playerEnergyResist + ".\n"
   message += "My/Player EM Resist: " + myEMDamageResist + "/" + playerEMDamageResist + ".\n"
-
-  message += "My/Player Critical Chance: " + myCriticalHitChance + "/" + playerCriticalHitChance + ".\n"
-  message += "My/Player Critical Multiplier: " + myCriticalHitDamageMult + "/" + playerCriticalHitDamageMult + ".\n"
 
   Debug.Trace("VPI_DS_DEBUG (NPCScaler): [" + checkPlace + "]" + message, 0)
 EndFunction
