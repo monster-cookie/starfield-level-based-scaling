@@ -1,8 +1,8 @@
 # V2.0 Dynamic Scaling ESM Version
 
 ## V2.0.15
-* Reimplemented Crimson Fleet/Pirate Faction from level 1 to 500 every 5 levels, have structure for going to 990.
-* Reimplemented Spacer Faction from level 1 to 500 every 5 levels, have structure for going to 990.
+* Reimplemented Crimson Fleet/Pirate Faction from level 1 to 500 every 5 levels, have structure for going to 990. Enabled PC Level Multiplier and Auto Calc Stats.
+* Reimplemented Spacer Faction from level 1 to 500 every 5 levels, have structure for going to 990. Enabled PC Level Multiplier and Auto Calc Stats.
 * Removed combat music from Crimson Fleet to match other factions. Added combat music to all bosses(++) to make them more standout. 
 * Basically I think true dynamic scaling to player will have to wait for the starfield creation kit
 
