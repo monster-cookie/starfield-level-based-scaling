@@ -1,5 +1,12 @@
 # V2.0 Dynamic Scaling ESM Version
 
+## V2.0.15
+* Reimplemented Crimson Fleet/Pirate Faction from level 1 to 500 every 5 levels, have structure for going to 990. Enabled PC Level Multiplier and Auto Calc Stats.
+* Reimplemented Spacer Faction from level 1 to 500 every 5 levels, have structure for going to 990. Enabled PC Level Multiplier and Auto Calc Stats.
+* Reimplemented Ecliptic Faction from level 1 to 500 every 5 levels, have structure for going to 990. Enabled PC Level Multiplier and Auto Calc Stats.
+* Removed combat music from Crimson Fleet to match other factions. Added combat music to all bosses(++) to make them more standout. 
+* Basically I think true dynamic scaling to player will have to wait for the starfield creation kit. For now the PC Level Multiplier and Auto Calc stats seems to be the only way around the weird stat recalculation that happens on a new NGP session. Testing 4 NGPs sessions with Pirates I got consistent combat in all 4 sessions. 
+
 ## V2.0.14
 * Reverted to v2.0.10
 * Reimplemented Crimson Fleet/Pirate from level 1 to 500 every 10 levels, have structure for going to 990 but need better testing first. 
