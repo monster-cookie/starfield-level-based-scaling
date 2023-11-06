@@ -488,12 +488,26 @@ Function DumpLevelScalingConfig()
   message += "Damage To Player: VE " + BaseDamageToPlayerVE.GetValue() + "; E " + BaseDamageToPlayerE.GetValue() + "; N " + BaseDamageToPlayerN.GetValue() + "; H " + BaseDamageToPlayerH.GetValue() + "; VH " + BaseDamageToPlayerVH.GetValue() + "\n"
   message += "Damage By Player: VE " + BaseDamageByPlayerVE.GetValue() + "; E " + BaseDamageByPlayerE.GetValue() + "; N " + BaseDamageByPlayerN.GetValue() + "; H " + BaseDamageByPlayerH.GetValue() + "; VH " + BaseDamageByPlayerVH.GetValue() + "\n"
 
+
   message += "\n\n*** Scaling Factors ***\n\n"
   message += "______________|____01____|____02____|____03____|____04____|____05____|____06____|____07____|____08____|____09____|____10____|\n"
-  message += "NPC Health    | " + SF_NPCHealthBoost[1] + " | " + SF_NPCHealthBoost[2] + " | " + SF_NPCHealthBoost[3] + " | " + SF_NPCHealthBoost[4] + " | " + SF_NPCHealthBoost[5] + " | " + SF_NPCHealthBoost[6] + " | " + SF_NPCHealthBoost[7] + " | " + SF_NPCHealthBoost[8] + " | " + SF_NPCHealthBoost[9] + " | " + SF_NPCHealthBoost[10] + " |\n"
-  message += "PC Health     | " + SF_PCHealthBoost[1] + " | " + SF_PCHealthBoost[2] + " | " + SF_PCHealthBoost[3] + " | " + SF_PCHealthBoost[4] + " | " + SF_PCHealthBoost[5] + " | " + SF_PCHealthBoost[6] + " | " + SF_PCHealthBoost[7] + " | " + SF_PCHealthBoost[8] + " | " + SF_PCHealthBoost[9] + " | " + SF_PCHealthBoost[10] + " |\n"
-  message += "Damage To PC  | " + SF_DamageToPlayer[1] + " | " + SF_DamageToPlayer[2] + " | " + SF_DamageToPlayer[3] + " | " + SF_DamageToPlayer[4] + " | " + SF_DamageToPlayer[5] + " | " + SF_DamageToPlayer[6] + " | " + SF_DamageToPlayer[7] + " | " + SF_DamageToPlayer[8] + " | " + SF_DamageToPlayer[9] + " | " + SF_DamageToPlayer[10] + " |\n"
-  message += "Damage By PC  | " + SF_DamageByPlayer[1] + " | " + SF_DamageByPlayer[2] + " | " + SF_DamageByPlayer[3] + " | " + SF_DamageByPlayer[4] + " | " + SF_DamageByPlayer[5] + " | " + SF_DamageByPlayer[6] + " | " + SF_DamageByPlayer[7] + " | " + SF_DamageByPlayer[8] + " | " + SF_DamageByPlayer[9] + " | " + SF_DamageByPlayer[10] + " |\n"
+
+  If (EnableScalingHealth.GetValueInt() == 1)
+    message += "NPC Health    | " + SF_NPCHealthBoost[1] + " | " + SF_NPCHealthBoost[2] + " | " + SF_NPCHealthBoost[3] + " | " + SF_NPCHealthBoost[4] + " | " + SF_NPCHealthBoost[5] + " | " + SF_NPCHealthBoost[6] + " | " + SF_NPCHealthBoost[7] + " | " + SF_NPCHealthBoost[8] + " | " + SF_NPCHealthBoost[9] + " | " + SF_NPCHealthBoost[10] + " |\n"
+    message += "PC Health     | " + SF_PCHealthBoost[1] + " | " + SF_PCHealthBoost[2] + " | " + SF_PCHealthBoost[3] + " | " + SF_PCHealthBoost[4] + " | " + SF_PCHealthBoost[5] + " | " + SF_PCHealthBoost[6] + " | " + SF_PCHealthBoost[7] + " | " + SF_PCHealthBoost[8] + " | " + SF_PCHealthBoost[9] + " | " + SF_PCHealthBoost[10] + " |\n"
+  Else
+    message += "NPC Health    | DISABLED                                                                                                    |\n"
+    message += "PC Health     | DISABLED                                                                                                    |\n"
+  EndIF
+
+  If (EnableScalingDamage.GetValueInt() == 1)
+    message += "Damage To PC  | " + SF_DamageToPlayer[1] + " | " + SF_DamageToPlayer[2] + " | " + SF_DamageToPlayer[3] + " | " + SF_DamageToPlayer[4] + " | " + SF_DamageToPlayer[5] + " | " + SF_DamageToPlayer[6] + " | " + SF_DamageToPlayer[7] + " | " + SF_DamageToPlayer[8] + " | " + SF_DamageToPlayer[9] + " | " + SF_DamageToPlayer[10] + " |\n"
+    message += "Damage By PC  | " + SF_DamageByPlayer[1] + " | " + SF_DamageByPlayer[2] + " | " + SF_DamageByPlayer[3] + " | " + SF_DamageByPlayer[4] + " | " + SF_DamageByPlayer[5] + " | " + SF_DamageByPlayer[6] + " | " + SF_DamageByPlayer[7] + " | " + SF_DamageByPlayer[8] + " | " + SF_DamageByPlayer[9] + " | " + SF_DamageByPlayer[10] + " |\n"
+  Else
+    message += "Damage To PC  | DISABLED                                                                                                    |\n"
+    message += "Damage By PC  | DISABLED                                                                                                    |\n"
+  EndIf
+
   message += "LL NPC HP ADJ | " + SF_LowLevelNPCHealthAdjustment[1] + " | " + SF_LowLevelNPCHealthAdjustment[2] + " | " + SF_LowLevelNPCHealthAdjustment[3] + " | " + SF_LowLevelNPCHealthAdjustment[4] + " | " + SF_LowLevelNPCHealthAdjustment[5] + " | " + SF_LowLevelNPCHealthAdjustment[6] + " | " + SF_LowLevelNPCHealthAdjustment[7] + " | " + SF_LowLevelNPCHealthAdjustment[8] + " | " + SF_LowLevelNPCHealthAdjustment[9] + " | " + SF_LowLevelNPCHealthAdjustment[10] + " |\n"
 
   Int iPlayerLevel = GetLevel()

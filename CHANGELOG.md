@@ -1,6 +1,9 @@
 # V2.0 Dynamic Scaling ESM Version
 
 ## V2.0.15
+* Created a configuration tables (Dynamic Scaling Configuration Table uses 1 lead) craft at the work bench can configure and of the global variables in game. Might have a nasty way to deal with the bracket data too but will be longer term. 
+
+## V2.0.15
 * Reimplemented Crimson Fleet/Pirate Faction from level 1 to 500 every 5 levels, have structure for going to 990. Enabled PC Level Multiplier and Auto Calc Stats.
 * Reimplemented Spacer Faction from level 1 to 500 every 5 levels, have structure for going to 990. Enabled PC Level Multiplier and Auto Calc Stats.
 * Reimplemented Ecliptic Faction from level 1 to 500 every 5 levels, have structure for going to 990. Enabled PC Level Multiplier and Auto Calc Stats.
