@@ -1,6 +1,6 @@
 # V2.0 Dynamic Scaling ESM Version
 
-## V2.0.15
+## V2.0.16
 * Created a configuration tables (Dynamic Scaling Configuration Table uses 1 lead) craft at the work bench can configure and of the global variables in game. Might have a nasty way to deal with the bracket data too but will be longer term. 
 
 ## V2.0.15
