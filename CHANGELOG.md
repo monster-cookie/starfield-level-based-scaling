@@ -1,5 +1,10 @@
 # V2.0 Dynamic Scaling ESM Version
 
+## V2.0.17
+* Fixed the missing keyword/flag on the low level configuration menu that stopped it from loading
+* Added remaining default/baseline configuration screens to the configuration terminal
+* All menus have descriptions and titles now to help out
+
 ## V2.0.16
 * Created a configuration tables (Dynamic Scaling Configuration Table uses 1 lead) craft at the work bench can configure and of the global variables in game. Might have a nasty way to deal with the bracket data too but will be longer term. 
 
