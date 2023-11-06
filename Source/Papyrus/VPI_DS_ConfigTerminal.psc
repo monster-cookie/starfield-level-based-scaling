@@ -37,6 +37,9 @@ Message Property DS_ConfigMenuMain Auto
 Message Property DS_ConfigMenu_LowLevelNPCBaseline Auto
 Message Property DS_ConfigMenu_LowLevelNPCBaseline_AdjustmentFactor Auto
 Message Property DS_ConfigMenu_LowLevelNPCBaseline_LevelDifference Auto
+Message Property DS_ConfigMenu_HealthScalingBaseline Auto
+Message Property DS_ConfigMenu_HealthScalingBaseline_NPCBonusHeath Auto
+Message Property DS_ConfigMenu_HealthScalingBaseline_PlayerBonusHeath Auto
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -92,7 +95,7 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
         Debug.Trace("VPI_DS_DEBUG (ConfigTerminal): Main Menu Button 7 clicked launching DS_ConfigMenu_LowLevelNPCBaseline.", 0)
       ElseIf (menuButtonClicked == 8)
         ;; Show Sponginess Defaults Menu
-        ;; message = DS_ConfigMenuHealthScalingBaseline
+        message = DS_ConfigMenu_HealthScalingBaseline
       ElseIf (menuButtonClicked == 9)
         ;; Show Damage Scaling Defaults Menu
         ;; message = DS_ConfigMenuDamageScalingBaseline
@@ -104,13 +107,13 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
       menuButtonClicked = DS_ConfigMenu_LowLevelNPCBaseline.Show(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
       message = DS_ConfigMenuMain ;; Return to root menu
       If (menuButtonClicked == 0)
-        ;; Close Menu Clicked
+        ;; CLICKED 0: Return to main menu
       ElseIF (menuButtonClicked == 1) 
-        ;; Show Low Level NPC Adjustment Factor Menu
+        ;; CLICKED 1: Configure Low Level NPC Adjustment Factor
         message = DS_ConfigMenu_LowLevelNPCBaseline_AdjustmentFactor
         Debug.Trace("VPI_DS_DEBUG (ConfigTerminal): Low Level NPC Menu Button 1 clicked launching DS_ConfigMenu_LowLevelNPCBaseline_AdjustmentFactor.", 0)
       ElseIF (menuButtonClicked == 2) 
-        ;; Show Low Level NPC Level Difference Menu
+        ;; CLICKED 2: Configure how many levels below player is considered low level
         message = DS_ConfigMenu_LowLevelNPCBaseline_LevelDifference
         Debug.Trace("VPI_DS_DEBUG (ConfigTerminal): Low Level NPC Menu Button 2 clicked launching DS_ConfigMenu_LowLevelNPCBaseline_LevelDifference.", 0)
       EndIf
@@ -121,27 +124,27 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
       menuButtonClicked = DS_ConfigMenu_LowLevelNPCBaseline_AdjustmentFactor.Show(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
       message = DS_ConfigMenu_LowLevelNPCBaseline ;; Return to previous menu
       If (menuButtonClicked == 0)
-        ;; Close Menu Clicked
+        ;; CLICKED 0: Return to Low Level NPC Configuration Menu
       ElseIF (menuButtonClicked == 1) 
-        ;; Set to 95% or 0.05 -- Recommended Setting -- Works weird actual is 95 = 100-(100*0.05)
+        ;; CLICKED 1: Set to 95% of player level (Recommended) -- Global has to be 0.05
         BaseLowLevelNPCHealthAdjustment.SetValue(0.05)
       ElseIF (menuButtonClicked == 2) 
-        ;; Set to 90% or 0.10
+        ;; CLICKED 2: Set to 90% of player level -- Global has to be 0.10
         BaseLowLevelNPCHealthAdjustment.SetValue(0.10)
       ElseIF (menuButtonClicked == 3) 
-        ;; Set to 85% or 0.15
+        ;; CLICKED 3: Set to 85% of player level -- Global has to be 0.15
         BaseLowLevelNPCHealthAdjustment.SetValue(0.15)
       ElseIF (menuButtonClicked == 4) 
-        ;; Set to 80% or 0.20
+        ;; CLICKED 4: Set to 80% of player level -- Global has to be 0.20
         BaseLowLevelNPCHealthAdjustment.SetValue(0.20)
       ElseIF (menuButtonClicked == 5) 
-        ;; Set to 75% or 0.25 -- Vanilla Setting
+        ;; CLICKED 5: Set to 75% of player level (Vanilla) -- Global has to be 0.25
         BaseLowLevelNPCHealthAdjustment.SetValue(0.25)
       ElseIF (menuButtonClicked == 6) 
-        ;; Set to 70% or 0.30
+        ;; CLICKED 6: Set to 70% of player level -- Global has to be 0.30
         BaseLowLevelNPCHealthAdjustment.SetValue(0.30)
       ElseIF (menuButtonClicked == 7) 
-        ;; Set to 50% or 0.50
+        ;; CLICKED 7: Set to 50% of player level -- Global has to be 0.50
         BaseLowLevelNPCHealthAdjustment.SetValue(0.50)
       EndIf
 
@@ -151,19 +154,108 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
       menuButtonClicked = DS_ConfigMenu_LowLevelNPCBaseline_LevelDifference.Show(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
       message = DS_ConfigMenu_LowLevelNPCBaseline ;; Return to previous menu
       If (menuButtonClicked == 0)
-        ;; Close Menu Clicked
+        ;; CLICKED 0: Return to Low Level NPC Configuration Menu
       ElseIF (menuButtonClicked == 1) 
-        ;; Set to 3 Levels -- Vanilla Setting
+        ;; CLICKED 1: 3 Levels (Vanilla)
         BaseLowLevelNPCVsPlayerLevelDifference.SetValueInt(3)
       ElseIF (menuButtonClicked == 2) 
-        ;; Set to 5 Levels -- Recommended Setting
+        ;; CLICKED 2: 5 Levels (Recommended)
         BaseLowLevelNPCVsPlayerLevelDifference.SetValueInt(5)
       ElseIF (menuButtonClicked == 3) 
-        ;; Set to 10 Levels
+        ;; CLICKED 3: 10 Levels
         BaseLowLevelNPCVsPlayerLevelDifference.SetValueInt(10)
       ElseIF (menuButtonClicked == 4) 
-        ;; Set to 25 Levels
+        ;; CLICKED 4: 25 Levels
         BaseLowLevelNPCVsPlayerLevelDifference.SetValueInt(25)
+      EndIf
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;; Show Baseline Health Configuration Menu
+    ElseIF (message == DS_ConfigMenu_HealthScalingBaseline)
+      menuButtonClicked = DS_ConfigMenu_HealthScalingBaseline.Show(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+      message = DS_ConfigMenuMain ;; Return to root menu
+      If (menuButtonClicked == 0)
+        ;; CLICKED 0: Return to main menu
+      ElseIF (menuButtonClicked == 1) 
+        ;; CLICKED 1: Configure NPC Bonus Health Baseline
+        message = DS_ConfigMenu_HealthScalingBaseline_NPCBonusHeath
+        Debug.Trace("VPI_DS_DEBUG (ConfigTerminal): Health Scaling Baseline Menu Button 1 clicked launching DS_ConfigMenu_HealthScalingBaseline_NPCBonusHeath.", 0)
+      ElseIF (menuButtonClicked == 2) 
+        ;; CLICKED 2: Configure Player Bonus Health Baseline
+        message = DS_ConfigMenu_HealthScalingBaseline_PlayerBonusHeath
+        Debug.Trace("VPI_DS_DEBUG (ConfigTerminal): Health Scaling Baseline Menu Button 2 clicked launching DS_ConfigMenu_HealthScalingBaseline_PlayerBonusHeath.", 0)
+      EndIf
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;; Show NPC Bonus Health Configuration Menu
+    ElseIF (message == DS_ConfigMenu_HealthScalingBaseline_NPCBonusHeath)
+      menuButtonClicked = DS_ConfigMenu_HealthScalingBaseline_NPCBonusHeath.Show(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+      message = DS_ConfigMenu_HealthScalingBaseline ;; Return to previous menu
+      If (menuButtonClicked == 0)
+        ;; CLICKED 0: Return to Health Scaling Baseline Configuration Menu
+      ElseIF (menuButtonClicked == 1) 
+        ;; CLICKED 1: 0 Health Bonus per Level
+        BaseNPCHealthBonus.SetValueInt(0)
+      ElseIF (menuButtonClicked == 2) 
+        ;; CLICKED 2: 2 Health Bonus per Level
+        BaseNPCHealthBonus.SetValueInt(2)
+      ElseIF (menuButtonClicked == 3) 
+        ;; CLICKED 3: 5 Health Bonus per Level (Recommended)
+        BaseNPCHealthBonus.SetValueInt(5)
+      ElseIF (menuButtonClicked == 4) 
+        ;; CLICKED 4: 10 Health Bonus per Level
+        BaseNPCHealthBonus.SetValueInt(10)
+      ElseIF (menuButtonClicked == 5) 
+        ;; CLICKED 5: 15 Health Bonus per Level
+        BaseNPCHealthBonus.SetValueInt(15)
+      ElseIF (menuButtonClicked == 6) 
+        ;; CLICKED 6: 20 Health Bonus per Level (Vanilla)
+        BaseNPCHealthBonus.SetValueInt(20)
+      ElseIF (menuButtonClicked == 7) 
+        ;; CLICKED 7: 15 Health Bonus per Level
+        BaseNPCHealthBonus.SetValueInt(25)
+      ElseIF (menuButtonClicked == 8) 
+        ;; CLICKED 8: 50 Health Bonus per Level
+        BaseNPCHealthBonus.SetValueInt(50)
+      ElseIF (menuButtonClicked == 9) 
+        ;; CLICKED 9: 100 Health Bonus per Level
+        BaseNPCHealthBonus.SetValueInt(100)
+      EndIf
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;; Show Player Bonus Health Configuration Menu
+    ElseIF (message == DS_ConfigMenu_HealthScalingBaseline_PlayerBonusHeath)
+      menuButtonClicked = DS_ConfigMenu_HealthScalingBaseline_PlayerBonusHeath.Show(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+      message = DS_ConfigMenu_HealthScalingBaseline ;; Return to previous menu
+      If (menuButtonClicked == 0)
+        ;; CLICKED 0: Return to Health Scaling Baseline Configuration Menu
+      ElseIF (menuButtonClicked == 1) 
+        ;; CLICKED 1: 0 Health Bonus per Level
+        BasePlayerHealthBonus.SetValueInt(0)
+      ElseIF (menuButtonClicked == 2) 
+        ;; CLICKED 2: 2 Health Bonus per Level
+        BasePlayerHealthBonus.SetValueInt(2)
+      ElseIF (menuButtonClicked == 3) 
+        ;; CLICKED 3: 5 Health Bonus per Level (Recommended)
+        BasePlayerHealthBonus.SetValueInt(5)
+      ElseIF (menuButtonClicked == 4) 
+        ;; CLICKED 4: 10 Health Bonus per Level
+        BasePlayerHealthBonus.SetValueInt(10)
+      ElseIF (menuButtonClicked == 5) 
+        ;; CLICKED 5: 15 Health Bonus per Level
+        BasePlayerHealthBonus.SetValueInt(15)
+      ElseIF (menuButtonClicked == 6) 
+        ;; CLICKED 6: 20 Health Bonus per Level (Vanilla)
+        BasePlayerHealthBonus.SetValueInt(20)
+      ElseIF (menuButtonClicked == 7) 
+        ;; CLICKED 7: 15 Health Bonus per Level
+        BasePlayerHealthBonus.SetValueInt(25)
+      ElseIF (menuButtonClicked == 8) 
+        ;; CLICKED 8: 50 Health Bonus per Level
+        BasePlayerHealthBonus.SetValueInt(50)
+      ElseIF (menuButtonClicked == 9) 
+        ;; CLICKED 9: 100 Health Bonus per Level
+        BasePlayerHealthBonus.SetValueInt(100)
       EndIf
     EndIf ;; End Main Menu
   EndWhile
