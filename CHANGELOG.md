@@ -1,5 +1,9 @@
 # V2.0 Dynamic Scaling ESM Version
 
+## V2.0.18
+* Experimenter's min level set to 100 and they have all the increased aggression settings I could find. 
+* Currently the NPC level pool for a rank name has 4 normal one then the boosted ++ variant. These now rotate available combat styles.
+
 ## V2.0.17
 * Fixed the missing keyword/flag on the low level configuration menu that stopped it from loading
 * Added remaining default/baseline configuration screens to the configuration terminal
