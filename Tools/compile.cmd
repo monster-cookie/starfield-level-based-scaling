@@ -1,6 +1,7 @@
 @echo off
 
 REM Get Caprica from https://github.com/Orvid/Caprica currently installed is old manual compile -- v0.3.0 causes a io stream failure
+REM Get Spriggit from https://github.com/Mutagen-Modding/Spriggit currently installed is 0.10
 
 REM Notepad++/VSCODE needs current working directory to be where Caprica.exe is 
 cd "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Tools"
@@ -38,6 +39,10 @@ copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Sou
 REM ESM can't is purly binary so need to pull from starfield dir where xedit has to have it 
 copy /y "D:\SteamLibrary\steamapps\common\Starfield\Data\DynamicScaling.esm" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\esm"
 copy /y "D:\SteamLibrary\steamapps\common\Starfield\Data\DynamicScaling.esm" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\dist\Data"
+
+
+REM Convert the ESM to YAML and JSON
+Spriggit.CLI.exe serialize --InputPath "D:\SteamLibrary\steamapps\common\Starfield\Data\DynamicScaling.esm" --OutputPath "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\esm\DynamicScaling" --GameRelease Starfield --PackageName Spriggit.Json.Starfield
 
 copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Batchfiles\vpi-ds-reset-vanilla.txt" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data\Batchfiles"
 copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Batchfiles\vpi-ds-reset-defaults.txt" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data\Batchfiles"

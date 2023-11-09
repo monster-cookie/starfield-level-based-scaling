@@ -1,0 +1,6 @@
+{
+  "MutagenObjectType": "GameSettingFloat",
+  "FormKey": "000854:DynamicScaling.esm",
+  "EditorID": "fLevelScalingMult",
+  "Data": 1.0
+}

@@ -1,0 +1,26 @@
+{
+  "SpriggitSource": {
+    "PackageName": "Spriggit.Json.Starfield",
+    "Version": "0.10.0"
+  },
+  "ModKey": "DynamicScaling.esm",
+  "GameRelease": "Starfield",
+  "ModHeader": {
+    "Flags": [
+      "Master"
+    ],
+    "Stats": {
+      "NumRecords": 518,
+      "NextFormID": 2751
+    },
+    "Author": "Venpi",
+    "MasterReferences": [
+      {
+        "Master": "Starfield.esm"
+      },
+      {
+        "Master": "BlueprintShips-Starfield.esm"
+      }
+    ]
+  }
+}

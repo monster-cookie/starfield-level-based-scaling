@@ -1,0 +1,34 @@
+{
+  "FormKey": "000AAE:DynamicScaling.esm",
+  "EditorID": "DS_ConfigTerminal",
+  "Description": {
+    "TargetLanguage": "English",
+    "Value": "Open Dynamic Scaling configuration terminal"
+  },
+  "WorkbenchKeyword": "0AA209:Starfield.esm",
+  "Conditions": [
+    {
+      "MutagenObjectType": "ConditionFloat",
+      "Unknown1": "0x000000",
+      "Data": {
+        "MutagenObjectType": "GetItemCountConditionData",
+        "RunOnType": "Reference",
+        "Reference": "000014:Starfield.esm",
+        "FirstParameter": "000AAF:DynamicScaling.esm"
+      }
+    }
+  ],
+  "ConstructableComponents": [
+    {
+      "Component": "0057C7:Starfield.esm",
+      "Count": 1
+    }
+  ],
+  "CreatedObject": "000AAF:DynamicScaling.esm",
+  "AmountProduced": 1,
+  "LearnMethod": "DefaultOrConditions",
+  "Categories": [
+    "2E2F2D:Starfield.esm"
+  ],
+  "RECF": 0
+}
