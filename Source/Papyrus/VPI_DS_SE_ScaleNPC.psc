@@ -10,4 +10,5 @@ Event OnEffectStart(ObjectReference akTarget, Actor akCaster, MagicEffect akBase
     return
   EndIf
   akTarget.SetScale(afMagnitude)
+  akCaster.SetScale(afMagnitude)
 EndEvent

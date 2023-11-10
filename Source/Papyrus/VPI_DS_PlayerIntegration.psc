@@ -68,34 +68,34 @@ Float[] Property SF_LowLevelNPCHealthAdjustment Auto
 ;; This event will run once, when the script is initialized and is a member of any and all scripts 
 ;; per docs. In the terms of ReferenceAlias is called when the script is bound to something. 
 Event OnInit() 
-  Debug.Trace("VPI_DS_EVENT (PCIntegration): OnInit triggered regenerating scaling values", 0)
+  ; Debug.Trace("VPI_DS_EVENT (PCIntegration): OnInit triggered regenerating scaling values", 0)
   CreateBracketArrays()
   ScaleSettings()
 EndEvent
 
 ;; Event called when the player loads a save game. 
 Event OnPlayerLoadGame()
-  Debug.Trace("VPI_DS_EVENT (PCIntegration): OnPlayerLoadGame triggered regenerating scaling values", 0)
+  ; Debug.Trace("VPI_DS_EVENT (PCIntegration): OnPlayerLoadGame triggered regenerating scaling values", 0)
   CreateBracketArrays()
   ScaleSettings()
 EndEvent
 
 Event OnDifficultyChanged(Int aOldDifficulty, Int aNewDifficulty)
-  Debug.Trace("VPI_DS_EVENT (PCIntegration): OnDifficultyChanged triggered regenerating scaling values", 0)
+  ; Debug.Trace("VPI_DS_EVENT (PCIntegration): OnDifficultyChanged triggered regenerating scaling values", 0)
   ScaleSettings()
 EndEvent
 
 ; Using ReferenceAlias (vs Actor) this is now actually triggered so don't think I need OnEnterShipInterior/OnExitShipInterior
 Event OnLocationChange(Location akOldLoc, Location akNewLoc)
-  Debug.Trace("VPI_DS_EVENT (PCIntegration): OnLocationChange triggered regenerating scaling values", 0)
+  ; Debug.Trace("VPI_DS_EVENT (PCIntegration): OnLocationChange triggered regenerating scaling values", 0)
   ScaleSettings()
 EndEvent
 
-;; Called on ever thinkg you kill player or beast -- probably a good tracking point as you gain XP from the kill
-Event OnKill(ObjectReference akVictim)
-  Debug.Trace("VPI_DS_EVENT (PCIntegration): OnKill triggered regenerating scaling values", 1)
-  ScaleSettings()
-EndEvent
+;; Called on ever thing you kill player or beast -- don't use it gets called way too much
+; Event OnKill(ObjectReference akVictim)
+;   Debug.Trace("VPI_DS_EVENT (PCIntegration): OnKill triggered regenerating scaling values", 1)
+;   ScaleSettings()
+; EndEvent
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
