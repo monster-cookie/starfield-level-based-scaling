@@ -1,0 +1,16 @@
+{
+  "FormKey": "000ACA:DynamicScaling.esm",
+  "EditorID": "ScaleTarget_150",
+  "Description": {
+    "TargetLanguage": "English",
+    "Value": ""
+  },
+  "Effects": [
+    {
+      "BaseEffect": "000AC9:DynamicScaling.esm",
+      "Data": {
+        "Magnitude": 0.25
+      }
+    }
+  ]
+}

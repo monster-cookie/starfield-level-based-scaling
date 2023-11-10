@@ -1,0 +1,47 @@
+{
+  "FormKey": "000ACC:DynamicScaling.esm",
+  "EditorID": "PERK_MK1_Adjustments",
+  "Description": {
+    "TargetLanguage": "English",
+    "Value": ""
+  },
+  "Flags": [
+    "PcPlayable"
+  ],
+  "Restriction": "000AC3:DynamicScaling.esm",
+  "Ranks": [
+    {
+      "Effects": [
+        {
+          "MutagenObjectType": "PerkAbilityEffect",
+          "Ability": "000ACB:DynamicScaling.esm"
+        },
+        {
+          "MutagenObjectType": "PerkEntryPointAddLeveledItem",
+          "EntryPoint": "AddLeveledListOnDeath",
+          "PerkConditionTabCount": 3,
+          "PerkEntryID": 0,
+          "Item": "2F29E0:Starfield.esm"
+        },
+        {
+          "MutagenObjectType": "PerkEntryPointAddLeveledItem",
+          "EntryPoint": "AddLeveledListOnDeath",
+          "PerkConditionTabCount": 3,
+          "PerkEntryID": 1,
+          "Item": "0C1F58:Starfield.esm"
+        },
+        {
+          "MutagenObjectType": "PerkEntryPointAddLeveledItem",
+          "EntryPoint": "AddLeveledListOnDeath",
+          "PerkConditionTabCount": 3,
+          "PerkEntryID": 2,
+          "Item": "131CBE:Starfield.esm"
+        }
+      ],
+      "Description": {
+        "TargetLanguage": "English",
+        "Value": ""
+      }
+    }
+  ]
+}

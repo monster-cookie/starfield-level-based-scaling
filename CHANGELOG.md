@@ -1,5 +1,8 @@
 # V2.0 Dynamic Scaling ESM Version
 
+## V2.0.19
+* Injecting MK5 Boss Loot using Keywords and hidden perk
+
 ## V2.0.18
 * Experimenter's min level set to 100 and they have all the increased aggression settings I could find. 
 * Currently the NPC level pool for a rank name has 4 normal one then the boosted ++ variant. These now rotate available combat styles.
