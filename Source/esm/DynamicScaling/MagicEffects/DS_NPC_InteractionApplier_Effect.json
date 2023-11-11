@@ -35,6 +35,15 @@
         "MutagenObjectType": "HasKeywordConditionData",
         "FirstParameter": "000AD6:DynamicScaling.esm"
       }
+    },
+    {
+      "MutagenObjectType": "ConditionFloat",
+      "Unknown1": "0x000000",
+      "Data": {
+        "MutagenObjectType": "HasKeywordConditionData",
+        "FirstParameter": "000AD7:DynamicScaling.esm"
+      },
+      "ComparisonValue": 1.0
     }
   ]
 }

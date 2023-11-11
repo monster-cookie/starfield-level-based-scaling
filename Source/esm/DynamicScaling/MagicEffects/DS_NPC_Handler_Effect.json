@@ -55,6 +55,11 @@
             "MutagenObjectType": "ScriptObjectProperty",
             "Name": "LL_Loot_Digipick",
             "Object": "131CBE:Starfield.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "DS_SCALING_APPLIED",
+            "Object": "000AD6:DynamicScaling.esm"
           }
         ]
       }
