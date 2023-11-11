@@ -1,0 +1,21 @@
+{
+  "FormKey": "000AD5:DynamicScaling.esm",
+  "EditorID": "DS_NPC_HandlerAbility",
+  "Name": {
+    "TargetLanguage": "English",
+    "Value": "ActorSpell"
+  },
+  "Description": {
+    "TargetLanguage": "English",
+    "Value": ""
+  },
+  "Type": [
+    "Ability"
+  ],
+  "Effects": [
+    {
+      "BaseEffect": "000AD4:DynamicScaling.esm",
+      "Data": {}
+    }
+  ]
+}

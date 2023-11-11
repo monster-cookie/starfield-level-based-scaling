@@ -1,0 +1,40 @@
+{
+  "FormKey": "000AD2:DynamicScaling.esm",
+  "EditorID": "DS_NPC_InteractionApplier_Effect",
+  "VirtualMachineAdapter": {
+    "Scripts": [
+      {
+        "Name": "VPI_DS_CloakAbilityApplier",
+        "Properties": [
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "AbilityToApply",
+            "Object": "000AD5:DynamicScaling.esm"
+          }
+        ]
+      }
+    ]
+  },
+  "Name": {
+    "TargetLanguage": "English",
+    "Value": "ApplyingEffect"
+  },
+  "Conditions": [
+    {
+      "MutagenObjectType": "ConditionFloat",
+      "Unknown1": "0x000000",
+      "Data": {
+        "MutagenObjectType": "HasMagicEffectConditionData",
+        "FirstParameter": "000AD4:DynamicScaling.esm"
+      }
+    },
+    {
+      "MutagenObjectType": "ConditionFloat",
+      "Unknown1": "0x000000",
+      "Data": {
+        "MutagenObjectType": "HasKeywordConditionData",
+        "FirstParameter": "000AD6:DynamicScaling.esm"
+      }
+    }
+  ]
+}

@@ -1,8 +1,7 @@
 # V2.0 Dynamic Scaling ESM Version
 
 ## V2.0.19
-* Injecting MK5 Boss Loot using Keywords and hidden perk
-* Fixed tons of enc -> lchar -> lvl NPC chaining errors that were messing up earlier dynamic script tests
+* Injecting MK5 Boss Loot using cloak spell it is the only sucky but viable way around the encounter system
 
 ## V2.0.18
 * Experimenter's min level set to 100 and they have all the increased aggression settings I could find. 

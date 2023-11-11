@@ -1,0 +1,67 @@
+{
+  "FormKey": "000AD4:DynamicScaling.esm",
+  "EditorID": "DS_NPC_Handler_Effect",
+  "VirtualMachineAdapter": {
+    "Scripts": [
+      {
+        "Name": "VPI_DS_NPC_Handler",
+        "Properties": [
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "NPC_Type_MK1",
+            "Object": "000AC3:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "NPC_Type_MK2",
+            "Object": "000AC2:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "NPC_Type_MK3",
+            "Object": "000AC1:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "NPC_Type_MK4",
+            "Object": "000AC0:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "NPC_Type_MK5",
+            "Object": "000ABF:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "NPC_Pirate",
+            "Object": "000AC4:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "LL_Contraband_Any",
+            "Object": "150EE5:Starfield.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "LL_Loot_Legendary_Human",
+            "Object": "0C1F58:Starfield.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "LL_Loot_Misc",
+            "Object": "00D3DD:Starfield.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "LL_Loot_Digipick",
+            "Object": "131CBE:Starfield.esm"
+          }
+        ]
+      }
+    ]
+  },
+  "Name": {
+    "TargetLanguage": "English",
+    "Value": "ActorEffect"
+  }
+}
