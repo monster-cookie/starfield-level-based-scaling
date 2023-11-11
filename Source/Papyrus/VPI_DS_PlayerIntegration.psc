@@ -68,34 +68,34 @@ Float[] Property SF_LowLevelNPCHealthAdjustment Auto
 ;; This event will run once, when the script is initialized and is a member of any and all scripts 
 ;; per docs. In the terms of ReferenceAlias is called when the script is bound to something. 
 Event OnInit() 
-  Debug.Trace("VPI_DS_EVENT (PCIntegration): OnInit triggered regenerating scaling values", 0)
+  ; Debug.Trace("VPI_DS_EVENT (PCIntegration): OnInit triggered regenerating scaling values", 0)
   CreateBracketArrays()
   ScaleSettings()
 EndEvent
 
 ;; Event called when the player loads a save game. 
 Event OnPlayerLoadGame()
-  Debug.Trace("VPI_DS_EVENT (PCIntegration): OnPlayerLoadGame triggered regenerating scaling values", 0)
+  ; Debug.Trace("VPI_DS_EVENT (PCIntegration): OnPlayerLoadGame triggered regenerating scaling values", 0)
   CreateBracketArrays()
   ScaleSettings()
 EndEvent
 
 Event OnDifficultyChanged(Int aOldDifficulty, Int aNewDifficulty)
-  Debug.Trace("VPI_DS_EVENT (PCIntegration): OnDifficultyChanged triggered regenerating scaling values", 0)
+  ; Debug.Trace("VPI_DS_EVENT (PCIntegration): OnDifficultyChanged triggered regenerating scaling values", 0)
   ScaleSettings()
 EndEvent
 
 ; Using ReferenceAlias (vs Actor) this is now actually triggered so don't think I need OnEnterShipInterior/OnExitShipInterior
 Event OnLocationChange(Location akOldLoc, Location akNewLoc)
-  Debug.Trace("VPI_DS_EVENT (PCIntegration): OnLocationChange triggered regenerating scaling values", 0)
+  ; Debug.Trace("VPI_DS_EVENT (PCIntegration): OnLocationChange triggered regenerating scaling values", 0)
   ScaleSettings()
 EndEvent
 
-;; Called on ever thinkg you kill player or beast -- probably a good tracking point as you gain XP from the kill
-Event OnKill(ObjectReference akVictim)
-  Debug.Trace("VPI_DS_EVENT (PCIntegration): OnKill triggered regenerating scaling values", 1)
-  ScaleSettings()
-EndEvent
+;; Called on ever thing you kill player or beast -- don't use it gets called way too much
+; Event OnKill(ObjectReference akVictim)
+;   Debug.Trace("VPI_DS_EVENT (PCIntegration): OnKill triggered regenerating scaling values", 1)
+;   ScaleSettings()
+; EndEvent
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -189,23 +189,23 @@ Float Function GetDamageToPlayerScalingFactor()
   Float scalefactorDamageReduction = BasePerkAdjustmentDamageReduction.GetValue()
   Float playerbaseScalingToAdjustForArmor = ((playerPhysicalResist + playerEnergyResist + playerElectromagneticResist)/3) * (scalefactorResistance * Math.Floor(playerLevel/50))
   Float scaleFactor = SF_DamageToPlayer[playerBracket] + playerbaseScalingToAdjustForArmor
-  Debug.Trace("VPI_DS_DEBUG (PCIntegration): Player Armor Adjustment Factor is " + playerbaseScalingToAdjustForArmor + " base bracket scale factor is " + SF_DamageToPlayer[playerBracket], 0)
-  Debug.Trace("VPI_DS_DEBUG (PCIntegration): Damage To Player scaling is being calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an initial SF of " + scaleFactor + ".", 0)
+  ; Debug.Trace("VPI_DS_DEBUG (PCIntegration): Player Armor Adjustment Factor is " + playerbaseScalingToAdjustForArmor + " base bracket scale factor is " + SF_DamageToPlayer[playerBracket], 0)
+  ; Debug.Trace("VPI_DS_DEBUG (PCIntegration): Damage To Player scaling is being calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an initial SF of " + scaleFactor + ".", 0)
 
   ;; Debug.Trace("VPI_DS_DEBUG (PCIntegration): Armor Adustment --->\n\n((playerPhysicalResist + playerEnergyResist + playerElectromagneticResist)/3) * (scalefactorResistance * Math.Floor(playerLevel/50))\n((" + playerPhysicalResist + " + " + playerEnergyResist + " + " + playerElectromagneticResist + ")/3) * (" + scalefactorResistance + " * Math.Floor(" + playerLevel + "/50))\n", 2)
   
   If (HasPerk(Skill_Wellness) || HasPerk(Skill_EnergyWeaponDissipation) || HasPerk(Skill_PainTolerance) || HasPerk(Skill_Rejuvenation))
     Float adjustment = scalefactorDamageReduction * (playerBracket/6)
     scaleFactor += adjustment
-    Debug.Trace("VPI_DS_DEBUG (PCIntegration): SF adjusted for damage reduction perks increased by " + adjustment + ".", 0)
+    ; Debug.Trace("VPI_DS_DEBUG (PCIntegration): SF adjusted for damage reduction perks increased by " + adjustment + ".", 0)
   EndIf
 
   If scaleFactor < 0 
-    Debug.Trace("VPI_DS_DEBUG (PCIntegration): SF is less than 0 so adjusting to minimum of 0.001.", 0)
+    ; Debug.Trace("VPI_DS_DEBUG (PCIntegration): SF is less than 0 so adjusting to minimum of 0.001.", 0)
     scaleFactor=0.001
   EndIf
 
-  Debug.Trace("VPI_DS_FINAL_RESULT (PCIntegration): Final Damage To Player scaling has been calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an final SF of " + scaleFactor + " (Base from armor was " + playerbaseScalingToAdjustForArmor + ").", 1)
+  ; Debug.Trace("VPI_DS_FINAL_RESULT (PCIntegration): Final Damage To Player scaling has been calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an final SF of " + scaleFactor + " (Base from armor was " + playerbaseScalingToAdjustForArmor + ").", 1)
   Return scaleFactor
 EndFunction
 
@@ -219,20 +219,20 @@ Float Function GetDamageByPlayerScalingFactor()
   Float scalefactorDamageAdd = BasePerkAdjustmentDamageAdd.GetValue()
   Float scaleFactor = SF_DamageByPlayer[playerBracket];
 
-  Debug.Trace("VPI_DS_DEBUG (PCIntegration): Damage By Player scaling is being calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an initial SF of " + scaleFactor + ".", 0)
+  ; Debug.Trace("VPI_DS_DEBUG (PCIntegration): Damage By Player scaling is being calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an initial SF of " + scaleFactor + ".", 0)
 
   If ((HasPerk(Skill_PistolCertification) || HasPerk(Skill_ShotgunCertification) || HasPerk(Skill_HeavyWeaponCertification) || HasPerk(Skill_RifleCertification)) && (HasPerk(Skill_Ballistics) || HasPerk(Skill_Lasers) || HasPerk(Skill_ParticleBeams) || HasPerk(Skill_Marksmanship))) 
     Float adjustment = scalefactorDamageAdd * (playerBracket/6)
     scaleFactor -= adjustment
-    Debug.Trace("VPI_DS_DEBUG (PCIntegration): SF adjusted for damage add perks decreased by " + adjustment + ".", 0)
+    ; Debug.Trace("VPI_DS_DEBUG (PCIntegration): SF adjusted for damage add perks decreased by " + adjustment + ".", 0)
   EndIf
 
   If scaleFactor < 0 
-    Debug.Trace("VPI_DS_DEBUG (PCIntegration): SF is less than 0 so adjusting to minimum of 0.001.", 0)
+    ; Debug.Trace("VPI_DS_DEBUG (PCIntegration): SF is less than 0 so adjusting to minimum of 0.001.", 0)
     scaleFactor=0.001
   EndIf
 
-  Debug.Trace("VPI_DS_FINAL_RESULT (PCIntegration): Final Damage By Player scaling has been calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an final SF of " + scaleFactor + ".", 1)
+  ; Debug.Trace("VPI_DS_FINAL_RESULT (PCIntegration): Final Damage By Player scaling has been calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an final SF of " + scaleFactor + ".", 1)
   Return scaleFactor
 EndFunction
 
@@ -244,14 +244,14 @@ Float Function SponginessNPCScalingFactor()
   Int playerBracket = VPI_Helper.GetBracketForPlayerLevel(playerLevel)
   Float scaleFactor = SF_NPCHealthBoost[playerBracket];
 
-  Debug.Trace("VPI_DS_DEBUG (PCIntegration): NPC Bonus Health scaling is being calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an initial SF of " + scaleFactor + ".", 0)
+  ; Debug.Trace("VPI_DS_DEBUG (PCIntegration): NPC Bonus Health scaling is being calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an initial SF of " + scaleFactor + ".", 0)
 
   If scaleFactor < 0 
-    Debug.Trace("VPI_DS_DEBUG (PCIntegration): SF is less than 0 so adjusting to minimum of 0.001.", 0)
+    ; Debug.Trace("VPI_DS_DEBUG (PCIntegration): SF is less than 0 so adjusting to minimum of 0.001.", 0)
     scaleFactor=0.001
   EndIf
 
-  Debug.Trace("VPI_DS_FINAL_RESULT (PCIntegration): Final NPC Bonus Health scaling has been calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an final SF of " + scaleFactor + ".", 1)
+  ; Debug.Trace("VPI_DS_FINAL_RESULT (PCIntegration): Final NPC Bonus Health scaling has been calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an final SF of " + scaleFactor + ".", 1)
   Return scaleFactor
 EndFunction
 
@@ -263,14 +263,14 @@ Float Function SponginessPlayerScalingFactor()
   Int playerBracket = VPI_Helper.GetBracketForPlayerLevel(playerLevel)
   Float scaleFactor = SF_PCHealthBoost[playerBracket];
 
-  Debug.Trace("VPI_DS_DEBUG (PCIntegration): Player Bonus Health scaling is being calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an initial SF of " + scaleFactor + ".", 0)
+  ; Debug.Trace("VPI_DS_DEBUG (PCIntegration): Player Bonus Health scaling is being calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an initial SF of " + scaleFactor + ".", 0)
 
   If scaleFactor < 0 
-    Debug.Trace("VPI_DS_DEBUG (PCIntegration): SF is less than 0 so adjusting to minimum of 0.001.", 0)
+    ; Debug.Trace("VPI_DS_DEBUG (PCIntegration): SF is less than 0 so adjusting to minimum of 0.001.", 0)
     scaleFactor=0.001
   EndIf
 
-  Debug.Trace("VPI_DS_FINAL_RESULT (PCIntegration): Final Player Bonus Health scaling has been calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an final SF of " + scaleFactor + ".", 1)
+  ; Debug.Trace("VPI_DS_FINAL_RESULT (PCIntegration): Final Player Bonus Health scaling has been calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an final SF of " + scaleFactor + ".", 1)
   Return scaleFactor
 EndFunction
 
@@ -282,7 +282,7 @@ Float Function BracketAdjustmentForLowLevelNPCHealthAdjustment()
   Int playerBracket = VPI_Helper.GetBracketForPlayerLevel(playerLevel)
   Float bracketValue = SF_LowLevelNPCHealthAdjustment[playerBracket];
 
-  Debug.Trace("VPI_DS_DEBUG (PCIntegration): Low Level NPC Health Adjustment is being calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an initial SF of " + bracketValue + ".", 0)
+  ; Debug.Trace("VPI_DS_DEBUG (PCIntegration): Low Level NPC Health Adjustment is being calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an initial SF of " + bracketValue + ".", 0)
   Return bracketValue
 EndFunction
 
@@ -300,14 +300,14 @@ EndFunction
 ;;
 Function ScaleSettings()
   If (IsInCombat())
-    Debug.Trace("VPI_DS_DEBUG (PCIntegration): Player is in combat so no new scaling values will be calculated.", 1)
+    ; Debug.Trace("VPI_DS_DEBUG (PCIntegration): Player is in combat so no new scaling values will be calculated.", 1)
     return
   EndIf
 
   Int playerLevel = GetLevel()
   Int adjustedScalingLevel = playerLevel + 5;
   
-  Debug.Trace("VPI_DS_DEBUG (PCIntegration): Setting iCalcLevelAdjustUp to " + adjustedScalingLevel + " for a player level of " + playerLevel + ".", 0)
+  ; Debug.Trace("VPI_DS_DEBUG (PCIntegration): Setting iCalcLevelAdjustUp to " + adjustedScalingLevel + " for a player level of " + playerLevel + ".", 0)
   VPI_Helper.SetGameSettingInt("iCalcLevelAdjustUp", adjustedScalingLevel)
   VPI_Helper.SetGameSettingInt("iCalcLevelAdjustDown", 0)
 

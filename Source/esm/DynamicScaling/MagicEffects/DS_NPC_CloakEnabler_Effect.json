@@ -1,0 +1,9 @@
+{
+  "FormKey": "000ACF:DynamicScaling.esm",
+  "EditorID": "DS_NPC_CloakEnabler_Effect",
+  "Name": {
+    "TargetLanguage": "English",
+    "Value": "CloakEffect"
+  },
+  "MagicSkill": "000AD3:DynamicScaling.esm"
+}

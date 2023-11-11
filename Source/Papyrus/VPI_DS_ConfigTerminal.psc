@@ -95,7 +95,7 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
       ElseIf (menuButtonClicked == 7)
         ;; Show Low Level NPC Settings Menu
         message = DS_ConfigMenu_LowLevelNPCBaseline
-        Debug.Trace("VPI_DS_DEBUG (ConfigTerminal): Main Menu Button 7 clicked launching DS_ConfigMenu_LowLevelNPCBaseline.", 0)
+        ; Debug.Trace("VPI_DS_DEBUG (ConfigTerminal): Main Menu Button 7 clicked launching DS_ConfigMenu_LowLevelNPCBaseline.", 0)
       ElseIf (menuButtonClicked == 8)
         ;; Show Sponginess Defaults Menu
         message = DS_ConfigMenu_HealthScalingBaseline
@@ -114,11 +114,11 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
       ElseIF (menuButtonClicked == 1) 
         ;; CLICKED 1: Configure Low Level NPC Adjustment Factor
         message = DS_ConfigMenu_LowLevelNPCBaseline_AdjustmentFactor
-        Debug.Trace("VPI_DS_DEBUG (ConfigTerminal): Low Level NPC Menu Button 1 clicked launching DS_ConfigMenu_LowLevelNPCBaseline_AdjustmentFactor.", 0)
+        ; Debug.Trace("VPI_DS_DEBUG (ConfigTerminal): Low Level NPC Menu Button 1 clicked launching DS_ConfigMenu_LowLevelNPCBaseline_AdjustmentFactor.", 0)
       ElseIF (menuButtonClicked == 2) 
         ;; CLICKED 2: Configure how many levels below player is considered low level
         message = DS_ConfigMenu_LowLevelNPCBaseline_LevelDifference
-        Debug.Trace("VPI_DS_DEBUG (ConfigTerminal): Low Level NPC Menu Button 2 clicked launching DS_ConfigMenu_LowLevelNPCBaseline_LevelDifference.", 0)
+        ; Debug.Trace("VPI_DS_DEBUG (ConfigTerminal): Low Level NPC Menu Button 2 clicked launching DS_ConfigMenu_LowLevelNPCBaseline_LevelDifference.", 0)
       EndIf
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -182,11 +182,11 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
       ElseIF (menuButtonClicked == 1) 
         ;; CLICKED 1: Configure NPC Bonus Health Baseline
         message = DS_ConfigMenu_HealthScalingBaseline_NPCBonusHeath
-        Debug.Trace("VPI_DS_DEBUG (ConfigTerminal): Health Scaling Baseline Menu Button 1 clicked launching DS_ConfigMenu_HealthScalingBaseline_NPCBonusHeath.", 0)
+        ; Debug.Trace("VPI_DS_DEBUG (ConfigTerminal): Health Scaling Baseline Menu Button 1 clicked launching DS_ConfigMenu_HealthScalingBaseline_NPCBonusHeath.", 0)
       ElseIF (menuButtonClicked == 2) 
         ;; CLICKED 2: Configure Player Bonus Health Baseline
         message = DS_ConfigMenu_HealthScalingBaseline_PlayerBonusHeath
-        Debug.Trace("VPI_DS_DEBUG (ConfigTerminal): Health Scaling Baseline Menu Button 2 clicked launching DS_ConfigMenu_HealthScalingBaseline_PlayerBonusHeath.", 0)
+        ; Debug.Trace("VPI_DS_DEBUG (ConfigTerminal): Health Scaling Baseline Menu Button 2 clicked launching DS_ConfigMenu_HealthScalingBaseline_PlayerBonusHeath.", 0)
       EndIf
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -271,11 +271,11 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
       ElseIF (menuButtonClicked == 1) 
         ;; CLICKED 1: Configure Damage To Player
         message = DS_ConfigMenu_DamageScalingBaseline_DMGToPlayer
-        Debug.Trace("VPI_DS_DEBUG (ConfigTerminal): Damage Scaling Baseline Menu Button 1 clicked launching DS_ConfigMenu_DamageScalingBaseline_DMGToPlayer.", 0)
+        ; Debug.Trace("VPI_DS_DEBUG (ConfigTerminal): Damage Scaling Baseline Menu Button 1 clicked launching DS_ConfigMenu_DamageScalingBaseline_DMGToPlayer.", 0)
       ElseIF (menuButtonClicked == 2) 
         ;; CLICKED 2: Configure Damage By Player
         message = DS_ConfigMenu_DamageScalingBaseline_DMGByPlayer
-        Debug.Trace("VPI_DS_DEBUG (ConfigTerminal): Damage Scaling Baseline Menu Button 2 clicked launching DS_ConfigMenu_DamageScalingBaseline_DMGByPlayer.", 0)
+        ; Debug.Trace("VPI_DS_DEBUG (ConfigTerminal): Damage Scaling Baseline Menu Button 2 clicked launching DS_ConfigMenu_DamageScalingBaseline_DMGByPlayer.", 0)
       EndIf
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

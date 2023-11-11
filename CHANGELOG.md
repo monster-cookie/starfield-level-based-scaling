@@ -1,5 +1,11 @@
 # V2.0 Dynamic Scaling ESM Version
 
+## V2.0.19
+* Injecting MK5 Boss Loot using cloak spell it is the only sucky but viable way around the encounter system. Minor bosses (have ++ in their name) will have a legendary. All pirate factions will have random contraband on them bosses will have a lot more. 
+* Put in for debugging the initial feasibility of this system for true dynamic scale, all combat factions with -- or ++ in their name will randomly scale up (++) or down (--)
+* Init Quest will add the Configuration Terminal into your inventory if you don't already have one
+* Removed the Syndicate and Creature factions for now while I fully implement dynamic scaling. Also they never worked right and some of them had a lot of extra whitespace and a newline in their names (Thank you Excel)
+
 ## V2.0.18
 * Experimenter's min level set to 100 and they have all the increased aggression settings I could find. 
 * Currently the NPC level pool for a rank name has 4 normal one then the boosted ++ variant. These now rotate available combat styles.
