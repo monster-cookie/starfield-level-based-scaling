@@ -132,3 +132,24 @@ Int Function GetBracketForPlayerLevel(int playerLevel) Global
     return 10
   EndIf
 EndFunction
+
+;;
+;; Helper functions for Debugging
+;;
+
+;; ****************************************************************************
+;; Debug Message Handler
+;;
+Function DebugMessage(string moduleName, string functionName, string message, int level, int debugModeEnabled) Global
+  If (debugModeEnabled == 0)
+    return
+  EndIf
+
+  If (level == 1)
+    Debug.Trace("VPI_WARN " + moduleName + "(" + functionName + "): " + message, level)
+  ElseIf (level == 2)
+    Debug.Trace("VPI_ERROR " + moduleName + "(" + functionName + "): " + message, level)
+  Else
+    Debug.Trace("VPI_DEBUG " + moduleName + "(" + functionName + "): " + message, level)
+  EndIf
+EndFunction
