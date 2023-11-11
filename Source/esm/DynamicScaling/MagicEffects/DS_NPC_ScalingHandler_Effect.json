@@ -1,0 +1,152 @@
+{
+  "FormKey": "000AF8:DynamicScaling.esm",
+  "EditorID": "DS_NPC_ScalingHandler_Effect",
+  "VirtualMachineAdapter": {
+    "Scripts": [
+      {
+        "Name": "VPI_DS_NPC_ScalingHandler",
+        "Properties": [
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "ActorTypeLegendary",
+            "Object": "0C1F54:Starfield.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "DamageResist",
+            "Object": "0002E3:Starfield.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "DSDebugMode",
+            "Object": "000AD8:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "DS_SCALING_APPLIED",
+            "Object": "000AD6:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "ElectromagneticDamageResist",
+            "Object": "000392:Starfield.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "EnergyResist",
+            "Object": "0002EB:Starfield.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "Health",
+            "Object": "0002D4:Starfield.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "NPC_CrimsonFleet",
+            "Object": "000ADA:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "NPC_Ecliptic",
+            "Object": "000ADB:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "NPC_Pirate",
+            "Object": "000AC4:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "NPC_Spacer",
+            "Object": "000ADC:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "NPC_Type_MK1",
+            "Object": "000AC3:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "NPC_Type_MK2",
+            "Object": "000AC2:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "NPC_Type_MK3",
+            "Object": "000AC1:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "NPC_Type_MK4",
+            "Object": "000AC0:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "NPC_Type_MK5",
+            "Object": "000ABF:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "NPC_Varuun",
+            "Object": "000AD9:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "ENV_Resist_Radiation",
+            "Object": "248D2F:Starfield.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "ENV_Resist_Corrosive",
+            "Object": "248D30:Starfield.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "ENV_Resist_Airborne",
+            "Object": "248D31:Starfield.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "ENV_Resist_Thermal",
+            "Object": "248D32:Starfield.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "CriticalHitChance",
+            "Object": "0002DD:Starfield.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "CriticalHitDamageMult",
+            "Object": "00039C:Starfield.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "AttackDamageMult",
+            "Object": "000357:Starfield.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "PlayerRef",
+            "Object": "000014:Starfield.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "ReflectDamage",
+            "Object": "00035F:Starfield.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "LegendaryRank",
+            "Object": "0003AC:Starfield.esm"
+          }
+        ]
+      }
+    ]
+  },
+  "Name": {
+    "TargetLanguage": "English",
+    "Value": "ActorScalingEffect"
+  }
+}

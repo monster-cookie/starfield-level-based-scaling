@@ -16,9 +16,13 @@ copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dis
 copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data\Scripts\VPI_DS_ConfigTerminal.pex" "D:\SteamLibrary\steamapps\common\Starfield\Data\Scripts"
 copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data\Scripts\Source\VPI_DS_ConfigTerminal.psc" "D:\SteamLibrary\steamapps\common\Starfield\Data\Scripts\Source"
 
-@echo "Deploying the VPI_DS_NPC_Handler script"
-copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data\Scripts\VPI_DS_NPC_Handler.pex" "D:\SteamLibrary\steamapps\common\Starfield\Data\Scripts"
-copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data\Scripts\Source\VPI_DS_NPC_Handler.psc" "D:\SteamLibrary\steamapps\common\Starfield\Data\Scripts\Source"
+@echo "Deploying the VPI_DS_NPC_LootHandler script"
+copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data\Scripts\VPI_DS_NPC_LootHandler.pex" "D:\SteamLibrary\steamapps\common\Starfield\Data\Scripts"
+copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data\Scripts\Source\VPI_DS_NPC_LootHandler.psc" "D:\SteamLibrary\steamapps\common\Starfield\Data\Scripts\Source"
+
+@echo "Deploying the VPI_DS_NPC_ScalingHandler script"
+copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data\Scripts\VPI_DS_NPC_ScalingHandler.pex" "D:\SteamLibrary\steamapps\common\Starfield\Data\Scripts"
+copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data\Scripts\Source\VPI_DS_NPC_ScalingHandler.psc" "D:\SteamLibrary\steamapps\common\Starfield\Data\Scripts\Source"
 
 @echo "Deploying the VPI_DS_CloakAbilityApplier script"
 copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data\Scripts\VPI_DS_CloakAbilityApplier.pex" "D:\SteamLibrary\steamapps\common\Starfield\Data\Scripts"
