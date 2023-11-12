@@ -154,7 +154,7 @@ Function DebugMessage(string moduleName, string functionName, string message, in
   EndIf
 EndFunction
 
-Int Function GetNPCVersion(ObjectReference npc, Keyword NPC_Type_MK5, Keyword NPC_Type_MK4, Keyword NPC_Type_MK3, Keyword NPC_Type_MK2, Keyword NPC_Type_MK1) Global
+Int Function GetNPCType(ObjectReference npc, Keyword NPC_Type_MK5, Keyword NPC_Type_MK4, Keyword NPC_Type_MK3, Keyword NPC_Type_MK2, Keyword NPC_Type_MK1) Global
   If (npc.HasKeyword(NPC_Type_MK5))
     return 5
   ElseIf (npc.HasKeyword(NPC_Type_MK4))
@@ -167,5 +167,19 @@ Int Function GetNPCVersion(ObjectReference npc, Keyword NPC_Type_MK5, Keyword NP
     return 1
   Else
     return 0
+  EndIf
+EndFunction
+
+String Function GetNPCRace(ObjectReference npc, Keyword NPC_Varuun, Keyword NPC_CrimsonFleet, Keyword NPC_Ecliptic, Keyword NPC_Spacer) Global
+  If (npc.HasKeyword(NPC_Varuun))
+    return "Va'ruun"
+  ElseIf (npc.HasKeyword(NPC_CrimsonFleet))
+    return "Crimson Fleet or Pirate"
+  ElseIf (npc.HasKeyword(NPC_Ecliptic))
+    return "Ecliptix PMC"
+  ElseIf (npc.HasKeyword(NPC_Spacer))
+    return "Spacer"
+  Else
+    return "Unkown - " + npc
   EndIf
 EndFunction

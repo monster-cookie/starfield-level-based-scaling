@@ -140,6 +140,16 @@
             "MutagenObjectType": "ScriptObjectProperty",
             "Name": "LegendaryRank",
             "Object": "0003AC:Starfield.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "EnableCombatFactionResize",
+            "Object": "000AFA:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "EnableCombatFactionStatsScaling",
+            "Object": "000AFC:DynamicScaling.esm"
           }
         ]
       }
