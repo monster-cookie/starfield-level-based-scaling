@@ -145,7 +145,7 @@ Function HandleLevelScaling(Int npcType)
   Float npcScalingAdjustmentToPlayer = (100 - (100 * playerAdjustmentFactor))/100
   If (npcType == 5) 
     npcScalingAdjustmentToPlayer = npcScalingAdjustmentToPlayer * 1.10
-  ElseIf (npcType == 5)
+  ElseIf (npcType == 1)
     npcScalingAdjustmentToPlayer = npcScalingAdjustmentToPlayer * 0.10
   EndIf
 
