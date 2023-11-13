@@ -607,9 +607,9 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
     ;; Show Configure Features Menu
     ElseIF (message == DS_ConfigMenu_ConfigureEnabledFeatures)
       menuButtonClicked = DS_ConfigMenu_ConfigureEnabledFeatures.Show(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
-      message = DS_ConfigMenuMain ;; Return to previous menu
       If (menuButtonClicked == 0)
         ;; CLICKED 0: Return to Root Menu
+        message = DS_ConfigMenuMain ;; Return to previous menu
       ElseIF (menuButtonClicked == 1) 
         ;; CLICKED 1: Enable Damage Scaling
         EnableScalingDamage.SetValueInt(1)

@@ -175,6 +175,16 @@
             "MutagenObjectType": "ScriptObjectProperty",
             "Name": "DSDebugMode",
             "Object": "000AD8:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "DS_ConfigMenu_ConfigureEnabledFeatures",
+            "Object": "000AFB:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "EnableCombatFactionStatsScaling",
+            "Object": "000AFC:DynamicScaling.esm"
           }
         ]
       }
