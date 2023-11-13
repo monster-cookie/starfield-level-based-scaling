@@ -16,6 +16,10 @@
     {
       "BaseEffect": "000AD4:DynamicScaling.esm",
       "Data": {}
+    },
+    {
+      "BaseEffect": "000AF8:DynamicScaling.esm",
+      "Data": {}
     }
   ]
 }

@@ -1,5 +1,9 @@
 # V2.0 Dynamic Scaling ESM Version
 
+## V2.0.20
+* Added feature flags for the NPC resize easter egg and NPC Stat Scaling. Control via the Configuration Terminal.
+* Stat scaling is highly alpha and the current iteration only works on Va'ruun and only in papyrus logs. It calculates but doesn't apply yet. I'm still trying to track down all the key stats like reflect, critical change, damage modifiers. The ones in AV vars skyrim used are 0 in starfield so I don't think that is the real values cause I crit a lot. :) 
+
 ## V2.0.19
 * Injecting MK5 Boss Loot using cloak spell it is the only sucky but viable way around the encounter system. Minor bosses (have ++ in their name) will have a legendary. All pirate factions will have random contraband on them bosses will have a lot more. 
 * Put in for debugging the initial feasibility of this system for true dynamic scale, all combat factions with -- or ++ in their name will randomly scale up (++) or down (--)

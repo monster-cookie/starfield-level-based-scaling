@@ -165,6 +165,26 @@
             "MutagenObjectType": "ScriptObjectProperty",
             "Name": "DS_ConfigMenu_DamageScalingBaseline_DMGToPlayer",
             "Object": "000ABE:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "EnableCombatFactionResize",
+            "Object": "000AFA:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "DSDebugMode",
+            "Object": "000AD8:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "DS_ConfigMenu_ConfigureEnabledFeatures",
+            "Object": "000AFB:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "EnableCombatFactionStatsScaling",
+            "Object": "000AFC:DynamicScaling.esm"
           }
         ]
       }
