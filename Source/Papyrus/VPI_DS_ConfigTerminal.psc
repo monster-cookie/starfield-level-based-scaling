@@ -77,22 +77,22 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
     If (message == DS_ConfigMenuMain)
       menuButtonClicked = DS_ConfigMenuMain.Show(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
       If (menuButtonClicked == 0)
-        ;; Close Menu Clicked
+        ;; CLICKED 0: Close Menu Clicked
         menuActive = False
       ElseIf (menuButtonClicked == 1)
-        ;; Show Enabled FEautre Menu
+        ;; CLICKED 1: Show Enabled FEautre Menu
         VPI_Helper.DebugMessage("ConfigTerminal", "ProcessMenu", "Main Menu Button 1 clicked launching DS_ConfigMenu_ConfigureEnabledFeatures.", 0, DSDebugMode.GetValueInt())
         message = DS_ConfigMenu_ConfigureEnabledFeatures
-      ElseIf (menuButtonClicked == 3)
-        ;; Show Low Level NPC Settings Menu
+      ElseIf (menuButtonClicked == 2)
+        ;; CLICKED 2: Show Low Level NPC Settings Menu
         VPI_Helper.DebugMessage("ConfigTerminal", "ProcessMenu", "Main Menu Button 2 clicked launching DS_ConfigMenu_LowLevelNPCBaseline.", 0, DSDebugMode.GetValueInt())
         message = DS_ConfigMenu_LowLevelNPCBaseline
       ElseIf (menuButtonClicked == 3)
-        ;; Show Sponginess Defaults Menu
+        ;; CLICKED 3: Show Sponginess Defaults Menu
         VPI_Helper.DebugMessage("ConfigTerminal", "ProcessMenu", "Main Menu Button 3 clicked launching DS_ConfigMenu_HealthScalingBaseline.", 0, DSDebugMode.GetValueInt())
         message = DS_ConfigMenu_HealthScalingBaseline
       ElseIf (menuButtonClicked == 4)
-        ;; Show Damage Scaling Defaults Menu
+        ;; CLICKED 4: Show Damage Scaling Defaults Menu
         VPI_Helper.DebugMessage("ConfigTerminal", "ProcessMenu", "Main Menu Button 4 clicked launching DS_ConfigMenu_DamageScalingBaseline.", 0, DSDebugMode.GetValueInt())
         message = DS_ConfigMenu_DamageScalingBaseline
       EndIf
