@@ -1,5 +1,8 @@
 # V2.0 Dynamic Scaling ESM Version
 
+## V2.0.21
+* Fix for the low level NPC menu not launching
+
 ## V2.0.20
 * Added feature flags for the NPC resize easter egg and NPC Stat Scaling. Control via the Configuration Terminal.
 * Stat scaling is highly alpha and the current iteration only works on Va'ruun and only in papyrus logs. It calculates but doesn't apply yet. I'm still trying to track down all the key stats like reflect, critical change, damage modifiers. The ones in AV vars skyrim used are 0 in starfield so I don't think that is the real values cause I crit a lot. :) 
