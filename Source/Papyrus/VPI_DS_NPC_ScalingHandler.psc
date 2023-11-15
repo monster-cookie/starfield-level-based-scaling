@@ -149,8 +149,26 @@ Function HandleLevelScaling(Int npcType)
     npcScalingAdjustmentToPlayer = npcScalingAdjustmentToPlayer * 0.10
   EndIf
 
-  VPI_Helper.DebugMessage("NPCScalingHandler", "HandleLevelScaling", Myself + "> Calculated a stat adjustment factor of " + npcScalingAdjustmentToPlayer + " for a NPC Type of " + npcType + ".", 0, DSDebugMode.GetValueInt())
+  string message = Myself + "> Calculated a stat adjustment factor of " + npcScalingAdjustmentToPlayer + " for a NPC Type of " + npcType + ".\n"
 
+  int scaledHealth = Math.Round(playerHealth * npcScalingAdjustmentToPlayer)
+  ;;RealMe.SetValue(Health, scaledHealth)
+  message += "Adjusting my Health to " + scaledHealth + " from " + myHealth + " using a scalig factor of " + npcScalingAdjustmentToPlayer + ".\n"
+
+
+  int scaledDamageResist = Math.Round(playerDamageResist * npcScalingAdjustmentToPlayer)
+  ;;RealMe.SetValue(DamageResist, scaledDamageResist)
+  message += "Adjusting my Damage Resist stat to " + scaledDamageResist + " from " + myDamageResist + " using a scalig factor of " + npcScalingAdjustmentToPlayer + ".\n"
+
+  int scaledEnergyResist = Math.Round(playerEnergyResist * npcScalingAdjustmentToPlayer)
+  ;;RealMe.SetValue(EnergyResist, scalscaledEnergyResistedHealth)
+  message += "Adjusting my Energy Resist stat to " + scaledEnergyResist + " from " + myEnergyResist + " using a scalig factor of " + npcScalingAdjustmentToPlayer + ".\n"
+
+  int scaledEMDamageResist = Math.Round(playerEMDamageResist * npcScalingAdjustmentToPlayer)
+  ;;RealMe.SetValue(ElectromagneticDamageResist, scaledEMDamageResist)
+  message += "Adjusting my EM Damage Resist stat to " + scaledEMDamageResist + " from " + myEMDamageResist + " using a scalig factor of " + npcScalingAdjustmentToPlayer + ".\n"
+
+  VPI_Helper.DebugMessage("NPCScalingHandler", "HandleLevelScaling", message, 0, DSDebugMode.GetValueInt())
   ;;DebugLevelScaling(npcType, "FINAL")
 EndFunction
 
