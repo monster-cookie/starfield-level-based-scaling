@@ -29,6 +29,7 @@ GlobalVariable Property EnableScalingHealth Auto Const Mandatory
 GlobalVariable Property EnableScalingXP Auto Const Mandatory
 GlobalVariable Property EnableCombatFactionResize Auto Const Mandatory
 GlobalVariable Property EnableCombatFactionStatsScaling Auto Const Mandatory
+GlobalVariable Property EnableCustomLoot Auto Const Mandatory
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -285,7 +286,7 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
           BaseDamageToPlayerVE.SetValue(0.25)
         ElseIf (difficulty == 1) ;; Easy Difficulty
           BaseDamageToPlayerE.SetValue(0.25)
-        ElseIf (difficulty == 3) ;; Normal Difficulty
+        ElseIf (difficulty == 2) ;; Normal Difficulty
           BaseDamageToPlayerN.SetValue(0.25)
         ElseIf (difficulty == 3) ;; Hard Difficulty
           BaseDamageToPlayerH.SetValue(0.25)
@@ -298,7 +299,7 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
           BaseDamageToPlayerVE.SetValue(0.50)
         ElseIf (difficulty == 1) ;; Easy Difficulty
           BaseDamageToPlayerE.SetValue(0.50)
-        ElseIf (difficulty == 3) ;; Normal Difficulty
+        ElseIf (difficulty == 2) ;; Normal Difficulty
           BaseDamageToPlayerN.SetValue(0.50)
         ElseIf (difficulty == 3) ;; Hard Difficulty
           BaseDamageToPlayerH.SetValue(0.50)
@@ -311,7 +312,7 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
           BaseDamageToPlayerVE.SetValue(0.75)
         ElseIf (difficulty == 1) ;; Easy Difficulty
           BaseDamageToPlayerE.SetValue(0.75)
-        ElseIf (difficulty == 3) ;; Normal Difficulty
+        ElseIf (difficulty == 2) ;; Normal Difficulty
           BaseDamageToPlayerN.SetValue(0.75)
         ElseIf (difficulty == 3) ;; Hard Difficulty
           BaseDamageToPlayerH.SetValue(0.75)
@@ -324,7 +325,7 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
           BaseDamageToPlayerVE.SetValue(1.00)
         ElseIf (difficulty == 1) ;; Easy Difficulty
           BaseDamageToPlayerE.SetValue(1.00)
-        ElseIf (difficulty == 3) ;; Normal Difficulty
+        ElseIf (difficulty == 2) ;; Normal Difficulty
           BaseDamageToPlayerN.SetValue(1.00)
         ElseIf (difficulty == 3) ;; Hard Difficulty
           BaseDamageToPlayerH.SetValue(1.00)
@@ -337,7 +338,7 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
           BaseDamageToPlayerVE.SetValue(1.25)
         ElseIf (difficulty == 1) ;; Easy Difficulty
           BaseDamageToPlayerE.SetValue(1.25)
-        ElseIf (difficulty == 3) ;; Normal Difficulty
+        ElseIf (difficulty == 2) ;; Normal Difficulty
           BaseDamageToPlayerN.SetValue(1.25)
         ElseIf (difficulty == 3) ;; Hard Difficulty
           BaseDamageToPlayerH.SetValue(1.25)
@@ -350,7 +351,7 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
           BaseDamageToPlayerVE.SetValue(1.50)
         ElseIf (difficulty == 1) ;; Easy Difficulty
           BaseDamageToPlayerE.SetValue(1.50)
-        ElseIf (difficulty == 3) ;; Normal Difficulty
+        ElseIf (difficulty == 2) ;; Normal Difficulty
           BaseDamageToPlayerN.SetValue(1.50)
         ElseIf (difficulty == 3) ;; Hard Difficulty
           BaseDamageToPlayerH.SetValue(1.50)
@@ -363,7 +364,7 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
           BaseDamageToPlayerVE.SetValue(1.75)
         ElseIf (difficulty == 1) ;; Easy Difficulty
           BaseDamageToPlayerE.SetValue(1.75)
-        ElseIf (difficulty == 3) ;; Normal Difficulty
+        ElseIf (difficulty == 2) ;; Normal Difficulty
           BaseDamageToPlayerN.SetValue(1.75)
         ElseIf (difficulty == 3) ;; Hard Difficulty
           BaseDamageToPlayerH.SetValue(1.75)
@@ -376,7 +377,7 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
           BaseDamageToPlayerVE.SetValue(3.00)
         ElseIf (difficulty == 1) ;; Easy Difficulty
           BaseDamageToPlayerE.SetValue(3.00)
-        ElseIf (difficulty == 3) ;; Normal Difficulty
+        ElseIf (difficulty == 2) ;; Normal Difficulty
           BaseDamageToPlayerN.SetValue(3.00)
         ElseIf (difficulty == 3) ;; Hard Difficulty
           BaseDamageToPlayerH.SetValue(3.00)
@@ -389,7 +390,7 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
           BaseDamageToPlayerVE.SetValue(3.25)
         ElseIf (difficulty == 1) ;; Easy Difficulty
           BaseDamageToPlayerE.SetValue(3.25)
-        ElseIf (difficulty == 3) ;; Normal Difficulty
+        ElseIf (difficulty == 2) ;; Normal Difficulty
           BaseDamageToPlayerN.SetValue(3.25)
         ElseIf (difficulty == 3) ;; Hard Difficulty
           BaseDamageToPlayerH.SetValue(3.25)
@@ -402,7 +403,7 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
           BaseDamageToPlayerVE.SetValue(3.50)
         ElseIf (difficulty == 1) ;; Easy Difficulty
           BaseDamageToPlayerE.SetValue(3.50)
-        ElseIf (difficulty == 3) ;; Normal Difficulty
+        ElseIf (difficulty == 2) ;; Normal Difficulty
           BaseDamageToPlayerN.SetValue(3.50)
         ElseIf (difficulty == 3) ;; Hard Difficulty
           BaseDamageToPlayerH.SetValue(3.50)
@@ -415,7 +416,7 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
           BaseDamageToPlayerVE.SetValue(3.75)
         ElseIf (difficulty == 1) ;; Easy Difficulty
           BaseDamageToPlayerE.SetValue(3.75)
-        ElseIf (difficulty == 3) ;; Normal Difficulty
+        ElseIf (difficulty == 2) ;; Normal Difficulty
           BaseDamageToPlayerN.SetValue(3.75)
         ElseIf (difficulty == 3) ;; Hard Difficulty
           BaseDamageToPlayerH.SetValue(3.75)
@@ -428,7 +429,7 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
           BaseDamageToPlayerVE.SetValue(3.00)
         ElseIf (difficulty == 1) ;; Easy Difficulty
           BaseDamageToPlayerE.SetValue(3.00)
-        ElseIf (difficulty == 3) ;; Normal Difficulty
+        ElseIf (difficulty == 2) ;; Normal Difficulty
           BaseDamageToPlayerN.SetValue(3.00)
         ElseIf (difficulty == 3) ;; Hard Difficulty
           BaseDamageToPlayerH.SetValue(3.00)
@@ -451,7 +452,7 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
           BaseDamageByPlayerVE.SetValue(0.25)
         ElseIf (difficulty == 1) ;; Easy Difficulty
           BaseDamageByPlayerE.SetValue(0.25)
-        ElseIf (difficulty == 3) ;; Normal Difficulty
+        ElseIf (difficulty == 2) ;; Normal Difficulty
           BaseDamageByPlayerN.SetValue(0.25)
         ElseIf (difficulty == 3) ;; Hard Difficulty
           BaseDamageByPlayerH.SetValue(0.25)
@@ -464,7 +465,7 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
           BaseDamageByPlayerVE.SetValue(0.50)
         ElseIf (difficulty == 1) ;; Easy Difficulty
           BaseDamageByPlayerE.SetValue(0.50)
-        ElseIf (difficulty == 3) ;; Normal Difficulty
+        ElseIf (difficulty == 2) ;; Normal Difficulty
           BaseDamageByPlayerN.SetValue(0.50)
         ElseIf (difficulty == 3) ;; Hard Difficulty
           BaseDamageByPlayerH.SetValue(0.50)
@@ -477,7 +478,7 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
           BaseDamageByPlayerVE.SetValue(0.75)
         ElseIf (difficulty == 1) ;; Easy Difficulty
           BaseDamageByPlayerE.SetValue(0.75)
-        ElseIf (difficulty == 3) ;; Normal Difficulty
+        ElseIf (difficulty == 2) ;; Normal Difficulty
           BaseDamageByPlayerN.SetValue(0.75)
         ElseIf (difficulty == 3) ;; Hard Difficulty
           BaseDamageByPlayerH.SetValue(0.75)
@@ -490,7 +491,7 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
           BaseDamageByPlayerVE.SetValue(1.00)
         ElseIf (difficulty == 1) ;; Easy Difficulty
           BaseDamageByPlayerE.SetValue(1.00)
-        ElseIf (difficulty == 3) ;; Normal Difficulty
+        ElseIf (difficulty == 2) ;; Normal Difficulty
           BaseDamageByPlayerN.SetValue(1.00)
         ElseIf (difficulty == 3) ;; Hard Difficulty
           BaseDamageByPlayerH.SetValue(1.00)
@@ -503,7 +504,7 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
           BaseDamageByPlayerVE.SetValue(1.25)
         ElseIf (difficulty == 1) ;; Easy Difficulty
           BaseDamageByPlayerE.SetValue(1.25)
-        ElseIf (difficulty == 3) ;; Normal Difficulty
+        ElseIf (difficulty == 2) ;; Normal Difficulty
           BaseDamageByPlayerN.SetValue(1.25)
         ElseIf (difficulty == 3) ;; Hard Difficulty
           BaseDamageByPlayerH.SetValue(1.25)
@@ -516,7 +517,7 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
           BaseDamageByPlayerVE.SetValue(1.50)
         ElseIf (difficulty == 1) ;; Easy Difficulty
           BaseDamageByPlayerE.SetValue(1.50)
-        ElseIf (difficulty == 3) ;; Normal Difficulty
+        ElseIf (difficulty == 2) ;; Normal Difficulty
           BaseDamageByPlayerN.SetValue(1.50)
         ElseIf (difficulty == 3) ;; Hard Difficulty
           BaseDamageByPlayerH.SetValue(1.50)
@@ -529,7 +530,7 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
           BaseDamageByPlayerVE.SetValue(1.75)
         ElseIf (difficulty == 1) ;; Easy Difficulty
           BaseDamageByPlayerE.SetValue(1.75)
-        ElseIf (difficulty == 3) ;; Normal Difficulty
+        ElseIf (difficulty == 2) ;; Normal Difficulty
           BaseDamageByPlayerN.SetValue(1.75)
         ElseIf (difficulty == 3) ;; Hard Difficulty
           BaseDamageByPlayerH.SetValue(1.75)
@@ -542,7 +543,7 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
           BaseDamageByPlayerVE.SetValue(3.00)
         ElseIf (difficulty == 1) ;; Easy Difficulty
           BaseDamageByPlayerE.SetValue(3.00)
-        ElseIf (difficulty == 3) ;; Normal Difficulty
+        ElseIf (difficulty == 2) ;; Normal Difficulty
           BaseDamageByPlayerN.SetValue(3.00)
         ElseIf (difficulty == 3) ;; Hard Difficulty
           BaseDamageByPlayerH.SetValue(3.00)
@@ -555,7 +556,7 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
           BaseDamageByPlayerVE.SetValue(3.25)
         ElseIf (difficulty == 1) ;; Easy Difficulty
           BaseDamageByPlayerE.SetValue(3.25)
-        ElseIf (difficulty == 3) ;; Normal Difficulty
+        ElseIf (difficulty == 2) ;; Normal Difficulty
           BaseDamageByPlayerN.SetValue(3.25)
         ElseIf (difficulty == 3) ;; Hard Difficulty
           BaseDamageByPlayerH.SetValue(3.25)
@@ -568,7 +569,7 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
           BaseDamageByPlayerVE.SetValue(3.50)
         ElseIf (difficulty == 1) ;; Easy Difficulty
           BaseDamageByPlayerE.SetValue(3.50)
-        ElseIf (difficulty == 3) ;; Normal Difficulty
+        ElseIf (difficulty == 2) ;; Normal Difficulty
           BaseDamageByPlayerN.SetValue(3.50)
         ElseIf (difficulty == 3) ;; Hard Difficulty
           BaseDamageByPlayerH.SetValue(3.50)
@@ -581,7 +582,7 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
           BaseDamageByPlayerVE.SetValue(3.75)
         ElseIf (difficulty == 1) ;; Easy Difficulty
           BaseDamageByPlayerE.SetValue(3.75)
-        ElseIf (difficulty == 3) ;; Normal Difficulty
+        ElseIf (difficulty == 2) ;; Normal Difficulty
           BaseDamageByPlayerN.SetValue(3.75)
         ElseIf (difficulty == 3) ;; Hard Difficulty
           BaseDamageByPlayerH.SetValue(3.75)
@@ -594,7 +595,7 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
           BaseDamageByPlayerVE.SetValue(3.00)
         ElseIf (difficulty == 1) ;; Easy Difficulty
           BaseDamageByPlayerE.SetValue(3.00)
-        ElseIf (difficulty == 3) ;; Normal Difficulty
+        ElseIf (difficulty == 2) ;; Normal Difficulty
           BaseDamageByPlayerN.SetValue(3.00)
         ElseIf (difficulty == 3) ;; Hard Difficulty
           BaseDamageByPlayerH.SetValue(3.00)
@@ -629,17 +630,23 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
         ;; CLICKED 6: Disable XP Scaling
         EnableScalingXP.SetValueInt(0)
       ElseIF (menuButtonClicked == 7) 
-        ;; CLICKED 8: Enable Combat Faction Height Resize Easter Egg
+        ;; CLICKED 7: Enable Combat Faction Height Resize Easter Egg
         EnableCombatFactionResize.SetValueInt(1)
       ElseIF (menuButtonClicked == 8) 
-        ;; CLICKED 7: Disable Combat Faction Height Resize Easter Egg
+        ;; CLICKED 8: Disable Combat Faction Height Resize Easter Egg
         EnableCombatFactionResize.SetValueInt(0)
       ElseIF (menuButtonClicked == 9) 
-        ;; CLICKED 8: Enable Combat Faction NPC Stat Scaling
+        ;; CLICKED 9: Enable Combat Faction NPC Stat Scaling
         EnableCombatFactionStatsScaling.SetValueInt(1)
       ElseIF (menuButtonClicked == 10) 
-        ;; CLICKED 7: Disable Combat Faction NPC Stat Scaling
+        ;; CLICKED 10: Disable Combat Faction NPC Stat Scaling
         EnableCombatFactionStatsScaling.SetValueInt(0)
+      ElseIF (menuButtonClicked == 11) 
+        ;; CLICKED 11: Enable Custom Loot Drops on NPCs
+        EnableCustomLoot.SetValueInt(1)
+      ElseIF (menuButtonClicked == 12) 
+        ;; CLICKED 12: Disable Custom Loot Drops on NPCs
+        EnableCustomLoot.SetValueInt(0)
       EndIf
     EndIf ;; End Main Menu
   EndWhile

@@ -1,0 +1,27 @@
+{
+  "FormKey": "000B00:DynamicScaling.esm",
+  "EditorID": "DS_Generic_Recruit",
+  "MaxCount": 4,
+  "Flags": [
+    "CalculateForEachItemInCount"
+  ],
+  "Entries": [
+    {
+      "Level": 1,
+      "Reference": "00D3DD:Starfield.esm",
+      "Count": 2
+    },
+    {
+      "Level": 1,
+      "Reference": "131CBE:Starfield.esm",
+      "Count": 1,
+      "ChanceNone": 0.0196078431372549
+    },
+    {
+      "Level": 1,
+      "Reference": "279263:Starfield.esm",
+      "Count": 2,
+      "ChanceNone": 0.09803921568627451
+    }
+  ]
+}
