@@ -1,5 +1,8 @@
 # V2.0 Dynamic Scaling ESM Version
 
+## V2.0.23
+* A repackage to readd fixed ESM that has the enable/disable for the new feature properly working. 
+
 ## V2.0.22
 * New feature flag to disable custom loot injection, find in the config terminal
 * Using a custom look list for the 3 combat faction classes Pirate (Spacer/CrimsonFleet/Pirate), Generic (Ecliptic), Va'ruun so you should get way less injected loot. I have no control over what Legendary Recycler is doing. If people aren't happy with the new drop rate I'll probably have to over ride the real NPC loot lists and make a bun fo patches for the conflicts.
