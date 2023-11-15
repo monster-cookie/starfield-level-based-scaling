@@ -185,6 +185,11 @@
             "MutagenObjectType": "ScriptObjectProperty",
             "Name": "EnableCombatFactionStatsScaling",
             "Object": "000AFC:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "EnableCustomLoot",
+            "Object": "000B06:DynamicScaling.esm"
           }
         ]
       }
