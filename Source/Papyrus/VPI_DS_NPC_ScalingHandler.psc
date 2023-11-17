@@ -106,7 +106,6 @@ EndFunction
 Function HandleLevelScaling(Int npcType)
   int playerLevel = Player.GetLevel()
   int myLevel = RealMe.GetLeveledActorBase().GetLevel()
-  string myRace = VPI_Helper.GetNPCRace(Myself, NPC_Varuun, NPC_CrimsonFleet, NPC_Ecliptic, NPC_Spacer)
 
   int playerHealth = Player.GetValueInt(Health)
   int myHealth = RealMe.GetValueInt(Health)
@@ -152,32 +151,32 @@ Function HandleLevelScaling(Int npcType)
   string message = Myself + "> Calculated a stat adjustment factor of " + npcScalingAdjustmentToPlayer + " for a NPC Type of " + npcType + ".\n"
 
   int scaledHealth = Math.Round(playerHealth * npcScalingAdjustmentToPlayer)
-  ;;RealMe.SetValue(Health, scaledHealth)
+  RealMe.SetValue(Health, scaledHealth)
   message += "Adjusting my Health to " + scaledHealth + " from " + myHealth + " using a scalig factor of " + npcScalingAdjustmentToPlayer + ".\n"
 
 
   int scaledDamageResist = Math.Round(playerDamageResist * npcScalingAdjustmentToPlayer)
-  ;;RealMe.SetValue(DamageResist, scaledDamageResist)
-  message += "Adjusting my Damage Resist stat to " + scaledDamageResist + " from " + myDamageResist + " using a scalig factor of " + npcScalingAdjustmentToPlayer + ".\n"
+  RealMe.SetValue(DamageResist, scaledDamageResist)
+  message += "Adjusting my Damage Resist stat to " + scaledDamageResist + " from " + myDamageResist + " using a scalig factor of " + npcScalingAdjustmentToPlayer + " against the player's " + playerDamageResist + " damage resist.\n"
 
   int scaledEnergyResist = Math.Round(playerEnergyResist * npcScalingAdjustmentToPlayer)
-  ;;RealMe.SetValue(EnergyResist, scalscaledEnergyResistedHealth)
-  message += "Adjusting my Energy Resist stat to " + scaledEnergyResist + " from " + myEnergyResist + " using a scalig factor of " + npcScalingAdjustmentToPlayer + ".\n"
+  RealMe.SetValue(EnergyResist, scaledEnergyResist)
+  message += "Adjusting my Energy Resist stat to " + scaledEnergyResist + " from " + myEnergyResist + " using a scalig factor of " + npcScalingAdjustmentToPlayer + " against the player's " + playerEnergyResist + " energy resist.\n"
 
   int scaledEMDamageResist = Math.Round(playerEMDamageResist * npcScalingAdjustmentToPlayer)
-  ;;RealMe.SetValue(ElectromagneticDamageResist, scaledEMDamageResist)
-  message += "Adjusting my EM Damage Resist stat to " + scaledEMDamageResist + " from " + myEMDamageResist + " using a scalig factor of " + npcScalingAdjustmentToPlayer + ".\n"
+  RealMe.SetValue(ElectromagneticDamageResist, scaledEMDamageResist)
+  message += "Adjusting my EM Damage Resist stat to " + scaledEMDamageResist + " from " + myEMDamageResist + " using a scalig factor of " + npcScalingAdjustmentToPlayer  + " against the player's " + playerEMDamageResist + " EM damage resist.\n"
 
   VPI_Helper.DebugMessage("NPCScalingHandler", "HandleLevelScaling", message, 0, DSDebugMode.GetValueInt())
-  ;;DebugLevelScaling(npcType, "FINAL")
+  DebugLevelScaling(npcType, "FINAL")
 EndFunction
 
 Function DebugLevelScaling(Int npcType, String scalingState)
   int playerLevel = Player.GetLevel()
   int myLevel = RealMe.GetLeveledActorBase().GetLevel()
   string myRace = VPI_Helper.GetNPCRace(Myself, NPC_Varuun, NPC_CrimsonFleet, NPC_Ecliptic, NPC_Spacer)
-  VPI_Helper.DebugMessage("NPCScalingHandler", "DebugLevelScaling-" + scalingState, Myself + "> Scaling for a player of level " + playerLevel + " and my level is " + myLevel + ".", 0, DSDebugMode.GetValueInt())
-  VPI_Helper.DebugMessage("NPCScalingHandler", "DebugLevelScaling-" + scalingState, Myself + "> I am a class " + npcType + " NPC in combat faction " + myRace + ".", 0, DSDebugMode.GetValueInt())
+  string message = Myself + "> Scaling for a player of level " + playerLevel + " and my level is " + myLevel + ".\n"
+  message += "I am a class " + npcType + " NPC in combat faction " + myRace + ".\n\n"
 
   int playerHealth = Player.GetValueInt(Health)
   int myHealth = RealMe.GetValueInt(Health)
@@ -209,7 +208,7 @@ Function DebugLevelScaling(Int npcType, String scalingState)
 
   int encounterlevel = RealMe.CalculateEncounterLevel(Game.GetDifficulty())
 
-  string message = Myself + "> Current stats (Encounter Level " + encounterlevel +"):\n\n"
+  message += "Current stats (Encounter Level " + encounterlevel +"):\n"
   message += "My/Player Level: " + myLevel + "/" + playerLevel + ".\n"
   message += "My/Player Health: " + myHealth + "/" + playerHealth + ".\n"
   
