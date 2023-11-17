@@ -1,5 +1,9 @@
 # V2.0 Dynamic Scaling ESM Version
 
+## V2.0.24
+* Trying a different way to tone down the loot explosions. The loots lists will only ever return exactly 1 item then the script side ill inject 1-4 items depending on NPC type (MK1-5).
+* Also fixed papyrus error about a missing property in the loot handler
+
 ## V2.0.23
 * A repackage to readd fixed ESM that has the enable/disable for the new feature properly working. 
 

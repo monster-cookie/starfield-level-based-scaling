@@ -33,53 +33,13 @@
           },
           {
             "MutagenObjectType": "ScriptObjectProperty",
-            "Name": "NPC_Pirate",
-            "Object": "000AC4:DynamicScaling.esm"
-          },
-          {
-            "MutagenObjectType": "ScriptObjectProperty",
-            "Name": "NPC_Spacer",
-            "Object": "000ADC:DynamicScaling.esm"
-          },
-          {
-            "MutagenObjectType": "ScriptObjectProperty",
-            "Name": "NPC_Type_MK1",
-            "Object": "000AC3:DynamicScaling.esm"
-          },
-          {
-            "MutagenObjectType": "ScriptObjectProperty",
-            "Name": "NPC_Type_MK2",
-            "Object": "000AC2:DynamicScaling.esm"
-          },
-          {
-            "MutagenObjectType": "ScriptObjectProperty",
-            "Name": "NPC_Type_MK3",
-            "Object": "000AC1:DynamicScaling.esm"
-          },
-          {
-            "MutagenObjectType": "ScriptObjectProperty",
-            "Name": "NPC_Type_MK4",
-            "Object": "000AC0:DynamicScaling.esm"
-          },
-          {
-            "MutagenObjectType": "ScriptObjectProperty",
-            "Name": "NPC_Type_MK5",
-            "Object": "000ABF:DynamicScaling.esm"
-          },
-          {
-            "MutagenObjectType": "ScriptObjectProperty",
-            "Name": "NPC_Varuun",
-            "Object": "000AD9:DynamicScaling.esm"
-          },
-          {
-            "MutagenObjectType": "ScriptObjectProperty",
-            "Name": "EnableCustomLoot",
-            "Object": "000B06:DynamicScaling.esm"
-          },
-          {
-            "MutagenObjectType": "ScriptObjectProperty",
             "Name": "DS_Pirate_Recruit",
             "Object": "000AFD:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "NPC_Pirate",
+            "Object": "000AC4:DynamicScaling.esm"
           },
           {
             "MutagenObjectType": "ScriptObjectProperty",
@@ -88,8 +48,18 @@
           },
           {
             "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "NPC_Spacer",
+            "Object": "000ADC:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
             "Name": "DS_Pirate_Miniboss",
             "Object": "000AFF:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "NPC_Type_MK1",
+            "Object": "000AC3:DynamicScaling.esm"
           },
           {
             "MutagenObjectType": "ScriptObjectProperty",
@@ -98,8 +68,18 @@
           },
           {
             "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "NPC_Type_MK2",
+            "Object": "000AC2:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
             "Name": "DS_Generic_Normal",
             "Object": "000B01:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "NPC_Type_MK3",
+            "Object": "000AC1:DynamicScaling.esm"
           },
           {
             "MutagenObjectType": "ScriptObjectProperty",
@@ -108,8 +88,18 @@
           },
           {
             "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "NPC_Type_MK4",
+            "Object": "000AC0:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
             "Name": "DS_Varuun_Recruit",
             "Object": "000B03:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "NPC_Type_MK5",
+            "Object": "000ABF:DynamicScaling.esm"
           },
           {
             "MutagenObjectType": "ScriptObjectProperty",
@@ -117,8 +107,19 @@
             "Object": "000B04:DynamicScaling.esm"
           },
           {
-            "MutagenObjectType": "ScriptProperty",
-            "Name": ""
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "NPC_Varuun",
+            "Object": "000AD9:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "DS_Varuun_Miniboss",
+            "Object": "000B05:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "EnableCustomLoot",
+            "Object": "000B06:DynamicScaling.esm"
           }
         ]
       }

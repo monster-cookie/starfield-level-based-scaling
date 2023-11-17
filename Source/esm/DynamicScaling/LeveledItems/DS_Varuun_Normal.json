@@ -1,7 +1,7 @@
 {
   "FormKey": "000B04:DynamicScaling.esm",
   "EditorID": "DS_Varuun_Normal",
-  "MaxCount": 4,
+  "MaxCount": 1,
   "Flags": [
     "CalculateForEachItemInCount"
   ],

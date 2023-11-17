@@ -1,7 +1,7 @@
 {
   "FormKey": "000B02:DynamicScaling.esm",
   "EditorID": "DS_Generic_Miniboss",
-  "MaxCount": 4,
+  "MaxCount": 1,
   "Flags": [
     "CalculateForEachItemInCount"
   ],
