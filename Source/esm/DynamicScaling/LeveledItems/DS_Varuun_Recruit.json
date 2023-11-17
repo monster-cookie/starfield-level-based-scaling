@@ -1,7 +1,7 @@
 {
   "FormKey": "000B03:DynamicScaling.esm",
   "EditorID": "DS_Varuun_Recruit",
-  "MaxCount": 4,
+  "MaxCount": 1,
   "Flags": [
     "CalculateForEachItemInCount"
   ],

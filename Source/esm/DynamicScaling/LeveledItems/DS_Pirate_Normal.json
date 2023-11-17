@@ -1,7 +1,7 @@
 {
   "FormKey": "000AFE:DynamicScaling.esm",
   "EditorID": "DS_Pirate_Normal",
-  "MaxCount": 4,
+  "MaxCount": 1,
   "Flags": [
     "CalculateForEachItemInCount"
   ],

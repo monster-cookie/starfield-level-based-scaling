@@ -1,7 +1,7 @@
 {
   "FormKey": "000AFF:DynamicScaling.esm",
   "EditorID": "DS_Pirate_Miniboss",
-  "MaxCount": 4,
+  "MaxCount": 1,
   "Flags": [
     "CalculateForEachItemInCount"
   ],
