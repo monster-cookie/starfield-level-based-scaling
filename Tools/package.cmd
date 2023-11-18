@@ -12,7 +12,7 @@ del /q "C:\Users\degre\Downloads\DynamicScaling-Config-Hard.zip"
 del /q "C:\Users\degre\Downloads\DynamicScaling-Config-Experimental.zip"
 
 REM Archive Dist Dir
-.\7za.exe a -tzip "C:\Users\degre\Downloads\DynamicScaling.zip" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Data"
-.\7za.exe a -tzip "C:\Users\degre\Downloads\DynamicScaling-Config-Balanced.zip" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Optional\Balanced\Data"
-.\7za.exe a -tzip "C:\Users\degre\Downloads\DynamicScaling-Config-Hard.zip" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Optional\Hard\Data"
-.\7za.exe a -tzip "C:\Users\degre\Downloads\DynamicScaling-Config-Experimental.zip" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\Optional\Experimental\Data"
+.\7za.exe a -tzip "C:\Users\degre\Downloads\DynamicScaling.zip" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist\*.*"
+.\7za.exe a -tzip "C:\Users\degre\Downloads\DynamicScaling-Config-Balanced.zip" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-Optional-Balanced\Batchfiles"
+.\7za.exe a -tzip "C:\Users\degre\Downloads\DynamicScaling-Config-Hard.zip" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-Optional-Hard\Batchfiles"
+.\7za.exe a -tzip "C:\Users\degre\Downloads\DynamicScaling-Config-Experimental.zip" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-Optional-Experimental\Batchfiles"

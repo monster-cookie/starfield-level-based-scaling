@@ -1,4 +1,9 @@
 ﻿Dist
+Dist-BA2
+Dist-Optional-Hard
+Dist-Optional-Balanced
+Dist-Optional-Experimental
+Tools/BSArch64.exe
 Tools/Caprica.exe
 Tools/Champollion.exe
 Tools/Caprica-Experimental.exe

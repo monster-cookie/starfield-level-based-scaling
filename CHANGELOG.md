@@ -1,5 +1,8 @@
 # V2.1 Full Dynamic Scaling
 
+## V2.1.1
+* No more loose files everything is one BA2 now which should make manual installs way easier. Please remove the vpi* scripts and batch files from data\scripts, data\scripts\source, and data\batchfiles. Hopefully your organizer will remove them but with how new the plugin for Starfield is they probably will not. Vortex user please us Starfield plugin 0.5.6 or newer. 
+
 ## V2.1.0
 * Full dynamic scaling via the cloak effect is functional and working. There is still some intentional random variance and MK1 (--) will hit way less and take more damage then MK5 (++) NPCs. 
 * MK5 now have a 50% chance to force into T3 legendary versions with even high stats then a legendary normally would have. 
