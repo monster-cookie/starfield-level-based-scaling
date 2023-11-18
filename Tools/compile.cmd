@@ -1,7 +1,6 @@
 @echo off
 
 @REM Get Caprica from https://github.com/Orvid/Caprica currently installed is old manual compile -- v0.3.0 causes a io stream failure
-@REM Get Spriggit from https://github.com/Mutagen-Modding/Spriggit currently installed is 0.10
 
 @REM Notepad++/VSCODE needs current working directory to be where Caprica.exe is 
 cd "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Tools"
@@ -37,7 +36,6 @@ rmdir /s /q "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling
 mkdir "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-Optional-Experimental"
 mkdir "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-Optional-Experimental\Batchfiles"
 
-
 REM Deploy Scripts to Dist-BA2 folder
 Caprica-Experimental.exe --game starfield --flags "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Tools\Starfield_Papyrus_Flags.flg" --import "C:\Repositories\Public\Starfield-Script-Source;C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus" --output "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-BA2\Scripts" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus\VPI_Helper.psc"
 Caprica-Experimental.exe --game starfield --flags "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Tools\Starfield_Papyrus_Flags.flg" --import "C:\Repositories\Public\Starfield-Script-Source;C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus" --output "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-BA2\Scripts" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus\VPI_DS_InitScript.psc"
@@ -47,13 +45,9 @@ Caprica-Experimental.exe --game starfield --flags "C:\Repositories\Public\Starfi
 Caprica-Experimental.exe --game starfield --flags "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Tools\Starfield_Papyrus_Flags.flg" --import "C:\Repositories\Public\Starfield-Script-Source;C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus" --output "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-BA2\Scripts" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus\VPI_DS_NPC_ScalingHandler.psc"
 Caprica-Experimental.exe --game starfield --flags "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Tools\Starfield_Papyrus_Flags.flg" --import "C:\Repositories\Public\Starfield-Script-Source;C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus" --output "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-BA2\Scripts" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus\VPI_DS_CloakAbilityApplier.psc"
 
-
 REM ESM is purely binary so need to pull from starfield dir where xedit has to have it 
 copy /y "D:\MO2Staging\Starfield\mods\DynamicScalingExperimental\DynamicScaling.esm" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\ESM"
 copy /y "D:\MO2Staging\Starfield\mods\DynamicScalingExperimental\DynamicScaling.esm" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist"
-
-REM Convert the ESM to YAML and JSON
-Spriggit.CLI.exe serialize --InputPath "D:\MO2Staging\Starfield\mods\DynamicScalingExperimental\DynamicScaling.esm" --OutputPath "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\ESM\DynamicScaling" --GameRelease Starfield --PackageName Spriggit.Json.Starfield
 
 REM Deploy configuration scripts
 copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Batchfiles\vpi-ds-reset-vanilla.txt" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-BA2\Batchfiles"
