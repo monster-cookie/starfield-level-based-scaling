@@ -8,8 +8,18 @@
         "Properties": [
           {
             "MutagenObjectType": "ScriptObjectProperty",
-            "Name": "ActorTypeLegendary",
-            "Object": "0C1F54:Starfield.esm"
+            "Name": "AttackDamageMult",
+            "Object": "000357:Starfield.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "CriticalHitChance",
+            "Object": "0002DD:Starfield.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "CriticalHitDamageMult",
+            "Object": "00039C:Starfield.esm"
           },
           {
             "MutagenObjectType": "ScriptObjectProperty",
@@ -33,13 +43,48 @@
           },
           {
             "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "EnableCombatFactionResize",
+            "Object": "000AFA:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "EnableCombatFactionStatsScaling",
+            "Object": "000AFC:DynamicScaling.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
             "Name": "EnergyResist",
             "Object": "0002EB:Starfield.esm"
           },
           {
             "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "ENV_Resist_Airborne",
+            "Object": "248D31:Starfield.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "ENV_Resist_Corrosive",
+            "Object": "248D30:Starfield.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "ENV_Resist_Radiation",
+            "Object": "248D2F:Starfield.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "ENV_Resist_Thermal",
+            "Object": "248D32:Starfield.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
             "Name": "Health",
             "Object": "0002D4:Starfield.esm"
+          },
+          {
+            "MutagenObjectType": "ScriptObjectProperty",
+            "Name": "LegendaryAliasQuest",
+            "Object": "0308F5:Starfield.esm"
           },
           {
             "MutagenObjectType": "ScriptObjectProperty",
@@ -93,41 +138,6 @@
           },
           {
             "MutagenObjectType": "ScriptObjectProperty",
-            "Name": "ENV_Resist_Radiation",
-            "Object": "248D2F:Starfield.esm"
-          },
-          {
-            "MutagenObjectType": "ScriptObjectProperty",
-            "Name": "ENV_Resist_Corrosive",
-            "Object": "248D30:Starfield.esm"
-          },
-          {
-            "MutagenObjectType": "ScriptObjectProperty",
-            "Name": "ENV_Resist_Airborne",
-            "Object": "248D31:Starfield.esm"
-          },
-          {
-            "MutagenObjectType": "ScriptObjectProperty",
-            "Name": "ENV_Resist_Thermal",
-            "Object": "248D32:Starfield.esm"
-          },
-          {
-            "MutagenObjectType": "ScriptObjectProperty",
-            "Name": "CriticalHitChance",
-            "Object": "0002DD:Starfield.esm"
-          },
-          {
-            "MutagenObjectType": "ScriptObjectProperty",
-            "Name": "CriticalHitDamageMult",
-            "Object": "00039C:Starfield.esm"
-          },
-          {
-            "MutagenObjectType": "ScriptObjectProperty",
-            "Name": "AttackDamageMult",
-            "Object": "000357:Starfield.esm"
-          },
-          {
-            "MutagenObjectType": "ScriptObjectProperty",
             "Name": "PlayerRef",
             "Object": "000014:Starfield.esm"
           },
@@ -135,21 +145,6 @@
             "MutagenObjectType": "ScriptObjectProperty",
             "Name": "ReflectDamage",
             "Object": "00035F:Starfield.esm"
-          },
-          {
-            "MutagenObjectType": "ScriptObjectProperty",
-            "Name": "LegendaryRank",
-            "Object": "0003AC:Starfield.esm"
-          },
-          {
-            "MutagenObjectType": "ScriptObjectProperty",
-            "Name": "EnableCombatFactionResize",
-            "Object": "000AFA:DynamicScaling.esm"
-          },
-          {
-            "MutagenObjectType": "ScriptObjectProperty",
-            "Name": "EnableCombatFactionStatsScaling",
-            "Object": "000AFC:DynamicScaling.esm"
           }
         ]
       }
