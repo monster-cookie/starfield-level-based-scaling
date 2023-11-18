@@ -24,7 +24,6 @@ Keyword Property NPC_CrimsonFleet Auto Const Mandatory
 Keyword Property NPC_Ecliptic Auto Const Mandatory
 Keyword Property NPC_Spacer Auto Const Mandatory
 Keyword Property DS_SCALING_APPLIED Auto Const Mandatory
-Keyword Property ActorTypeLegendary Auto Const Mandatory
 
 ActorValue Property Health Auto Const Mandatory
 ActorValue Property DamageResist Auto Const Mandatory
@@ -38,7 +37,10 @@ ActorValue Property CriticalHitChance Auto Const Mandatory
 ActorValue Property CriticalHitDamageMult Auto Const Mandatory
 ActorValue Property AttackDamageMult Auto Const Mandatory
 ActorValue Property ReflectDamage Auto Const Mandatory
-ActorValue Property LegendaryRank Auto Const Mandatory
+
+;; Keyword Property ActorTypeLegendary Auto Const Mandatory
+;; ActorValue Property LegendaryRank Auto Const Mandatory
+LegendaryAliasQuestScript Property LegendaryAliasQuest Auto Const mandatory
 
 ObjectReference Property Myself Auto
 ObjectReference Property PlayerRef Auto Const Mandatory
@@ -91,10 +93,10 @@ Function HandleHeightScaling(Int npcType)
   Float currentScale = RealMe.GetScale()
   Float newScale = currentScale
   If (npcType == 5)
-    newScale = currentScale * Utility.RandomFloat(1.25,2.5)
+    newScale = currentScale * Utility.RandomFloat(1.05,2.0)
     VPI_Helper.DebugMessage("NPCScalingHandler", "HandleHeight", Myself + "> Leveled NPC is a MK5 type and needs enlarged. Current scale is " + currentScale + " moving to new scale of " + newScale + ".", 0, DSDebugMode.GetValueInt())
   ElseIf (npcType == 1)
-    newScale = currentScale * Utility.RandomFloat(0.25,0.90)
+    newScale = currentScale * Utility.RandomFloat(0.35,0.95)
     VPI_Helper.DebugMessage("NPCScalingHandler", "HandleHeight", Myself + "> Leveled NPC is a MK1 type and needs shrunk. Current scale is " + currentScale + " moving to new scale of " + newScale + ".", 0, DSDebugMode.GetValueInt())
   Else
     VPI_Helper.DebugMessage("NPCScalingHandler", "HandleHeight", Myself + "> Leveled NPC is a normal class so no scaling needed.", 0, DSDebugMode.GetValueInt())
@@ -126,33 +128,26 @@ Function HandleLevelScaling(Int npcType)
   int playerThermalResist = Player.GetValueInt(ENV_Resist_Thermal)
   int myThermalResist = RealMe.GetValueInt(ENV_Resist_Thermal)
 
-  int playerReflectDamage = Player.GetValueInt(ReflectDamage)
-  int myReflectDamage = RealMe.GetValueInt(ReflectDamage)
-  int playerCriticalHitChance = Player.GetValueInt(CriticalHitChance)
-  int myCriticalHitChance = RealMe.GetValueInt(CriticalHitChance)
-  int playerCriticalHitDamageMult = Player.GetValueInt(CriticalHitDamageMult)
-  int myCriticalHitDamageMult = RealMe.GetValueInt(CriticalHitDamageMult)
-  int playerAttackDamageMult = Player.GetValueInt(AttackDamageMult)
-  int myAttackDamageMult = RealMe.GetValueInt(AttackDamageMult)
+  Float playerReflectDamage = Player.GetValue(ReflectDamage)
+  Float myReflectDamage = RealMe.GetValue(ReflectDamage)
+  Float playerCriticalHitChance = Player.GetValue(CriticalHitChance)
+  Float myCriticalHitChance = RealMe.GetValue(CriticalHitChance)
+  Float playerCriticalHitDamageMult = Player.GetValue(CriticalHitDamageMult)
+  Float myCriticalHitDamageMult = RealMe.GetValue(CriticalHitDamageMult)
+  Float playerAttackDamageMult = Player.GetValue(AttackDamageMult)
+  Float myAttackDamageMult = RealMe.GetValue(AttackDamageMult)
 
   int encounterlevel = RealMe.CalculateEncounterLevel(Game.GetDifficulty())
 
   DebugLevelScaling(npcType, "INITIAL")
 
   ;; Already does what we need so lets reuse that system, another option is the PC Level Multiplier but not sure I can get that
-  Float playerAdjustmentFactor = Game.GetGameSettingFloat("fLowLevelNPCBaseHealthMult")
-  Float npcScalingAdjustmentToPlayer = (100 - (100 * playerAdjustmentFactor))/100
-  If (npcType == 5) 
-    npcScalingAdjustmentToPlayer = npcScalingAdjustmentToPlayer * 1.10
-  ElseIf (npcType == 1)
-    npcScalingAdjustmentToPlayer = npcScalingAdjustmentToPlayer * 0.10
-  EndIf
-
+  Float npcScalingAdjustmentToPlayer = GetScalingAdjustmentForDifficultyAndNPCType(Game.GetGameSettingFloat("fLowLevelNPCBaseHealthMult"), npcType)
   string message = Myself + "> Calculated a stat adjustment factor of " + npcScalingAdjustmentToPlayer + " for a NPC Type of " + npcType + ".\n"
 
   int scaledHealth = Math.Round(playerHealth * npcScalingAdjustmentToPlayer)
   RealMe.SetValue(Health, scaledHealth)
-  message += "Adjusting my Health to " + scaledHealth + " from " + myHealth + " using a scalig factor of " + npcScalingAdjustmentToPlayer + ".\n"
+  message += "Adjusting my Health to " + scaledHealth + " from " + myHealth + " using a scalig factor of " + npcScalingAdjustmentToPlayer + " against the player's " + playerHealth + " health.\n"
 
 
   int scaledDamageResist = Math.Round(playerDamageResist * npcScalingAdjustmentToPlayer)
@@ -166,6 +161,48 @@ Function HandleLevelScaling(Int npcType)
   int scaledEMDamageResist = Math.Round(playerEMDamageResist * npcScalingAdjustmentToPlayer)
   RealMe.SetValue(ElectromagneticDamageResist, scaledEMDamageResist)
   message += "Adjusting my EM Damage Resist stat to " + scaledEMDamageResist + " from " + myEMDamageResist + " using a scalig factor of " + npcScalingAdjustmentToPlayer  + " against the player's " + playerEMDamageResist + " EM damage resist.\n"
+
+  Float scaledCriticalHitChance = Math.Round(playerCriticalHitChance * npcScalingAdjustmentToPlayer)
+  RealMe.SetValue(CriticalHitChance, scaledCriticalHitChance)
+  message += "Adjusting my EM Damage Resist stat to " + scaledCriticalHitChance + " from " + myCriticalHitChance + " using a scalig factor of " + npcScalingAdjustmentToPlayer  + " against the player's " + playerCriticalHitChance + " EM damage resist.\n"
+
+
+  ;; Some stats adjust by rank
+  Float scaledAttackDamageMult = myAttackDamageMult
+  Float scaledCriticalHitDamageMult = myCriticalHitDamageMult
+  If (npcType == 5)
+    If (Game.GetDieRollSuccess(50, 1, 100, -1, -1))
+      ;; Won the lotto I become a legendary
+      LegendaryAliasQuest.MakeLegendary(RealMe)
+      RealMe.SetValue(Health, scaledHealth*2)
+      RealMe.SetValue(DamageResist, scaledDamageResist*2)
+      RealMe.SetValue(EnergyResist, scaledEnergyResist*2)
+      RealMe.SetValue(ElectromagneticDamageResist, scaledEMDamageResist*2)
+      RealMe.SetValue(AttackDamageMult, 3)
+      RealMe.SetValue(CriticalHitDamageMult, 2)
+      message += "I beat the dice so becoming legendary hopefully.\n"
+    Else
+      scaledAttackDamageMult = 1.5
+      scaledCriticalHitDamageMult = 1.5
+    EndIf
+  ElseIf (npcType == 4)
+    scaledAttackDamageMult = 1.5
+    scaledCriticalHitDamageMult = 1.5
+  ElseIf (npcType == 3)
+    scaledAttackDamageMult = 1.15
+    scaledCriticalHitDamageMult = 1.15
+  ElseIf (npcType == 2)
+    scaledAttackDamageMult = 1.00
+    scaledCriticalHitDamageMult = 1.00
+  ElseIf (npcType == 1)
+    scaledAttackDamageMult = 0.95
+    scaledCriticalHitDamageMult = 0.95
+  EndIf
+  message += "Adjusting my attack multiplier to " + scaledAttackDamageMult + " from " + myAttackDamageMult + " against the player's " + playerAttackDamageMult + ".\n"
+  RealMe.SetValue(AttackDamageMult, scaledAttackDamageMult)
+
+  message += "Adjusting my critical damage multiplier to " + scaledCriticalHitDamageMult + " from " + myCriticalHitDamageMult + " against the player's " + playerCriticalHitDamageMult + ".\n"
+  RealMe.SetValue(CriticalHitDamageMult, scaledCriticalHitDamageMult)
 
   VPI_Helper.DebugMessage("NPCScalingHandler", "HandleLevelScaling", message, 0, DSDebugMode.GetValueInt())
   DebugLevelScaling(npcType, "FINAL")
@@ -197,14 +234,14 @@ Function DebugLevelScaling(Int npcType, String scalingState)
   int playerThermalResist = Player.GetValueInt(ENV_Resist_Thermal)
   int myThermalResist = RealMe.GetValueInt(ENV_Resist_Thermal)
 
-  int playerReflectDamage = Player.GetValueInt(ReflectDamage)
-  int myReflectDamage = RealMe.GetValueInt(ReflectDamage)
-  int playerCriticalHitChance = Player.GetValueInt(CriticalHitChance)
-  int myCriticalHitChance = RealMe.GetValueInt(CriticalHitChance)
-  int playerCriticalHitDamageMult = Player.GetValueInt(CriticalHitDamageMult)
-  int myCriticalHitDamageMult = RealMe.GetValueInt(CriticalHitDamageMult)
-  int playerAttackDamageMult = Player.GetValueInt(AttackDamageMult)
-  int myAttackDamageMult = RealMe.GetValueInt(AttackDamageMult)
+  Float playerReflectDamage = Player.GetValue(ReflectDamage)
+  Float myReflectDamage = RealMe.GetValue(ReflectDamage)
+  Float playerCriticalHitChance = Player.GetValue(CriticalHitChance)
+  Float myCriticalHitChance = RealMe.GetValue(CriticalHitChance)
+  Float playerCriticalHitDamageMult = Player.GetValue(CriticalHitDamageMult)
+  Float myCriticalHitDamageMult = RealMe.GetValue(CriticalHitDamageMult)
+  Float playerAttackDamageMult = Player.GetValue(AttackDamageMult)
+  Float myAttackDamageMult = RealMe.GetValue(AttackDamageMult)
 
   int encounterlevel = RealMe.CalculateEncounterLevel(Game.GetDifficulty())
 
@@ -229,7 +266,40 @@ Function DebugLevelScaling(Int npcType, String scalingState)
   VPI_Helper.DebugMessage("NPCScalingHandler", "DebugLevelScaling-" + scalingState, message, 0, DSDebugMode.GetValueInt())
 EndFunction
 
+Float Function GetScalingAdjustmentForDifficultyAndNPCType(Float adjustmentFactor, int npcType)
+  Int iDifficulty = Game.GetDifficulty()
+  string sDifficulty = VPI_Helper.GetDifficulty(iDifficulty)
 
+  Float base = ((100 - (100 * adjustmentFactor))/100)
+  Float calculated = 1
+  if (iDifficulty == 0)
+    ;; Very Easy Difficulty
+    calculated = base + 0.05
+  ElseIf (iDifficulty == 1)
+    ;; Easy Difficulty
+    calculated = base + 0.10
+  ElseIf (iDifficulty == 2)
+    ;; Normal Difficulty
+    calculated = base + 0.25
+  ElseIf (iDifficulty == 3)
+    ;; Hard Difficulty
+    calculated = base + 0.50
+  ElseIf (iDifficulty == 4)
+    ;; Very Hard Difficulty
+    calculated = base + 1
+  Else 
+    ;; Really cna only be survival mode
+    calculated = base + 2
+  EndIf
+
+  If (npcType == 5) 
+    calculated = calculated * 1.25
+  ElseIf (npcType == 1)
+    calculated = calculated * 0.90
+  EndIf
+
+  return calculated
+EndFunction
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;

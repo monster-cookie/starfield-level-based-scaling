@@ -1,4 +1,10 @@
-# V2.0 Dynamic Scaling ESM Version
+# V2.1 Full Dynamic Scaling
+
+## V2.1.0
+* Full dynamic scaling via the cloak effect is functional and working. There is still some intentional random variance and MK1 (--) will hit way less and take more damage then MK5 (++) NPCs. 
+* MK5 now have a 50% chance to force into T3 legendary versions with even high stats then a legendary normally would have. 
+* I still need to implement the First's and Starborn's MK versioned NPCs I will get them this weekend its just cut and paste work :) 
+* Loot is actual fixed with a MAJOR caveat, you need a new NGP session or game. Apparent the engine pre makes some stuff on universe creation and the only way to reset it is a new NGP session and universe. 
 
 ## V2.0.24
 * Trying a different way to tone down the loot explosions. The loots lists will only ever return exactly 1 item then the script side ill inject 1-4 items depending on NPC type (MK1-5).
