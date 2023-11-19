@@ -1,5 +1,11 @@
 # V2.1 Full Dynamic Scaling
 
+## V2.1.2
+* Added new feature flag for random groups of NPCs instead of 1 NP you will get 2-4 based on chance. MK5 will be capped at 2 and only 10% chance, the other types will have 4 (10%), 3 (20%), or 2 (40%). 
+* Random group sizes only enabled on Crimson Fleet/Pirate faction for feedback on spawn rates. 
+* Legendary's are no longer scaled, scaling was making them way weaker stats wise but not visually. They will hit hard and be hard to kill again. 
+* Changed the default for the NPC resize easter egg to off it was fun for a while but it cause weird engine scaling glitches on death. 
+
 ## V2.1.1
 * No more loose files everything is one BA2 now which should make manual installs way easier. Please remove the vpi* scripts and batch files from data\scripts, data\scripts\source, and data\batchfiles. Hopefully your organizer will remove them but with how new the plugin for Starfield is they probably will not. Vortex user please us Starfield plugin 0.5.6 or newer. 
 

@@ -30,7 +30,7 @@ GlobalVariable Property EnableScalingXP Auto Const Mandatory
 GlobalVariable Property EnableCombatFactionResize Auto Const Mandatory
 GlobalVariable Property EnableCombatFactionStatsScaling Auto Const Mandatory
 GlobalVariable Property EnableCustomLoot Auto Const Mandatory
-
+GlobalVariable Property EnableRandomGroups Auto Const Mandatory
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -647,6 +647,12 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
       ElseIF (menuButtonClicked == 12) 
         ;; CLICKED 12: Disable Custom Loot Drops on NPCs
         EnableCustomLoot.SetValueInt(0)
+      ElseIF (menuButtonClicked == 13) 
+        ;; CLICKED 13: Enable NPC group spawns
+        EnableRandomGroups.SetValueInt(1)
+      ElseIF (menuButtonClicked == 14) 
+        ;; CLICKED 14: Disable NPC group spawns
+        EnableRandomGroups.SetValueInt(0)
       EndIf
     EndIf ;; End Main Menu
   EndWhile

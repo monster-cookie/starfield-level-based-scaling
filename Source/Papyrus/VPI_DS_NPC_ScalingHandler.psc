@@ -38,7 +38,7 @@ ActorValue Property CriticalHitDamageMult Auto Const Mandatory
 ActorValue Property AttackDamageMult Auto Const Mandatory
 ActorValue Property ReflectDamage Auto Const Mandatory
 
-;; Keyword Property ActorTypeLegendary Auto Const Mandatory
+Keyword Property ActorTypeLegendary Auto Const Mandatory
 ;; ActorValue Property LegendaryRank Auto Const Mandatory
 LegendaryAliasQuestScript Property LegendaryAliasQuest Auto Const mandatory
 
@@ -139,6 +139,20 @@ Function HandleLevelScaling(Int npcType)
 
   int encounterlevel = RealMe.CalculateEncounterLevel(Game.GetDifficulty())
 
+  If (RealMe.HasKeyword(ActorTypeLegendary))
+      VPI_Helper.DebugMessage("NPCScalingHandler", "HandleLevelScaling",  Myself + "> is a legendary and scaling basically negates so skipping for a NPC Type of " + npcType + ".", 0, DSDebugMode.GetValueInt())
+      DebugLevelScaling(npcType, "FINAL")
+      return
+  EndIf
+
+  If (Game.GetDieRollSuccess(50, 1, 100, -1, -1))
+    ;; Won the lotto I become a legendary
+    LegendaryAliasQuest.MakeLegendary(RealMe)
+    VPI_Helper.DebugMessage("NPCScalingHandler", "HandleLevelScaling",  Myself + "> is now a legendary and scaling basically negates so skipping for a NPC Type of " + npcType + ".", 0, DSDebugMode.GetValueInt())
+    DebugLevelScaling(npcType, "FINAL")
+    return
+  EndIf
+
   DebugLevelScaling(npcType, "INITIAL")
 
   ;; Already does what we need so lets reuse that system, another option is the PC Level Multiplier but not sure I can get that
@@ -148,7 +162,6 @@ Function HandleLevelScaling(Int npcType)
   int scaledHealth = Math.Round(playerHealth * npcScalingAdjustmentToPlayer)
   RealMe.SetValue(Health, scaledHealth)
   message += "Adjusting my Health to " + scaledHealth + " from " + myHealth + " using a scalig factor of " + npcScalingAdjustmentToPlayer + " against the player's " + playerHealth + " health.\n"
-
 
   int scaledDamageResist = Math.Round(playerDamageResist * npcScalingAdjustmentToPlayer)
   RealMe.SetValue(DamageResist, scaledDamageResist)
@@ -171,20 +184,8 @@ Function HandleLevelScaling(Int npcType)
   Float scaledAttackDamageMult = myAttackDamageMult
   Float scaledCriticalHitDamageMult = myCriticalHitDamageMult
   If (npcType == 5)
-    If (Game.GetDieRollSuccess(50, 1, 100, -1, -1))
-      ;; Won the lotto I become a legendary
-      LegendaryAliasQuest.MakeLegendary(RealMe)
-      RealMe.SetValue(Health, scaledHealth*2)
-      RealMe.SetValue(DamageResist, scaledDamageResist*2)
-      RealMe.SetValue(EnergyResist, scaledEnergyResist*2)
-      RealMe.SetValue(ElectromagneticDamageResist, scaledEMDamageResist*2)
-      RealMe.SetValue(AttackDamageMult, 3)
-      RealMe.SetValue(CriticalHitDamageMult, 2)
-      message += "I beat the dice so becoming legendary hopefully.\n"
-    Else
-      scaledAttackDamageMult = 1.5
-      scaledCriticalHitDamageMult = 1.5
-    EndIf
+    scaledAttackDamageMult = 1.5
+    scaledCriticalHitDamageMult = 1.5
   ElseIf (npcType == 4)
     scaledAttackDamageMult = 1.5
     scaledCriticalHitDamageMult = 1.5
