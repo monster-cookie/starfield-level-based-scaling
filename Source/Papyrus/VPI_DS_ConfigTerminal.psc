@@ -31,6 +31,8 @@ GlobalVariable Property EnableCombatFactionResize Auto Const Mandatory
 GlobalVariable Property EnableCombatFactionStatsScaling Auto Const Mandatory
 GlobalVariable Property EnableCustomLoot Auto Const Mandatory
 GlobalVariable Property EnableRandomGroups Auto Const Mandatory
+GlobalVariable Property DSLegendaryChangeNotToSpawn Auto Const Mandatory
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -49,7 +51,8 @@ Message Property DS_ConfigMenu_DamageScalingBaseline Auto
 Message Property DS_ConfigMenu_DamageScalingBaseline_DMGByPlayer Auto
 Message Property DS_ConfigMenu_DamageScalingBaseline_DMGToPlayer Auto
 Message Property DS_ConfigMenu_ConfigureEnabledFeatures Auto
-
+Message Property DS_ConfigMenu_NPCDynamicScalingSettings Auto
+Message Property DS_ConfigMenu_NPCDynamicScalingSettings_LegendarySpawnChanceNone Auto
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -96,6 +99,10 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
         ;; CLICKED 4: Show Damage Scaling Defaults Menu
         VPI_Helper.DebugMessage("ConfigTerminal", "ProcessMenu", "Main Menu Button 4 clicked launching DS_ConfigMenu_DamageScalingBaseline.", 0, DSDebugMode.GetValueInt())
         message = DS_ConfigMenu_DamageScalingBaseline
+      ElseIf (menuButtonClicked == 5)
+        ;; CLICKED 5: Show NPC Dynamic Scaling Config Menu
+        VPI_Helper.DebugMessage("ConfigTerminal", "ProcessMenu", "Main Menu Button 5 clicked launching DS_ConfigMenu_NPCDynamicScalingSettings.", 0, DSDebugMode.GetValueInt())
+        message = DS_ConfigMenu_NPCDynamicScalingSettings
       EndIf
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -653,6 +660,55 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
       ElseIF (menuButtonClicked == 14) 
         ;; CLICKED 14: Disable NPC group spawns
         EnableRandomGroups.SetValueInt(0)
+      EndIf
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;; Show Dynamic Scaling Configuration Menu
+    ElseIF (message == DS_ConfigMenu_NPCDynamicScalingSettings)
+      menuButtonClicked = DS_ConfigMenu_NPCDynamicScalingSettings.Show(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+      message = DS_ConfigMenuMain ;; Return to root menu
+      If (menuButtonClicked == 0)
+        ;; CLICKED 0: Return to main menu
+      ElseIF (menuButtonClicked == 1) 
+        ;; CLICKED 1: Configure Damage To Player
+        message = DS_ConfigMenu_NPCDynamicScalingSettings_LegendarySpawnChanceNone
+        VPI_Helper.DebugMessage("ConfigTerminal", "ProcessMenu", "Dynamic Scaling Settings Menu Button 1 clicked launching DS_ConfigMenu_NPCDynamicScalingSettings_LegendarySpawnChanceNone.", 0, DSDebugMode.GetValueInt())
+      EndIf
+
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;; Show Low Level NPC Adjustment Factor Menu
+    ElseIF (message == DS_ConfigMenu_NPCDynamicScalingSettings_LegendarySpawnChanceNone)
+      menuButtonClicked = DS_ConfigMenu_NPCDynamicScalingSettings_LegendarySpawnChanceNone.Show(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+      message = DS_ConfigMenu_NPCDynamicScalingSettings ;; Return to previous menu
+      If (menuButtonClicked == 0)
+        ;; CLICKED 0: Return to Dynamic Scaling Configuration Menu
+      ElseIF (menuButtonClicked == 1) 
+        ;; CLICKED 1: Set to 10% chance -- Global is inverted so 10% Chance = 90% ChanceNone
+        DSLegendaryChangeNotToSpawn.SetValueInt(90)
+      ElseIF (menuButtonClicked == 2) 
+        ;; CLICKED 2: Set to 20% chance -- Global is inverted so 20% Chance = 80% ChanceNone
+        DSLegendaryChangeNotToSpawn.SetValueInt(80)
+      ElseIF (menuButtonClicked == 3) 
+        ;; CLICKED 3: Set to 25% chance (Default) -- Global is inverted so 25% Chance = 75% ChanceNone
+        DSLegendaryChangeNotToSpawn.SetValueInt(75)
+      ElseIF (menuButtonClicked == 4) 
+        ;; CLICKED 4: Set to 30% chance -- Global is inverted so 30% Chance = 70% ChanceNone
+        DSLegendaryChangeNotToSpawn.SetValueInt(70)
+      ElseIF (menuButtonClicked == 5) 
+        ;; CLICKED 5: Set to 40% chance (Recommended) -- Global is inverted so 40% Chance = 60% ChanceNone
+        DSLegendaryChangeNotToSpawn.SetValueInt(60)
+      ElseIF (menuButtonClicked == 6) 
+        ;; CLICKED 6: Set to 50% chance -- Global is inverted so 50% Chance = 50% ChanceNone
+        DSLegendaryChangeNotToSpawn.SetValueInt(50)
+      ElseIF (menuButtonClicked == 7) 
+        ;; CLICKED 7: Set to 60% chance -- Global is inverted so 60% Chance = 40% ChanceNone
+        DSLegendaryChangeNotToSpawn.SetValueInt(40)
+      ElseIF (menuButtonClicked == 8) 
+        ;; CLICKED 8: Set to 75% chance -- Global is inverted so 75% Chance = 25% ChanceNone
+        DSLegendaryChangeNotToSpawn.SetValueInt(25)
+      ElseIF (menuButtonClicked == 9) 
+        ;; CLICKED 9: Set to 100% chance -- Global is inverted so 100% Chance = 0% ChanceNone
+        DSLegendaryChangeNotToSpawn.SetValueInt(0)
       EndIf
     EndIf ;; End Main Menu
   EndWhile

@@ -1,5 +1,8 @@
 # V2.1 Full Dynamic Scaling
 
+## V2.1.3
+* Added a new global for legendary spawn chance which is the change dynamic scaling will make a legendary from a normal. Fixing dynamic scaling effectively removing the legendary buffs for the legendary NPCs, I noticed it was making legendary mobs way too much. The chance is now 25% instead of 50%. The new variable is DSLegendaryChangeNotToSpawn and its default values is 75%. It is configurable in the terminal. 
+
 ## V2.1.2
 * Added new feature flag for random groups of NPCs instead of 1 NP you will get 2-4 based on chance. MK5 will be capped at 2 and only 10% chance, the other types will have 4 (10%), 3 (20%), or 2 (40%). 
 * Random group sizes only enabled on Crimson Fleet/Pirate faction for feedback on spawn rates. 
