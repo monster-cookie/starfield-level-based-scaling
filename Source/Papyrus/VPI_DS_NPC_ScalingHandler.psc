@@ -7,6 +7,7 @@ Scriptname VPI_DS_NPC_ScalingHandler extends ActiveMagicEffect
 GlobalVariable Property DSDebugMode Auto Const Mandatory
 GlobalVariable Property EnableCombatFactionResize Auto Const Mandatory
 GlobalVariable Property EnableCombatFactionStatsScaling Auto Const Mandatory
+GlobalVariable Property DSLegendaryChangeNotToSpawn Auto Const Mandatory
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -140,15 +141,15 @@ Function HandleLevelScaling(Int npcType)
   int encounterlevel = RealMe.CalculateEncounterLevel(Game.GetDifficulty())
 
   If (RealMe.HasKeyword(ActorTypeLegendary))
-      VPI_Helper.DebugMessage("NPCScalingHandler", "HandleLevelScaling",  Myself + "> is a legendary and scaling basically negates so skipping for a NPC Type of " + npcType + ".", 0, DSDebugMode.GetValueInt())
+      VPI_Helper.DebugMessage("NPCScalingHandler", "HandleLevelScaling",  Myself + "> is already a legendary and scaling basically negates so skipping for a NPC Type of " + npcType + ".", 0, DSDebugMode.GetValueInt())
       DebugLevelScaling(npcType, "FINAL")
       return
   EndIf
 
-  If (Game.GetDieRollSuccess(50, 1, 100, -1, -1))
+  If (DSLegendaryChangeNotToSpawn.GetValueInt() == 0 || Game.GetDieRollSuccess(DSLegendaryChangeNotToSpawn.GetValueInt(), 1, 100, -1, -1))
     ;; Won the lotto I become a legendary
     LegendaryAliasQuest.MakeLegendary(RealMe)
-    VPI_Helper.DebugMessage("NPCScalingHandler", "HandleLevelScaling",  Myself + "> is now a legendary and scaling basically negates so skipping for a NPC Type of " + npcType + ".", 0, DSDebugMode.GetValueInt())
+    VPI_Helper.DebugMessage("NPCScalingHandler", "HandleLevelScaling",  Myself + "> hase won the lottoe and is now a legendary and scaling basically negates so skipping for a NPC Type of " + npcType + ".", 0, DSDebugMode.GetValueInt())
     DebugLevelScaling(npcType, "FINAL")
     return
   EndIf
