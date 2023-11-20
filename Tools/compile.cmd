@@ -36,20 +36,76 @@ rmdir /s /q "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling
 mkdir "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-Optional-Experimental"
 mkdir "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-Optional-Experimental\Batchfiles"
 
-REM Deploy Scripts to Dist-BA2 folder
-Caprica-Experimental.exe --game starfield --flags "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Tools\Starfield_Papyrus_Flags.flg" --import "C:\Repositories\Public\Starfield-Script-Source;C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus" --output "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-BA2\Scripts" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus\VPI_Helper.psc"
-Caprica-Experimental.exe --game starfield --flags "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Tools\Starfield_Papyrus_Flags.flg" --import "C:\Repositories\Public\Starfield-Script-Source;C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus" --output "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-BA2\Scripts" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus\VPI_DS_InitScript.psc"
-Caprica-Experimental.exe --game starfield --flags "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Tools\Starfield_Papyrus_Flags.flg" --import "C:\Repositories\Public\Starfield-Script-Source;C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus" --output "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-BA2\Scripts" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus\VPI_DS_PlayerIntegration.psc"
-Caprica-Experimental.exe --game starfield --flags "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Tools\Starfield_Papyrus_Flags.flg" --import "C:\Repositories\Public\Starfield-Script-Source;C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus" --output "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-BA2\Scripts" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus\VPI_DS_ConfigTerminal.psc"
-Caprica-Experimental.exe --game starfield --flags "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Tools\Starfield_Papyrus_Flags.flg" --import "C:\Repositories\Public\Starfield-Script-Source;C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus" --output "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-BA2\Scripts" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus\VPI_DS_NPC_LootHandler.psc"
-Caprica-Experimental.exe --game starfield --flags "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Tools\Starfield_Papyrus_Flags.flg" --import "C:\Repositories\Public\Starfield-Script-Source;C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus" --output "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-BA2\Scripts" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus\VPI_DS_NPC_ScalingHandler.psc"
-Caprica-Experimental.exe --game starfield --flags "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Tools\Starfield_Papyrus_Flags.flg" --import "C:\Repositories\Public\Starfield-Script-Source;C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus" --output "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-BA2\Scripts" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus\VPI_DS_CloakAbilityApplier.psc"
+@REM Compile and Deploy Scripts to Dist-BA2 folder
+@REM Compile VPI_Helper
+Caprica-Experimental.exe --game starfield --flags "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Tools\Starfield_Papyrus_Flags.flg" --import "C:\Repositories\Public\Starfield-Script-Source;C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus" --output "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-BA2\Scripts" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus\VPI_Helper.psc" && (
+  @echo "VPI_Helper.psc successfully compiled"
+  (call )
+) || (
+  @echo "Error:  VPI_Helper.psc failed to compile <======================================="
+  exit /b 1
+)
 
-REM ESM is purely binary so need to pull from starfield dir where xedit has to have it 
+@REM Compile VPI_DS_InitScript
+Caprica-Experimental.exe --game starfield --flags "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Tools\Starfield_Papyrus_Flags.flg" --import "C:\Repositories\Public\Starfield-Script-Source;C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus" --output "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-BA2\Scripts" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus\VPI_DS_InitScript.psc" && (
+  @echo "VPI_DS_InitScript.psc successfully compiled"
+  (call )
+) || (
+  @echo "Error:  VPI_DS_InitScript.psc failed to compile <======================================="
+  exit /b 1
+)
+
+@REM Compile VPI_DS_PlayerIntegration
+Caprica-Experimental.exe --game starfield --flags "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Tools\Starfield_Papyrus_Flags.flg" --import "C:\Repositories\Public\Starfield-Script-Source;C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus" --output "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-BA2\Scripts" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus\VPI_DS_PlayerIntegration.psc" && (
+  @echo "VPI_DS_PlayerIntegration.psc successfully compiled"
+  (call )
+) || (
+  @echo "Error:  VPI_DS_PlayerIntegration.psc failed to compile <======================================="
+  exit /b 1
+)
+
+@REM Compile VPI_DS_ConfigTerminal
+Caprica-Experimental.exe --game starfield --flags "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Tools\Starfield_Papyrus_Flags.flg" --import "C:\Repositories\Public\Starfield-Script-Source;C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus" --output "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-BA2\Scripts" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus\VPI_DS_ConfigTerminal.psc" && (
+  @echo "VPI_DS_ConfigTerminal.psc successfully compiled"
+  (call )
+) || (
+  @echo "Error:  VPI_DS_ConfigTerminal.psc failed to compile <======================================="
+  exit /b 1
+)
+
+@REM Compile VPI_DS_NPC_LootHandler
+Caprica-Experimental.exe --game starfield --flags "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Tools\Starfield_Papyrus_Flags.flg" --import "C:\Repositories\Public\Starfield-Script-Source;C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus" --output "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-BA2\Scripts" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus\VPI_DS_NPC_LootHandler.psc" && (
+  @echo "VPI_DS_NPC_LootHandler.psc successfully compiled"
+  (call )
+) || (
+  @echo "Error:  VPI_DS_NPC_LootHandler.psc failed to compile <======================================="
+  exit /b 1
+)
+
+@REM Compile VPI_DS_NPC_ScalingHandler
+Caprica-Experimental.exe --game starfield --flags "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Tools\Starfield_Papyrus_Flags.flg" --import "C:\Repositories\Public\Starfield-Script-Source;C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus" --output "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-BA2\Scripts" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus\VPI_DS_NPC_ScalingHandler.psc" && (
+  @echo "VPI_DS_NPC_ScalingHandler.psc successfully compiled"
+  (call )
+) || (
+  @echo "Error:  VPI_DS_NPC_ScalingHandler.psc failed to compile <======================================="
+  exit /b 1
+)
+
+@REM Compile VPI_DS_CloakAbilityApplier
+Caprica-Experimental.exe --game starfield --flags "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Tools\Starfield_Papyrus_Flags.flg" --import "C:\Repositories\Public\Starfield-Script-Source;C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus" --output "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-BA2\Scripts" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus\VPI_DS_CloakAbilityApplier.psc" && (
+  @echo "VPI_DS_CloakAbilityApplier.psc successfully compiled"
+  (call )
+) || (
+  @echo "Error:  VPI_DS_CloakAbilityApplier.psc failed to compile <======================================="
+  exit /b 1
+)
+
+@REM ESM is purely binary so need to pull from starfield dir where xedit has to have it 
+@echo "Copying the ESM from MO2 into the Dist folder"
 copy /y "D:\MO2Staging\Starfield\mods\DynamicScalingExperimental\DynamicScaling.esm" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\ESM"
 copy /y "D:\MO2Staging\Starfield\mods\DynamicScalingExperimental\DynamicScaling.esm" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist"
 
-REM Deploy configuration scripts
+@REM Deploy configuration scripts
 copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Batchfiles\vpi-ds-reset-vanilla.txt" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-BA2\Batchfiles"
 copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Batchfiles\vpi-ds-reset-defaults.txt" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-BA2\Batchfiles"
 copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Batchfiles\vpi-ds-reset-gamesettings-default.txt" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-BA2\Batchfiles"
@@ -61,6 +117,14 @@ copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Sou
 
 @REM Create and copy the BA2 to Dist folder
 @echo "Creating the BA2 Archive"
-.\BSArch64.exe pack "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-BA2" "DynamicScaling - Main.ba2" -sf1 -mt
-@echo "Copying the BA2 Archive to the Dist folder"
+.\BSArch64.exe pack "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-BA2" "DynamicScaling - Main.ba2" -sf1 -mt && (
+  @echo "Main Archive successfully assembled"
+  (call )
+) || (
+  @echo "ERROR:  Main Archive failed to assemble <======================================="
+  exit /b 1
+)
+
+@REM Copying the BA2 Main Archive to the Dist folder
+@echo "Copying the Main Archive to the Dist folder"
 copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-BA2\DynamicScaling - Main.ba2" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist"
