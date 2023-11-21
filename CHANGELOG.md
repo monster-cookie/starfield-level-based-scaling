@@ -1,5 +1,9 @@
 # V2.1 Full Dynamic Scaling
 
+## V2.1.4
+* All combat factions now are using the same logic for both scaling and group spawning. 
+* I still need to implement the First's and Starborn's MK versioned NPCs
+
 ## V2.1.3
 * Added a new global for legendary spawn chance which is the change dynamic scaling will make a legendary from a normal. Fixing dynamic scaling effectively removing the legendary buffs for the legendary NPCs, I noticed it was making legendary mobs way too much. The chance is now 25% instead of 50%. The new variable is DSLegendaryChangeNotToSpawn and its default values is 75%. It is configurable in the terminal. 
 
