@@ -2,6 +2,7 @@
 
 ## V2.1.4
 * All combat factions now are using the same logic for both scaling and group spawning. 
+* Maybe hopefully fixed the loot explosion issues
 * I still need to implement the First's and Starborn's MK versioned NPCs
 
 ## V2.1.3
