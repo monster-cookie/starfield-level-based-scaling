@@ -5,7 +5,7 @@ ScriptName VPI_DS_ConfigTerminal Extends ActiveMagicEffect
 ;;;
 ;;; Global Variables
 ;;;
-GlobalVariable Property DSDebugMode Auto Const Mandatory
+GlobalVariable Property Venpi_DebugEnabled Auto Const Mandatory
 
 GlobalVariable Property BaseNPCHealthBonus Auto Const Mandatory
 GlobalVariable Property BasePlayerHealthBonus Auto Const Mandatory
@@ -31,7 +31,7 @@ GlobalVariable Property EnableCombatFactionResize Auto Const Mandatory
 GlobalVariable Property EnableCombatFactionStatsScaling Auto Const Mandatory
 GlobalVariable Property EnableCustomLoot Auto Const Mandatory
 GlobalVariable Property EnableRandomGroups Auto Const Mandatory
-GlobalVariable Property DSLegendaryChangeNotToSpawn Auto Const Mandatory
+GlobalVariable Property DSLegendaryChanceNotToSpawn Auto Const Mandatory
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -85,23 +85,23 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
         menuActive = False
       ElseIf (menuButtonClicked == 1)
         ;; CLICKED 1: Show Enabled FEautre Menu
-        VPI_Helper.DebugMessage("ConfigTerminal", "ProcessMenu", "Main Menu Button 1 clicked launching DS_ConfigMenu_ConfigureEnabledFeatures.", 0, DSDebugMode.GetValueInt())
+        VPI_Helper.DebugMessage("ConfigTerminal", "ProcessMenu", "Main Menu Button 1 clicked launching DS_ConfigMenu_ConfigureEnabledFeatures.", 0, Venpi_DebugEnabled.GetValueInt())
         message = DS_ConfigMenu_ConfigureEnabledFeatures
       ElseIf (menuButtonClicked == 2)
         ;; CLICKED 2: Show Low Level NPC Settings Menu
-        VPI_Helper.DebugMessage("ConfigTerminal", "ProcessMenu", "Main Menu Button 2 clicked launching DS_ConfigMenu_LowLevelNPCBaseline.", 0, DSDebugMode.GetValueInt())
+        VPI_Helper.DebugMessage("ConfigTerminal", "ProcessMenu", "Main Menu Button 2 clicked launching DS_ConfigMenu_LowLevelNPCBaseline.", 0, Venpi_DebugEnabled.GetValueInt())
         message = DS_ConfigMenu_LowLevelNPCBaseline
       ElseIf (menuButtonClicked == 3)
         ;; CLICKED 3: Show Sponginess Defaults Menu
-        VPI_Helper.DebugMessage("ConfigTerminal", "ProcessMenu", "Main Menu Button 3 clicked launching DS_ConfigMenu_HealthScalingBaseline.", 0, DSDebugMode.GetValueInt())
+        VPI_Helper.DebugMessage("ConfigTerminal", "ProcessMenu", "Main Menu Button 3 clicked launching DS_ConfigMenu_HealthScalingBaseline.", 0, Venpi_DebugEnabled.GetValueInt())
         message = DS_ConfigMenu_HealthScalingBaseline
       ElseIf (menuButtonClicked == 4)
         ;; CLICKED 4: Show Damage Scaling Defaults Menu
-        VPI_Helper.DebugMessage("ConfigTerminal", "ProcessMenu", "Main Menu Button 4 clicked launching DS_ConfigMenu_DamageScalingBaseline.", 0, DSDebugMode.GetValueInt())
+        VPI_Helper.DebugMessage("ConfigTerminal", "ProcessMenu", "Main Menu Button 4 clicked launching DS_ConfigMenu_DamageScalingBaseline.", 0, Venpi_DebugEnabled.GetValueInt())
         message = DS_ConfigMenu_DamageScalingBaseline
       ElseIf (menuButtonClicked == 5)
         ;; CLICKED 5: Show NPC Dynamic Scaling Config Menu
-        VPI_Helper.DebugMessage("ConfigTerminal", "ProcessMenu", "Main Menu Button 5 clicked launching DS_ConfigMenu_NPCDynamicScalingSettings.", 0, DSDebugMode.GetValueInt())
+        VPI_Helper.DebugMessage("ConfigTerminal", "ProcessMenu", "Main Menu Button 5 clicked launching DS_ConfigMenu_NPCDynamicScalingSettings.", 0, Venpi_DebugEnabled.GetValueInt())
         message = DS_ConfigMenu_NPCDynamicScalingSettings
       EndIf
 
@@ -115,11 +115,11 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
       ElseIF (menuButtonClicked == 1) 
         ;; CLICKED 1: Configure Low Level NPC Adjustment Factor
         message = DS_ConfigMenu_LowLevelNPCBaseline_AdjustmentFactor
-        VPI_Helper.DebugMessage("ConfigTerminal", "ProcessMenu", "Low Level NPC Menu Button 1 clicked launching DS_ConfigMenu_LowLevelNPCBaseline_AdjustmentFactor.", 0, DSDebugMode.GetValueInt())
+        VPI_Helper.DebugMessage("ConfigTerminal", "ProcessMenu", "Low Level NPC Menu Button 1 clicked launching DS_ConfigMenu_LowLevelNPCBaseline_AdjustmentFactor.", 0, Venpi_DebugEnabled.GetValueInt())
       ElseIF (menuButtonClicked == 2) 
         ;; CLICKED 2: Configure how many levels below player is considered low level
         message = DS_ConfigMenu_LowLevelNPCBaseline_LevelDifference
-        VPI_Helper.DebugMessage("ConfigTerminal", "ProcessMenu", "Low Level NPC Menu Button 2 clicked launching DS_ConfigMenu_LowLevelNPCBaseline_LevelDifference.", 0, DSDebugMode.GetValueInt())
+        VPI_Helper.DebugMessage("ConfigTerminal", "ProcessMenu", "Low Level NPC Menu Button 2 clicked launching DS_ConfigMenu_LowLevelNPCBaseline_LevelDifference.", 0, Venpi_DebugEnabled.GetValueInt())
       EndIf
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -183,11 +183,11 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
       ElseIF (menuButtonClicked == 1) 
         ;; CLICKED 1: Configure NPC Bonus Health Baseline
         message = DS_ConfigMenu_HealthScalingBaseline_NPCBonusHeath
-        VPI_Helper.DebugMessage("ConfigTerminal", "ProcessMenu", "Health Scaling Baseline Menu Button 1 clicked launching DS_ConfigMenu_HealthScalingBaseline_NPCBonusHeath.", 0, DSDebugMode.GetValueInt())
+        VPI_Helper.DebugMessage("ConfigTerminal", "ProcessMenu", "Health Scaling Baseline Menu Button 1 clicked launching DS_ConfigMenu_HealthScalingBaseline_NPCBonusHeath.", 0, Venpi_DebugEnabled.GetValueInt())
       ElseIF (menuButtonClicked == 2) 
         ;; CLICKED 3: Configure Player Bonus Health Baseline
         message = DS_ConfigMenu_HealthScalingBaseline_PlayerBonusHeath
-        VPI_Helper.DebugMessage("ConfigTerminal", "ProcessMenu", "Health Scaling Baseline Menu Button 2 clicked launching DS_ConfigMenu_HealthScalingBaseline_PlayerBonusHeath.", 0, DSDebugMode.GetValueInt())
+        VPI_Helper.DebugMessage("ConfigTerminal", "ProcessMenu", "Health Scaling Baseline Menu Button 2 clicked launching DS_ConfigMenu_HealthScalingBaseline_PlayerBonusHeath.", 0, Venpi_DebugEnabled.GetValueInt())
       EndIf
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -272,11 +272,11 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
       ElseIF (menuButtonClicked == 1) 
         ;; CLICKED 1: Configure Damage To Player
         message = DS_ConfigMenu_DamageScalingBaseline_DMGToPlayer
-        VPI_Helper.DebugMessage("ConfigTerminal", "ProcessMenu", "Damage Scaling Baseline Menu Button 1 clicked launching DS_ConfigMenu_DamageScalingBaseline_DMGToPlayer.", 0, DSDebugMode.GetValueInt())
+        VPI_Helper.DebugMessage("ConfigTerminal", "ProcessMenu", "Damage Scaling Baseline Menu Button 1 clicked launching DS_ConfigMenu_DamageScalingBaseline_DMGToPlayer.", 0, Venpi_DebugEnabled.GetValueInt())
       ElseIF (menuButtonClicked == 2) 
         ;; CLICKED 2: Configure Damage By Player
         message = DS_ConfigMenu_DamageScalingBaseline_DMGByPlayer
-        VPI_Helper.DebugMessage("ConfigTerminal", "ProcessMenu", "Damage Scaling Baseline Menu Button 2 clicked launching DS_ConfigMenu_DamageScalingBaseline_DMGByPlayer.", 0, DSDebugMode.GetValueInt())
+        VPI_Helper.DebugMessage("ConfigTerminal", "ProcessMenu", "Damage Scaling Baseline Menu Button 2 clicked launching DS_ConfigMenu_DamageScalingBaseline_DMGByPlayer.", 0, Venpi_DebugEnabled.GetValueInt())
       EndIf
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -672,7 +672,7 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
       ElseIF (menuButtonClicked == 1) 
         ;; CLICKED 1: Configure Damage To Player
         message = DS_ConfigMenu_NPCDynamicScalingSettings_LegendarySpawnChanceNone
-        VPI_Helper.DebugMessage("ConfigTerminal", "ProcessMenu", "Dynamic Scaling Settings Menu Button 1 clicked launching DS_ConfigMenu_NPCDynamicScalingSettings_LegendarySpawnChanceNone.", 0, DSDebugMode.GetValueInt())
+        VPI_Helper.DebugMessage("ConfigTerminal", "ProcessMenu", "Dynamic Scaling Settings Menu Button 1 clicked launching DS_ConfigMenu_NPCDynamicScalingSettings_LegendarySpawnChanceNone.", 0, Venpi_DebugEnabled.GetValueInt())
       EndIf
 
     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -684,31 +684,31 @@ Function ProcessMenu(Message message, Int menuButtonClicked, Bool menuActive)
         ;; CLICKED 0: Return to Dynamic Scaling Configuration Menu
       ElseIF (menuButtonClicked == 1) 
         ;; CLICKED 1: Set to 10% chance -- Global is inverted so 10% Chance = 90% ChanceNone
-        DSLegendaryChangeNotToSpawn.SetValueInt(90)
+        DSLegendaryChanceNotToSpawn.SetValueInt(90)
       ElseIF (menuButtonClicked == 2) 
         ;; CLICKED 2: Set to 20% chance -- Global is inverted so 20% Chance = 80% ChanceNone
-        DSLegendaryChangeNotToSpawn.SetValueInt(80)
+        DSLegendaryChanceNotToSpawn.SetValueInt(80)
       ElseIF (menuButtonClicked == 3) 
         ;; CLICKED 3: Set to 25% chance (Default) -- Global is inverted so 25% Chance = 75% ChanceNone
-        DSLegendaryChangeNotToSpawn.SetValueInt(75)
+        DSLegendaryChanceNotToSpawn.SetValueInt(75)
       ElseIF (menuButtonClicked == 4) 
         ;; CLICKED 4: Set to 30% chance -- Global is inverted so 30% Chance = 70% ChanceNone
-        DSLegendaryChangeNotToSpawn.SetValueInt(70)
+        DSLegendaryChanceNotToSpawn.SetValueInt(70)
       ElseIF (menuButtonClicked == 5) 
         ;; CLICKED 5: Set to 40% chance (Recommended) -- Global is inverted so 40% Chance = 60% ChanceNone
-        DSLegendaryChangeNotToSpawn.SetValueInt(60)
+        DSLegendaryChanceNotToSpawn.SetValueInt(60)
       ElseIF (menuButtonClicked == 6) 
         ;; CLICKED 6: Set to 50% chance -- Global is inverted so 50% Chance = 50% ChanceNone
-        DSLegendaryChangeNotToSpawn.SetValueInt(50)
+        DSLegendaryChanceNotToSpawn.SetValueInt(50)
       ElseIF (menuButtonClicked == 7) 
         ;; CLICKED 7: Set to 60% chance -- Global is inverted so 60% Chance = 40% ChanceNone
-        DSLegendaryChangeNotToSpawn.SetValueInt(40)
+        DSLegendaryChanceNotToSpawn.SetValueInt(40)
       ElseIF (menuButtonClicked == 8) 
         ;; CLICKED 8: Set to 75% chance -- Global is inverted so 75% Chance = 25% ChanceNone
-        DSLegendaryChangeNotToSpawn.SetValueInt(25)
+        DSLegendaryChanceNotToSpawn.SetValueInt(25)
       ElseIF (menuButtonClicked == 9) 
         ;; CLICKED 9: Set to 100% chance -- Global is inverted so 100% Chance = 0% ChanceNone
-        DSLegendaryChangeNotToSpawn.SetValueInt(0)
+        DSLegendaryChanceNotToSpawn.SetValueInt(0)
       EndIf
     EndIf ;; End Main Menu
   EndWhile

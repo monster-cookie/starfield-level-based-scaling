@@ -4,7 +4,7 @@ Scriptname VPI_DS_NPC_LootHandler extends ActiveMagicEffect
 ;;;
 ;;; Global Variables
 ;;;
-GlobalVariable Property DSDebugMode Auto Const Mandatory
+GlobalVariable Property Venpi_DebugEnabled Auto Const Mandatory
 GlobalVariable Property EnableCustomLoot Auto Const Mandatory
 
 
@@ -44,7 +44,7 @@ ObjectReference Property Myself Auto
 ;;;
 
 Event OnEffectStart(ObjectReference akTarget, Actor akCaster, MagicEffect akBaseEffect, Float afMagnitude, Float afDuration)
-  ; VPI_Helper.DebugMessage("NPCLootHandler", "OnEffectStart", "OnEffectStart triggered", 0, DSDebugMode.GetValueInt())
+  ; VPI_Helper.DebugMessage("NPCLootHandler", "OnEffectStart", "OnEffectStart triggered", 0, Venpi_DebugEnabled.GetValueInt())
   Myself = akTarget
 
   ;; Have a race condition which shouldn't be possible but injecting a keyword to prevent reprossessing. 
@@ -67,7 +67,7 @@ Event OnEffectStart(ObjectReference akTarget, Actor akCaster, MagicEffect akBase
 EndEvent
 
 Event OnEffectFinish(ObjectReference akTarget, Actor akCaster, MagicEffect akBaseEffect, Float afMagnitude, Float afDuration)
-  ; VPI_Helper.DebugMessage("NPCLootHandler", "OnEffectFinish", "OnEffectFinish triggered", 0, DSDebugMode.GetValueInt())
+  ; VPI_Helper.DebugMessage("NPCLootHandler", "OnEffectFinish", "OnEffectFinish triggered", 0, Venpi_DebugEnabled.GetValueInt())
 EndEvent
 
 
@@ -77,69 +77,69 @@ EndEvent
 ;;;
 Function HandleLootGeneric(Int npcType)
   If (npcType == 5)
-    VPI_Helper.DebugMessage("NPCLootHandler", "HandleLootGeneric", Myself + "> Generic Leveled NPC is a MK5 class and needs loot updated.", 0, DSDebugMode.GetValueInt())
+    VPI_Helper.DebugMessage("NPCLootHandler", "HandleLootGeneric", Myself + "> Generic Leveled NPC is a MK5 class and needs loot updated.", 0, Venpi_DebugEnabled.GetValueInt())
     Myself.AddItem(LL_Loot_Legendary_Human as Form, 1, true)
     Myself.AddItem(DS_Generic_Miniboss as Form, 4, true)
   ElseIf (npcType == 4)
-    VPI_Helper.DebugMessage("NPCLootHandler", "HandleLootGeneric", Myself + "> Generic Leveled NPC is a MK4 class and needs loot updated.", 0, DSDebugMode.GetValueInt())
+    VPI_Helper.DebugMessage("NPCLootHandler", "HandleLootGeneric", Myself + "> Generic Leveled NPC is a MK4 class and needs loot updated.", 0, Venpi_DebugEnabled.GetValueInt())
     If (Game.GetDieRollSuccess(40, 1, 100, -1, -1))
       Myself.AddItem(LL_Loot_Legendary_Human as Form, 1, true)
     EndIf
     Myself.AddItem(DS_Generic_Normal as Form, 3, true)
   ElseIf (npcType == 3)
-    VPI_Helper.DebugMessage("NPCLootHandler", "HandleLootGeneric", Myself + "> Generic Leveled NPC is a MK3 class and needs loot updated.", 0, DSDebugMode.GetValueInt())
+    VPI_Helper.DebugMessage("NPCLootHandler", "HandleLootGeneric", Myself + "> Generic Leveled NPC is a MK3 class and needs loot updated.", 0, Venpi_DebugEnabled.GetValueInt())
     Myself.AddItem(DS_Generic_Normal as Form, 3, true)
   ElseIf (npcType == 2)
-    VPI_Helper.DebugMessage("NPCLootHandler", "HandleLootGeneric", Myself + "> Generic Leveled NPC is a MK2 class and needs loot updated.", 0, DSDebugMode.GetValueInt())
+    VPI_Helper.DebugMessage("NPCLootHandler", "HandleLootGeneric", Myself + "> Generic Leveled NPC is a MK2 class and needs loot updated.", 0, Venpi_DebugEnabled.GetValueInt())
     Myself.AddItem(DS_Generic_Normal as Form, 2, true)
   ElseIf (npcType == 1)
-    VPI_Helper.DebugMessage("NPCLootHandler", "HandleLootGeneric", Myself + "> Generic Leveled NPC is a MK1 class and needs loot updated.", 0, DSDebugMode.GetValueInt())
+    VPI_Helper.DebugMessage("NPCLootHandler", "HandleLootGeneric", Myself + "> Generic Leveled NPC is a MK1 class and needs loot updated.", 0, Venpi_DebugEnabled.GetValueInt())
     Myself.AddItem(DS_Generic_Recruit as Form, 2, true)
   EndIf
 EndFunction
 
 Function HandleLootPirate(Int npcType)
   If (npcType == 5)
-    VPI_Helper.DebugMessage("NPCLootHandler", "HandleLootPirate", Myself + "> Pirate Leveled NPC is a MK5 class and needs loot updated.", 0, DSDebugMode.GetValueInt())
+    VPI_Helper.DebugMessage("NPCLootHandler", "HandleLootPirate", Myself + "> Pirate Leveled NPC is a MK5 class and needs loot updated.", 0, Venpi_DebugEnabled.GetValueInt())
     Myself.AddItem(LL_Loot_Legendary_Human as Form, 1, true)
     Myself.AddItem(DS_Pirate_Miniboss as Form, 5, true)
   ElseIf (npcType == 4)
-    VPI_Helper.DebugMessage("NPCLootHandler", "HandleLootPirate", Myself + "> Pirate Leveled NPC is a MK4 class and needs loot updated.", 0, DSDebugMode.GetValueInt())
+    VPI_Helper.DebugMessage("NPCLootHandler", "HandleLootPirate", Myself + "> Pirate Leveled NPC is a MK4 class and needs loot updated.", 0, Venpi_DebugEnabled.GetValueInt())
     If (Game.GetDieRollSuccess(40, 1, 100, -1, -1))
       Myself.AddItem(LL_Loot_Legendary_Human as Form, 1, true)
     EndIf
     Myself.AddItem(DS_Pirate_Normal as Form, 3, true)
   ElseIf (npcType == 3)
-    VPI_Helper.DebugMessage("NPCLootHandler", "HandleLootPirate", Myself + "> Pirate Leveled NPC is a MK3 class and needs loot updated.", 0, DSDebugMode.GetValueInt())
+    VPI_Helper.DebugMessage("NPCLootHandler", "HandleLootPirate", Myself + "> Pirate Leveled NPC is a MK3 class and needs loot updated.", 0, Venpi_DebugEnabled.GetValueInt())
     Myself.AddItem(DS_Pirate_Normal as Form, 3, true)
   ElseIf (npcType == 2)
-    VPI_Helper.DebugMessage("NPCLootHandler", "HandleLootPirate", Myself + "> Pirate Leveled NPC is a MK2 class and needs loot updated.", 0, DSDebugMode.GetValueInt())
+    VPI_Helper.DebugMessage("NPCLootHandler", "HandleLootPirate", Myself + "> Pirate Leveled NPC is a MK2 class and needs loot updated.", 0, Venpi_DebugEnabled.GetValueInt())
     Myself.AddItem(DS_Pirate_Normal as Form, 2, true)
   ElseIf (npcType == 1)
-    VPI_Helper.DebugMessage("NPCLootHandler", "HandleLootPirate", Myself + "> Pirate Leveled NPC is a MK1 class and needs loot updated.", 0, DSDebugMode.GetValueInt())
+    VPI_Helper.DebugMessage("NPCLootHandler", "HandleLootPirate", Myself + "> Pirate Leveled NPC is a MK1 class and needs loot updated.", 0, Venpi_DebugEnabled.GetValueInt())
     Myself.AddItem(DS_Pirate_Normal as Form, 2, true)
   EndIf
 EndFunction
 
 Function HandleLootVaruun(Int npcType)
   If (npcType == 5)
-    VPI_Helper.DebugMessage("NPCLootHandler", "HandleLootVaruun", Myself + "> Va'ruun Leveled NPC is a MK5 class and needs loot updated.", 0, DSDebugMode.GetValueInt())
+    VPI_Helper.DebugMessage("NPCLootHandler", "HandleLootVaruun", Myself + "> Va'ruun Leveled NPC is a MK5 class and needs loot updated.", 0, Venpi_DebugEnabled.GetValueInt())
     Myself.AddItem(LL_Loot_Legendary_Human as Form, 1, true)
     Myself.AddItem(DS_Varuun_Miniboss as Form, 5, true)
   ElseIf (npcType == 4)
-    VPI_Helper.DebugMessage("NPCLootHandler", "HandleLootVaruun", Myself + "> Va'ruun Leveled NPC is a MK4 class and needs loot updated.", 0, DSDebugMode.GetValueInt())
+    VPI_Helper.DebugMessage("NPCLootHandler", "HandleLootVaruun", Myself + "> Va'ruun Leveled NPC is a MK4 class and needs loot updated.", 0, Venpi_DebugEnabled.GetValueInt())
     If (Game.GetDieRollSuccess(40, 1, 100, -1, -1))
       Myself.AddItem(LL_Loot_Legendary_Human as Form, 1, true)
     EndIf
     Myself.AddItem(DS_Varuun_Normal as Form, 3, true)
   ElseIf (npcType == 3)
-    VPI_Helper.DebugMessage("NPCLootHandler", "HandleLootVaruun", Myself + "> Va'ruun Leveled NPC is a MK3 class and needs loot updated.", 0, DSDebugMode.GetValueInt())
+    VPI_Helper.DebugMessage("NPCLootHandler", "HandleLootVaruun", Myself + "> Va'ruun Leveled NPC is a MK3 class and needs loot updated.", 0, Venpi_DebugEnabled.GetValueInt())
     Myself.AddItem(DS_Varuun_Normal as Form, 3, true)
   ElseIf (npcType == 2)
-    VPI_Helper.DebugMessage("NPCLootHandler", "HandleLootVaruun", Myself + "> Va'ruun Leveled NPC is a MK2 class and needs loot updated.", 0, DSDebugMode.GetValueInt())
+    VPI_Helper.DebugMessage("NPCLootHandler", "HandleLootVaruun", Myself + "> Va'ruun Leveled NPC is a MK2 class and needs loot updated.", 0, Venpi_DebugEnabled.GetValueInt())
     Myself.AddItem(DS_Varuun_Normal as Form, 2, true)
   ElseIf (npcType == 1)
-    VPI_Helper.DebugMessage("NPCLootHandler", "HandleLootVaruun", Myself + "> Va'ruun Leveled NPC is a MK1 class and needs loot updated.", 0, DSDebugMode.GetValueInt())
+    VPI_Helper.DebugMessage("NPCLootHandler", "HandleLootVaruun", Myself + "> Va'ruun Leveled NPC is a MK1 class and needs loot updated.", 0, Venpi_DebugEnabled.GetValueInt())
     Myself.AddItem(DS_Varuun_Normal as Form, 2, true)
   EndIf
 EndFunction
