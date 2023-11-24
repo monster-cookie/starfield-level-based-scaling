@@ -43,6 +43,11 @@ Keyword Property ActorTypeLegendary Auto Const Mandatory
 ;; ActorValue Property LegendaryRank Auto Const Mandatory
 LegendaryAliasQuestScript Property LegendaryAliasQuest Auto Const mandatory
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Variables
+;;;
 ObjectReference Property Myself Auto
 ObjectReference Property PlayerRef Auto Const Mandatory
 Actor Property Player Auto
@@ -55,7 +60,7 @@ Actor Property RealMe Auto
 ;;;
 
 Event OnEffectStart(ObjectReference akTarget, Actor akCaster, MagicEffect akBaseEffect, Float afMagnitude, Float afDuration)
-  ; VPI_Helper.DebugMessage("NPCScalingHandler", "OnEffectStart", "OnEffectStart triggered", 0, Venpi_DebugEnabled.GetValueInt())
+  ; VPI_Debug.DebugMessage("NPCScalingHandler", "OnEffectStart", "OnEffectStart triggered", 0, Venpi_DebugEnabled.GetValueInt())
   Myself = akTarget
   RealMe = akTarget.GetSelfAsActor()
   Player = PlayerRef.GetSelfAsActor()
@@ -69,19 +74,19 @@ Event OnEffectStart(ObjectReference akTarget, Actor akCaster, MagicEffect akBase
 
   ;; Handle Scaling Stuff
   If (EnableCombatFactionStatsScaling.GetValueInt() == 1)
-    HandleLevelScaling(VPI_Helper.GetNPCType(akTarget, NPC_Type_MK5, NPC_Type_MK4, NPC_Type_MK3, NPC_Type_MK2, NPC_Type_MK1))
+    HandleLevelScaling(VPI_NPCUtilities.GetType(akTarget, NPC_Type_MK5, NPC_Type_MK4, NPC_Type_MK3, NPC_Type_MK2, NPC_Type_MK1))
   Else
-    VPI_Helper.DebugMessage("NPCScalingHandler", "OnEffectStart", "Combat Faction NPC Stat Scaling is currently disabled.", 0, Venpi_DebugEnabled.GetValueInt())
+    VPI_Debug.DebugMessage("NPCScalingHandler", "OnEffectStart", "Combat Faction NPC Stat Scaling is currently disabled.", 0, Venpi_DebugEnabled.GetValueInt())
   EndIf
   If (EnableCombatFactionResize.GetValueInt() == 1)
-    HandleHeightScaling(VPI_Helper.GetNPCType(akTarget, NPC_Type_MK5, NPC_Type_MK4, NPC_Type_MK3, NPC_Type_MK2, NPC_Type_MK1))
+    HandleHeightScaling(VPI_NPCUtilities.GetType(akTarget, NPC_Type_MK5, NPC_Type_MK4, NPC_Type_MK3, NPC_Type_MK2, NPC_Type_MK1))
   Else
-    VPI_Helper.DebugMessage("NPCScalingHandler", "OnEffectStart", "Combat Faction NPC Height Resizing is currently disabled.", 0, Venpi_DebugEnabled.GetValueInt())
+    VPI_Debug.DebugMessage("NPCScalingHandler", "OnEffectStart", "Combat Faction NPC Height Resizing is currently disabled.", 0, Venpi_DebugEnabled.GetValueInt())
   EndIf
 EndEvent
 
 Event OnEffectFinish(ObjectReference akTarget, Actor akCaster, MagicEffect akBaseEffect, Float afMagnitude, Float afDuration)
-  ; VPI_Helper.DebugMessage("NPCScalingHandler", "OnEffectFinish", "OnEffectFinish triggered", 0, Venpi_DebugEnabled.GetValueInt())
+  VPI_Debug.DebugMessage("NPCScalingHandler", "OnEffectFinish", "OnEffectFinish triggered", 0, Venpi_DebugEnabled.GetValueInt())
 EndEvent
 
 
@@ -95,12 +100,12 @@ Function HandleHeightScaling(Int npcType)
   Float newScale = currentScale
   If (npcType == 5)
     newScale = currentScale * Utility.RandomFloat(1.05,2.0)
-    VPI_Helper.DebugMessage("NPCScalingHandler", "HandleHeight", Myself + "> Leveled NPC is a MK5 type and needs enlarged. Current scale is " + currentScale + " moving to new scale of " + newScale + ".", 0, Venpi_DebugEnabled.GetValueInt())
+    VPI_Debug.DebugMessage("NPCScalingHandler", "HandleHeight", Myself + "> Leveled NPC is a MK5 type and needs enlarged. Current scale is " + currentScale + " moving to new scale of " + newScale + ".", 0, Venpi_DebugEnabled.GetValueInt())
   ElseIf (npcType == 1)
     newScale = currentScale * Utility.RandomFloat(0.35,0.95)
-    VPI_Helper.DebugMessage("NPCScalingHandler", "HandleHeight", Myself + "> Leveled NPC is a MK1 type and needs shrunk. Current scale is " + currentScale + " moving to new scale of " + newScale + ".", 0, Venpi_DebugEnabled.GetValueInt())
+    VPI_Debug.DebugMessage("NPCScalingHandler", "HandleHeight", Myself + "> Leveled NPC is a MK1 type and needs shrunk. Current scale is " + currentScale + " moving to new scale of " + newScale + ".", 0, Venpi_DebugEnabled.GetValueInt())
   Else
-    VPI_Helper.DebugMessage("NPCScalingHandler", "HandleHeight", Myself + "> Leveled NPC is a normal class so no scaling needed.", 0, Venpi_DebugEnabled.GetValueInt())
+    VPI_Debug.DebugMessage("NPCScalingHandler", "HandleHeight", Myself + "> Leveled NPC is a normal class so no scaling needed.", 0, Venpi_DebugEnabled.GetValueInt())
     newScale = currentScale
   EndIf
   RealMe.SetScale(newScale)
@@ -141,7 +146,7 @@ Function HandleLevelScaling(Int npcType)
   int encounterlevel = RealMe.CalculateEncounterLevel(Game.GetDifficulty())
 
   If (RealMe.HasKeyword(ActorTypeLegendary))
-      VPI_Helper.DebugMessage("NPCScalingHandler", "HandleLevelScaling",  Myself + "> is already a legendary and scaling basically negates so skipping for a NPC Type of " + npcType + ".", 0, Venpi_DebugEnabled.GetValueInt())
+      VPI_Debug.DebugMessage("NPCScalingHandler", "HandleLevelScaling",  Myself + "> is already a legendary and scaling basically negates so skipping for a NPC Type of " + npcType + ".", 0, Venpi_DebugEnabled.GetValueInt())
       DebugLevelScaling(npcType, "FINAL")
       return
   EndIf
@@ -149,7 +154,7 @@ Function HandleLevelScaling(Int npcType)
   If (DSLegendaryChanceNotToSpawn.GetValueInt() == 0 || Game.GetDieRollSuccess(DSLegendaryChanceNotToSpawn.GetValueInt(), 1, 100, -1, -1))
     ;; Won the lotto I become a legendary
     LegendaryAliasQuest.MakeLegendary(RealMe)
-    VPI_Helper.DebugMessage("NPCScalingHandler", "HandleLevelScaling",  Myself + "> hase won the lottoe and is now a legendary and scaling basically negates so skipping for a NPC Type of " + npcType + ".", 0, Venpi_DebugEnabled.GetValueInt())
+    VPI_Debug.DebugMessage("NPCScalingHandler", "HandleLevelScaling",  Myself + "> hase won the lottoe and is now a legendary and scaling basically negates so skipping for a NPC Type of " + npcType + ".", 0, Venpi_DebugEnabled.GetValueInt())
     DebugLevelScaling(npcType, "FINAL")
     return
   EndIf
@@ -206,14 +211,14 @@ Function HandleLevelScaling(Int npcType)
   message += "Adjusting my critical damage multiplier to " + scaledCriticalHitDamageMult + " from " + myCriticalHitDamageMult + " against the player's " + playerCriticalHitDamageMult + ".\n"
   RealMe.SetValue(CriticalHitDamageMult, scaledCriticalHitDamageMult)
 
-  VPI_Helper.DebugMessage("NPCScalingHandler", "HandleLevelScaling", message, 0, Venpi_DebugEnabled.GetValueInt())
+  VPI_Debug.DebugMessage("NPCScalingHandler", "HandleLevelScaling", message, 0, Venpi_DebugEnabled.GetValueInt())
   DebugLevelScaling(npcType, "FINAL")
 EndFunction
 
 Function DebugLevelScaling(Int npcType, String scalingState)
   int playerLevel = Player.GetLevel()
   int myLevel = RealMe.GetLeveledActorBase().GetLevel()
-  string myRace = VPI_Helper.GetNPCRace(Myself, NPC_Varuun, NPC_CrimsonFleet, NPC_Ecliptic, NPC_Spacer)
+  string myRace = VPI_NPCUtilities.GetRace(Myself, NPC_Varuun, NPC_CrimsonFleet, NPC_Ecliptic, NPC_Spacer)
   string message = Myself + "> Scaling for a player of level " + playerLevel + " and my level is " + myLevel + ".\n"
   message += "I am a class " + npcType + " NPC in combat faction " + myRace + ".\n\n"
 
@@ -265,12 +270,12 @@ Function DebugLevelScaling(Int npcType, String scalingState)
   message += "My/Player Critical Hit Damage Multiplier: " + myCriticalHitDamageMult + " | " + playerCriticalHitDamageMult + ".\n"
   message += "My/Player Attack Damage Multiplier: " + myAttackDamageMult + " | " + playerAttackDamageMult + ".\n"
 
-  VPI_Helper.DebugMessage("NPCScalingHandler", "DebugLevelScaling-" + scalingState, message, 0, Venpi_DebugEnabled.GetValueInt())
+  VPI_Debug.DebugMessage("NPCScalingHandler", "DebugLevelScaling-" + scalingState, message, 0, Venpi_DebugEnabled.GetValueInt())
 EndFunction
 
 Float Function GetScalingAdjustmentForDifficultyAndNPCType(Float adjustmentFactor, int npcType)
   Int iDifficulty = Game.GetDifficulty()
-  string sDifficulty = VPI_Helper.GetDifficulty(iDifficulty)
+  string sDifficulty = VPI_GameUtilities.GetDifficulty(iDifficulty)
 
   Float base = ((100 - (100 * adjustmentFactor))/100)
   Float calculated = 1

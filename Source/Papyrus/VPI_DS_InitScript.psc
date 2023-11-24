@@ -1,10 +1,10 @@
 scriptname VPI_DS_InitScript extends Quest
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;; Global Variables
 ;;;
+GlobalVariable Property Venpi_DebugEnabled Auto Const Mandatory
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -21,7 +21,7 @@ Spell Property DS_NPC_CloakEnabler_Ability Auto Const Mandatory
 ;;; Events
 ;;;
 Event OnQuestInit()
-  Debug.Trace("VPI_DS_EVENT (InitScript): OnQuestInit triggered", 0)
+  VPI_Debug.DebugMessage("InitScript", "OnQuestInit", "OnQuestInit triggered.", 0, Venpi_DebugEnabled.GetValueInt())
   HandleInventory()
   HandleSpell()
 EndEvent
@@ -34,11 +34,13 @@ EndEvent
 Function HandleInventory()
   If PlayerRef.GetItemCount(DS_ConfigTerminal) <= 0
     PlayerRef.AddItem(DS_ConfigTerminal, 1, false)
+    VPI_Debug.DebugMessage("InitScript", "HandleInventory", "Config Terminal Item added to player inventory.", 0, Venpi_DebugEnabled.GetValueInt())
   EndIf
 EndFunction
 
 Function HandleSpell()
   PlayerRef.AddSpell(DS_NPC_CloakEnabler_Ability, false)
+  VPI_Debug.DebugMessage("InitScript", "HandleSpell", "Cloak enabler spell added to playerref.", 0, Venpi_DebugEnabled.GetValueInt())
 EndFunction
 
 

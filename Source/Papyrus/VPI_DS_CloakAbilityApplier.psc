@@ -1,10 +1,23 @@
 Scriptname VPI_DS_CloakAbilityApplier extends ActiveMagicEffect  
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Global Variables
+;;;
+GlobalVariable Property Venpi_DebugEnabled Auto Const Mandatory
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Properties
+;;;
 Spell Property AbilityToApply Auto Const Mandatory
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;; Events
+;;;
 Event OnEffectStart(ObjectReference akTarget, Actor akCaster, MagicEffect akBaseEffect, Float afMagnitude, Float afDuration)
-  ; Debug.Trace("VPI_DS_EVENT (AbilityApplier): OnEffectStart triggered", 0)
   Actor target = akTarget.GetSelfAsActor()
 	target.AddSpell(AbilityToApply, false)
-  ; Debug.Trace("VPI_DS_DEBUG (AbilityApplier): Added ability with form ID " + AbilityToApply + " to target with form ID " + target + ".", 0)
+  VPI_Debug.DebugMessage("CloakAbilityApplier", "OnEffectStart", "Added ability with form ID " + AbilityToApply + " to target with form ID " + target + ".", 0, Venpi_DebugEnabled.GetValueInt())
 EndEvent

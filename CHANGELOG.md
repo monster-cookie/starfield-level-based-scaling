@@ -1,5 +1,9 @@
 # V2.1 Full Dynamic Scaling
 
+## V2.1.5
+* Full usage and compatibility with VenpiCore
+* Pilgrimage Patch has updates for the latest version
+
 ## V2.1.4
 * All combat factions now are using the same logic for both scaling and group spawning. 
 * Maybe hopefully fixed the loot explosion issues

@@ -1,8 +1,9 @@
 ﻿Dist
-Dist-BA2
+Dist-BA2-Main
 Dist-Optional-Hard
 Dist-Optional-Balanced
 Dist-Optional-Experimental
+Dist-Patch-Pilgrimage
 Tools/BSArch64.exe
 Tools/Caprica.exe
 Tools/Champollion.exe

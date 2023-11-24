@@ -5,6 +5,7 @@ ScriptName VPI_DS_PlayerIntegration Extends Actor
 ;;;
 ;;; Global Variables
 ;;;
+GlobalVariable Property Venpi_DebugEnabled Auto Const Mandatory
 GlobalVariable Property BaseNPCHealthBonus Auto Const Mandatory
 GlobalVariable Property BasePlayerHealthBonus Auto Const Mandatory
 GlobalVariable Property BaseLowLevelNPCHealthAdjustment Auto Const Mandatory
@@ -181,7 +182,7 @@ EndFunction
 ;;
 Float Function GetDamageToPlayerScalingFactor()
   Int playerLevel = GetLevel()
-  Int playerBracket = VPI_Helper.GetBracketForPlayerLevel(playerLevel)
+  Int playerBracket = VPI_ScalingUtilities.GetBracketForPlayerLevel(playerLevel)
   Float playerPhysicalResist = GetValue(DamageResist)
   Float playerEnergyResist = GetValue(EnergyResist)
   Float playerElectromagneticResist = GetValue(ElectromagneticDamageResist)
@@ -215,7 +216,7 @@ EndFunction
 ;;
 Float Function GetDamageByPlayerScalingFactor()
   Int playerLevel = GetLevel()
-  Int playerBracket = VPI_Helper.GetBracketForPlayerLevel(playerLevel)
+  Int playerBracket = VPI_ScalingUtilities.GetBracketForPlayerLevel(playerLevel)
   Float scalefactorDamageAdd = BasePerkAdjustmentDamageAdd.GetValue()
   Float scaleFactor = SF_DamageByPlayer[playerBracket];
 
@@ -241,7 +242,7 @@ EndFunction
 ;;
 Float Function SponginessNPCScalingFactor()
   Int playerLevel = GetLevel()
-  Int playerBracket = VPI_Helper.GetBracketForPlayerLevel(playerLevel)
+  Int playerBracket = VPI_ScalingUtilities.GetBracketForPlayerLevel(playerLevel)
   Float scaleFactor = SF_NPCHealthBoost[playerBracket];
 
   ; Debug.Trace("VPI_DS_DEBUG (PCIntegration): NPC Bonus Health scaling is being calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an initial SF of " + scaleFactor + ".", 0)
@@ -260,7 +261,7 @@ EndFunction
 ;;
 Float Function SponginessPlayerScalingFactor()
   Int playerLevel = GetLevel()
-  Int playerBracket = VPI_Helper.GetBracketForPlayerLevel(playerLevel)
+  Int playerBracket = VPI_ScalingUtilities.GetBracketForPlayerLevel(playerLevel)
   Float scaleFactor = SF_PCHealthBoost[playerBracket];
 
   ; Debug.Trace("VPI_DS_DEBUG (PCIntegration): Player Bonus Health scaling is being calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an initial SF of " + scaleFactor + ".", 0)
@@ -279,7 +280,7 @@ EndFunction
 ;;
 Float Function BracketAdjustmentForLowLevelNPCHealthAdjustment()
   Int playerLevel = GetLevel()
-  Int playerBracket = VPI_Helper.GetBracketForPlayerLevel(playerLevel)
+  Int playerBracket = VPI_ScalingUtilities.GetBracketForPlayerLevel(playerLevel)
   Float bracketValue = SF_LowLevelNPCHealthAdjustment[playerBracket];
 
   ; Debug.Trace("VPI_DS_DEBUG (PCIntegration): Low Level NPC Health Adjustment is being calculated for a player level of " + playerLevel + " using bracket " + playerBracket + " resulting in an initial SF of " + bracketValue + ".", 0)
@@ -308,30 +309,30 @@ Function ScaleSettings()
   Int adjustedScalingLevel = playerLevel + 5;
   
   ; Debug.Trace("VPI_DS_DEBUG (PCIntegration): Setting iCalcLevelAdjustUp to " + adjustedScalingLevel + " for a player level of " + playerLevel + ".", 0)
-  VPI_Helper.SetGameSettingInt("iCalcLevelAdjustUp", adjustedScalingLevel)
-  VPI_Helper.SetGameSettingInt("iCalcLevelAdjustDown", 0)
+  VPI_GameUtilities.SetGameSettingInt("iCalcLevelAdjustUp", adjustedScalingLevel)
+  VPI_GameUtilities.SetGameSettingInt("iCalcLevelAdjustDown", 0)
 
   Float bvLowLevelNPCHealthAdjustment = BracketAdjustmentForLowLevelNPCHealthAdjustment()
-  VPI_Helper.SetGameSettingFloat("fLowLevelNPCBaseHealthMult", bvLowLevelNPCHealthAdjustment)
+  VPI_GameUtilities.SetGameSettingFloat("fLowLevelNPCBaseHealthMult", bvLowLevelNPCHealthAdjustment)
 
   Int bvLowLevelNPCVsPlayerLevelDifference = BaseLowLevelNPCVsPlayerLevelDifference.GetValueInt()
-  VPI_Helper.SetGameSettingInt("iLowLevelNPCMaxLevel", bvLowLevelNPCVsPlayerLevelDifference)
+  VPI_GameUtilities.SetGameSettingInt("iLowLevelNPCMaxLevel", bvLowLevelNPCVsPlayerLevelDifference)
 
   If (EnableScalingDamage.GetValueInt() == 1)
     Float sfDamageByPlayer = GetDamageByPlayerScalingFactor()
     Float sfDamageToPlayer = GetDamageToPlayerScalingFactor()
 
-    VPI_Helper.ScaleGameSettingFloat("fDiffMultHPByPCVE", BaseDamageByPlayerVE.GetValue(), sfDamageByPlayer)
-    VPI_Helper.ScaleGameSettingFloat("fDiffMultHPByPCE", BaseDamageByPlayerE.GetValue(), sfDamageByPlayer)
-    VPI_Helper.ScaleGameSettingFloat("fDiffMultHPByPCN", BaseDamageByPlayerN.GetValue(), sfDamageByPlayer)
-    VPI_Helper.ScaleGameSettingFloat("fDiffMultHPByPCH", BaseDamageByPlayerH.GetValue(), sfDamageByPlayer)
-    VPI_Helper.ScaleGameSettingFloat("fDiffMultHPByPCVH", BaseDamageByPlayerVH.GetValue(), sfDamageByPlayer)
+    VPI_ScalingUtilities.ScaleGameSettingFloat("fDiffMultHPByPCVE", BaseDamageByPlayerVE.GetValue(), sfDamageByPlayer)
+    VPI_ScalingUtilities.ScaleGameSettingFloat("fDiffMultHPByPCE", BaseDamageByPlayerE.GetValue(), sfDamageByPlayer)
+    VPI_ScalingUtilities.ScaleGameSettingFloat("fDiffMultHPByPCN", BaseDamageByPlayerN.GetValue(), sfDamageByPlayer)
+    VPI_ScalingUtilities.ScaleGameSettingFloat("fDiffMultHPByPCH", BaseDamageByPlayerH.GetValue(), sfDamageByPlayer)
+    VPI_ScalingUtilities.ScaleGameSettingFloat("fDiffMultHPByPCVH", BaseDamageByPlayerVH.GetValue(), sfDamageByPlayer)
   
-    VPI_Helper.ScaleGameSettingFloat("fDiffMultHPToPCVE", BaseDamageToPlayerVE.GetValue(), sfDamageToPlayer)
-    VPI_Helper.ScaleGameSettingFloat("fDiffMultHPToPCE", BaseDamageToPlayerE.GetValue(), sfDamageToPlayer)
-    VPI_Helper.ScaleGameSettingFloat("fDiffMultHPToPCN", BaseDamageToPlayerN.GetValue(), sfDamageToPlayer)
-    VPI_Helper.ScaleGameSettingFloat("fDiffMultHPToPCH", BaseDamageToPlayerH.GetValue(), sfDamageToPlayer)
-    VPI_Helper.ScaleGameSettingFloat("fDiffMultHPToPCVH", BaseDamageToPlayerVH.GetValue(), sfDamageToPlayer)    
+    VPI_ScalingUtilities.ScaleGameSettingFloat("fDiffMultHPToPCVE", BaseDamageToPlayerVE.GetValue(), sfDamageToPlayer)
+    VPI_ScalingUtilities.ScaleGameSettingFloat("fDiffMultHPToPCE", BaseDamageToPlayerE.GetValue(), sfDamageToPlayer)
+    VPI_ScalingUtilities.ScaleGameSettingFloat("fDiffMultHPToPCN", BaseDamageToPlayerN.GetValue(), sfDamageToPlayer)
+    VPI_ScalingUtilities.ScaleGameSettingFloat("fDiffMultHPToPCH", BaseDamageToPlayerH.GetValue(), sfDamageToPlayer)
+    VPI_ScalingUtilities.ScaleGameSettingFloat("fDiffMultHPToPCVH", BaseDamageToPlayerVH.GetValue(), sfDamageToPlayer)    
   Else
     Debug.Trace("VPI_DS_DEBUG (PCIntegration): Damage Scaling is disabled.", 0)
   EndIF
@@ -340,8 +341,8 @@ Function ScaleSettings()
     Float sfSponginessNPC = SponginessNPCScalingFactor()
     Float sfSponginessPlayer = SponginessPlayerScalingFactor()
 
-    VPI_Helper.ScaleGameSettingFloat("fNPCHealthLevelBonus", BaseNPCHealthBonus.GetValueInt(), sfSponginessNPC)
-    VPI_Helper.ScaleGameSettingFloat("fHealthEnduranceOffset", BasePlayerHealthBonus.GetValueInt(), sfSponginessPlayer)
+    VPI_ScalingUtilities.ScaleGameSettingFloat("fNPCHealthLevelBonus", BaseNPCHealthBonus.GetValueInt(), sfSponginessNPC)
+    VPI_ScalingUtilities.ScaleGameSettingFloat("fHealthEnduranceOffset", BasePlayerHealthBonus.GetValueInt(), sfSponginessPlayer)
   Else
     Debug.Trace("VPI_DS_DEBUG (PCIntegration): Health Scaling is disabled.", 0)
   EndIF
@@ -417,9 +418,9 @@ EndFunction
 ;;
 Function GetScalingMatrix()
   Int iPlayerLevel = GetLevel()
-  Int iPlayerBracket = VPI_Helper.GetBracketForPlayerLevel(iPlayerLevel)
+  Int iPlayerBracket = VPI_ScalingUtilities.GetBracketForPlayerLevel(iPlayerLevel)
   Int iDifficulty = Game.GetDifficulty()
-  string sDifficulty = VPI_Helper.GetDifficulty(iDifficulty)
+  string sDifficulty = VPI_GameUtilities.GetDifficulty(iDifficulty)
 
   Float sfDamageByPlayer = GetDamageByPlayerScalingFactor()
   Float sfDamageToPlayer = GetDamageToPlayerScalingFactor()
