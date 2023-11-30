@@ -1,5 +1,8 @@
 # V2.1 Full Dynamic Scaling
 
+## V2.1.6
+* NPC REsize functions have been removed and moved to the new NPC Resizer Mod
+
 ## V2.1.5
 * Full usage and compatibility with VenpiCore
 * Pilgrimage Patch has updates for the latest version

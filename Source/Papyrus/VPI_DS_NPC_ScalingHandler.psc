@@ -78,11 +78,6 @@ Event OnEffectStart(ObjectReference akTarget, Actor akCaster, MagicEffect akBase
   Else
     VPI_Debug.DebugMessage("NPCScalingHandler", "OnEffectStart", "Combat Faction NPC Stat Scaling is currently disabled.", 0, Venpi_DebugEnabled.GetValueInt())
   EndIf
-  If (EnableCombatFactionResize.GetValueInt() == 1)
-    HandleHeightScaling(VPI_NPCUtilities.GetType(akTarget, NPC_Type_MK5, NPC_Type_MK4, NPC_Type_MK3, NPC_Type_MK2, NPC_Type_MK1))
-  Else
-    VPI_Debug.DebugMessage("NPCScalingHandler", "OnEffectStart", "Combat Faction NPC Height Resizing is currently disabled.", 0, Venpi_DebugEnabled.GetValueInt())
-  EndIf
 EndEvent
 
 Event OnEffectFinish(ObjectReference akTarget, Actor akCaster, MagicEffect akBaseEffect, Float afMagnitude, Float afDuration)
@@ -92,25 +87,8 @@ EndEvent
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
-;;; Private Member Functions
+;;; Functions
 ;;;
-
-Function HandleHeightScaling(Int npcType)
-  Float currentScale = RealMe.GetScale()
-  Float newScale = currentScale
-  If (npcType == 5)
-    newScale = currentScale * Utility.RandomFloat(1.05,2.0)
-    VPI_Debug.DebugMessage("NPCScalingHandler", "HandleHeight", Myself + "> Leveled NPC is a MK5 type and needs enlarged. Current scale is " + currentScale + " moving to new scale of " + newScale + ".", 0, Venpi_DebugEnabled.GetValueInt())
-  ElseIf (npcType == 1)
-    newScale = currentScale * Utility.RandomFloat(0.35,0.95)
-    VPI_Debug.DebugMessage("NPCScalingHandler", "HandleHeight", Myself + "> Leveled NPC is a MK1 type and needs shrunk. Current scale is " + currentScale + " moving to new scale of " + newScale + ".", 0, Venpi_DebugEnabled.GetValueInt())
-  Else
-    VPI_Debug.DebugMessage("NPCScalingHandler", "HandleHeight", Myself + "> Leveled NPC is a normal class so no scaling needed.", 0, Venpi_DebugEnabled.GetValueInt())
-    newScale = currentScale
-  EndIf
-  RealMe.SetScale(newScale)
-EndFunction
-
 Function HandleLevelScaling(Int npcType)
   int playerLevel = Player.GetLevel()
   int myLevel = RealMe.GetLeveledActorBase().GetLevel()
@@ -307,8 +285,3 @@ Float Function GetScalingAdjustmentForDifficultyAndNPCType(Float adjustmentFacto
 
   return calculated
 EndFunction
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;; Public Member Functions
-;;;
