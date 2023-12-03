@@ -48,13 +48,14 @@ mkdir "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-
 
 @REM Compile and deploy Scripts to Dist-BA2-Main folder
 @echo "Compiling all script in Source/Papyrus to Dist-BA2-Main folder"
-Caprica-0.3.0.exe --game starfield --import "C:\Repositories\Public\Starfield-Script-Source;C:\Repositories\Public\Starfield Mods\starfield-venpi-core\Source\Papyrus;C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus" --output "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-BA2-Main\Scripts" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus" -R -q && (
+"D:\Program Files\PexTools\Caprica-0.3.0.exe" --game starfield --import "C:\Repositories\Public\Starfield-Script-Source;C:\Repositories\Public\Starfield Mods\starfield-venpi-core\Source\Papyrus;C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus" --output "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-BA2-Main\Scripts" "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Source\Papyrus" -R -q && (
   @echo "Compile all scripts has successfully compiled"
   (call )
 ) || (
   @echo "Error:  Compile all scripts has failed to compile <======================================="
   exit /b 1
 )
+
 
 @REM ESM is purely binary so need to pull from starfield dir where xedit has to have it 
 @echo "Copying the ESM from MO2 into the Dist folder"
@@ -75,7 +76,7 @@ copy /y "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Sou
 
 @REM Create and copy the BA2 Main Archive to Dist folder
 @echo "Creating the BA2 Main Archive"
-.\BSArch64.exe pack "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-BA2-Main" "DynamicScaling - Main.ba2" -sf1 -mt && (
+"D:\Program Files\xEdit\BSArch64.exe" pack "C:\Repositories\Public\Starfield Mods\starfield-level-based-scaling\Dist-BA2-Main" "DynamicScaling - Main.ba2" -sf1 -mt && (
   @echo "Main Archive successfully assembled"
   (call )
 ) || (

@@ -1,5 +1,9 @@
 # V2.1 Full Dynamic Scaling
 
+## V2.1.7
+* Removed the NPC Scaler/Loot stuff
+* Added configuration for enable/disable debug mode
+
 ## V2.1.6
 * NPC REsize functions have been removed and moved to the new NPC Resizer Mod
 
